@@ -143,3 +143,6 @@ class Applicant(models.Model):
     correspondence = models.TextField("Correspondence", help_text="Correspondence")
     year_created = models.DateField("Created Year", help_text="Year Created")
     #########End Administrative fields ###########################################################
+
+class Intern(models.Model):
+    application = models.ForeignKey(Applicant, verbose_name="Intern Application")

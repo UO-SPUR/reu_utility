@@ -127,8 +127,19 @@ class Applicant(models.Model):
     faculty_reference_one_email = models.EmailField("Faculty 1 Email", help_text="Email")
     faculty_reference_two = models.CharField("Faculty 2", help_text="Name; Department; Institution", max_length=100)
     faculty_reference_two_email = models.EmailField("Faculty 2 Email", help_text="Email")
+    faculty_reference_three = models.CharField("Faculty 3", help_text="Name; Department; Institution", max_length=100)
+    faculty_reference_three_email = models.EmailField("Faculty 3 Email", help_text="Email")
     ########## End Question Fields and preferences ############################################
 
     ######### Administrative fields ###########################################################
     mentors = models.ForeignKey(Mentor, verbose_name="Possible Mentors")
     possible_pis = models.ForeignKey(Faculty, verbose_name="Possible PIs")
+    triage = models.CharField("Triage", max_length=10) #TODO Figure out what this is supposed to do
+    ranking = models.CharField("Ranking", help_text="What is the ranking of this applicant?", max_length=20)
+    likely_institute = models.CharField("Likely Institute", help_text="What institute would this applicant be a part of?", max_length=80)
+    decision_action = models.CharField("Decision", help_text="Final decision on applicant", max_length=20) #TODO Choice for this
+    comments = models.TextField("Admin Comments", help_text="Comments on Applicant")
+    application_completeness = models.TextField("Application Completeness", help_text="Anything missing?")
+    correspondence = models.TextField("Correspondence", help_text="Correspondence")
+    year_created = models.DateField("Created Year", help_text="Year Created")
+    #########End Administrative fields ###########################################################

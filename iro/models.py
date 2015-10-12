@@ -50,17 +50,7 @@ class Applicant(models.Model):
     research_career = models.CharField("Research Career?", help_text="Do you want to pursue a career in research?", max_length=6) #TODO create a choice list for this
     gre_mcat = models.CharField("GRE/MCAT", help_text="What are your GRE/MCAT scores (if taken)?", max_length=20)
     date_of_test = models.DateField("GRE/MCAT Date", help_text="When did you take the GRE/MCAT (if applicable)?", null=True)
-    ###### End Misc Info ####
-    ############## End Basic Info ###########################
-    ########Contact Info ########################################
-    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-    phone_number = models.CharField("Applicant Phone Number", validators=[phone_regex], blank=True, max_length=15) # validators should be a list
-    cell_phone_number = models.CharField("Applicant Cell Phone Number", validators=[phone_regex], blank=True, max_length=15) # validators should be a list
-    applicant_email = models.EmailField("Applicant Email", help_text="Enter your email address")
-    address = models.ForeignKey(Address, verbose_name="Applicant Address", related_name="applicant_address")
-    permanent_address = models.ForeignKey(Address, verbose_name="Permanent Address", related_name="applicant_perm_address")
 
-    ####### End Contact Info ####################################
     ########### Degree section of application model ##############
     HIGH_SCHOOL = 'High School'
     ASSOCIATES = 'Associates'
@@ -83,5 +73,33 @@ class Applicant(models.Model):
                                              default=HIGH_SCHOOL)
     ########## End Degree Section ###################################
 
+    ###### End Misc Info ####
+
+    ############## End Basic Info ###########################
+
+    ########Contact Info ########################################
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    phone_number = models.CharField("Applicant Phone Number", validators=[phone_regex], blank=True, max_length=15) # validators should be a list
+    cell_phone_number = models.CharField("Applicant Cell Phone Number", validators=[phone_regex], blank=True, max_length=15) # validators should be a list
+    applicant_email = models.EmailField("Applicant Email", help_text="Enter your email address")
+    address = models.ForeignKey(Address, verbose_name="Applicant Address", related_name="applicant_address")
+    permanent_address = models.ForeignKey(Address, verbose_name="Permanent Address", related_name="applicant_perm_address")
+
+    ####### End Contact Info ####################################
+
+    ########## Question Fields and preferences ############################################
+
+    background = models.TextField("Background", help_text="Please enter your background.")
+    goals = models.TextField("Goals", help_text="What are your goals?")
+    first_choice = models.CharField("1st Choice", help_text="Write your first choice for this program.", max_length=50)
+    #TODO Write a choice list for the importance part
+    first_choice_importance = models.CharField("1st Importance", help_text="How important is this choice?", max_length=12)
+    second_choice = models.CharField("2nd Choice", help_text="Write your second choice for this program.", max_length=50)
+    second_choice_importance = models.CharField("2nd Importance", help_text="How important is this choice?", max_length=12)
+    third_choice = models.CharField("3rd Choice", help_text="Write your third choice for this program.", max_length=50)
+    third_choice_importance = models.CharField("3rd Importance", help_text="How important is this choice?", max_length=12)
+
     mentors = models.ForeignKey(Mentor, verbose_name="Possible Mentors")
     possible_pis = models.ForeignKey(Faculty, verbose_name="Possible PIs")
+
+    ########## Question Fields and preferences ############################################

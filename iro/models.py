@@ -118,9 +118,17 @@ class Applicant(models.Model):
     lab_preferences = models.TextField("Lab Preferences", help_text="After viewing the participating laboratories, "
                                                                     "please list a few laboratories for which you "
                                                                     "might have a preference (if any).", null=True)
-    outside_interests = models.TextField("Outside Activites", help_text="(Optional) Describe your outside interests and activities.", null=True)
+    outside_interests = models.TextField("Outside Activites", help_text="(Optional) Describe your outside interests "
+                                                                        "and activities.", null=True)
+    grades = models.TextField("Grades/Classes", help_text="Paste or type your classes and grades here -- (as neatly "
+                                                          "as possible; no official transcripts or images; please "
+                                                          "include courses you are currently taking)")
+    faculty_reference_one = models.CharField("Faculty 1", help_text="Name; Department; Institution", max_length=100)
+    faculty_reference_one_email = models.EmailField("Faculty 1 Email", help_text="Email")
+    faculty_reference_two = models.CharField("Faculty 2", help_text="Name; Department; Institution", max_length=100)
+    faculty_reference_two_email = models.EmailField("Faculty 2 Email", help_text="Email")
+    ########## End Question Fields and preferences ############################################
 
+    ######### Administrative fields ###########################################################
     mentors = models.ForeignKey(Mentor, verbose_name="Possible Mentors")
     possible_pis = models.ForeignKey(Faculty, verbose_name="Possible PIs")
-
-    ########## Question Fields and preferences ############################################

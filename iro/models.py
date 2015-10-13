@@ -24,6 +24,7 @@ class ReferenceLetter(models.Model):
     status = models.CharField("Status", help_text="Status of Letter of Rec", max_length=10)#TODO create choice list
     letter = models.FileField("Letter of Rec", help_text="Recommendation Letter", upload_to="references")
     comments = models.TextField("Comments", help_text="Any comments on Letter of Recommendation?")
+    applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference")
 
 class Applicant(models.Model):
     ############## Basic Info ###############################

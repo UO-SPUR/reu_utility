@@ -49,7 +49,7 @@ class Applicant(models.Model):
     learned_of = models.CharField("Learned of Program", help_text="How did you learn about this program?", max_length=50)
     #TODO Create choice list for this: Internet Search, ABRCMS meeting, SACNAS meeting, AISES meeting, College Advisor, Mailing or poster, other
     previous_program = models.BooleanField("Previous Program?", help_text="Have you participated previously in a summer undergraduate research program at another institution?")
-    previous_program_other = models.CharField("Previous Program Other", help_text="If so, list name of the Program and Institution")
+    previous_program_other = models.CharField("Previous Program Other", help_text="If so, list name of the Program and Institution", max_length=200)
     marc_current = models.BooleanField("MARC?", help_text="Are you currently a MARC Scholar?")
     marc_past = models.BooleanField("MARC (past)?", help_text="Did you used to be a MARC Scholar?")
     research_career = models.CharField("Research Career?", help_text="Do you want to pursue a career in research?", max_length=6) #TODO create a choice list for this
@@ -146,3 +146,12 @@ class Applicant(models.Model):
 
 class Intern(models.Model):
     application = models.ForeignKey(Applicant, verbose_name="Intern Application")
+    program = models.CharField("Program", help_text="Program the intern is participating in.", max_length=40)
+    arrival_date = models.DateField("Arrives", help_text="Date of arrival")
+    departure_date = models.DateField("Departs", help_text="Date of departure")
+    professor = models.ForeignKey(Faculty, verbose_name="Professor")
+    mentors = models.ForeignKey(Mentor, verbose_name="Mentors")
+    symposium_session = models.CharField("Sympo. Session", help_text="Symposium Session", max_length=100)
+    picture = models.ImageField(upload_to='interns')
+    social_security_number = models.CharField("SSN", help_text="Social Security Number", max_length=9)
+    student_id = models.CharField("Student ID", help_text="Student ID number", max_length=11)

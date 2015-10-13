@@ -5,9 +5,13 @@ from django.core.validators import RegexValidator
 
 class Mentor(models.Model):
     mentor_name = models.CharField(max_length=200)
+    professor = models.CharField("PI Name", help_text="Professor's name", max_length=200)#TODO ForeignKey?
+    email_address = models.EmailField("Email Address", help_text="Enter the mentor's email address")
 
 class Faculty(models.Model):
     faculty_name = models.CharField(max_length=200)
+    email_template = models.TextField("Email Template", help_text="Enter a template for emails")
+    correspondence = models.TextField("Correspondence", help_text="Correspondence with Professor")
 
 class Address(models.Model):
     street = models.TextField("Street", help_text="Enter street name")

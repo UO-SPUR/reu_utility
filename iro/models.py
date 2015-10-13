@@ -20,12 +20,6 @@ class Abstract(models.Model):
     last_updated = models.DateField("Last Updated", help_text="Timestamp of last modification", auto_now=True)
     content = models.TextField("Abstract", help_text="Enter the abstract here")
 
-class ReferenceLetter(models.Model):
-    status = models.CharField("Status", help_text="Status of Letter of Rec", max_length=10)#TODO create choice list
-    letter = models.FileField("Letter of Rec", help_text="Recommendation Letter", upload_to="references")
-    comments = models.TextField("Comments", help_text="Any comments on Letter of Recommendation?")
-    applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference")
-
 class Applicant(models.Model):
     ############## Basic Info ###############################
     first_name = models.CharField("Applicant First Name", help_text="Enter your first name", max_length=20)
@@ -160,7 +154,7 @@ class Intern(models.Model):
     arrival_date = models.DateField("Arrives", help_text="Date of arrival")
     departure_date = models.DateField("Departs", help_text="Date of departure")
     professor = models.ForeignKey(Faculty, verbose_name="Professor")
-    mentors = models.ManyToManyField(Mentor, verbose_name="Mentors", null=True)
+    mentors = models.ManyToManyField(Mentor, verbose_name="Mentors")
     symposium_session = models.CharField("Sympo. Session", help_text="Symposium Session", max_length=100, null=True)
     picture = models.ImageField(upload_to='interns', null=True)
     social_security_number = models.CharField("SSN", help_text="Social Security Number", max_length=9)
@@ -168,3 +162,16 @@ class Intern(models.Model):
     abstract = models.OneToOneField(Abstract, verbose_name="Abstract", null=True)
     presentation_oral = models.URLField("Oral Presentation URL", help_text="URL to oral presentation", null=True)
     presentation_poster = models.URLField("Poster Presentation URL", help_text="URL to poster presentation", null=True)
+
+
+class ReferenceLetter(models.Model):
+    status = models.CharField("Status", help_text="Status of Letter of Rec", max_length=10)#TODO create choice list
+    letter = models.FileField("Letter of Rec", help_text="Recommendation Letter", upload_to="references")
+    comments = models.TextField("Comments", help_text="Any comments on Letter of Recommendation?")
+    applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference")
+
+class ProgressReport(models.Model):
+    last_updated = models.DateField("Last Updated", help_text="Last modified timestamp", auto_now=True)
+    content = models.TextField("Progress Report", help_text="Enter your progress report")
+    week = models.PositiveSmallIntegerField("Week", help_text="Which week is this progress report for?")
+    intern = models.ForeignKey(Intern, verbose_name="Intern")

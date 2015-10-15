@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import RegexValidator
+from iro.choices import *
 
 # Create your models here.
 
@@ -30,25 +31,12 @@ class Applicant(models.Model):
     last_name = models.CharField("Applicant Last Name", help_text="Enter your last name", max_length=40)
     applicant_name = models.CharField("Applicant Full Name", help_text="Enter your full name", max_length=200)
     date_of_birth = models.DateField("Applicant Date of Birth", help_text="Please choose date of birth")
-
-    ### Sex Choice Field ###
-    MALE = "Male"
-    FEMALE = "Female"
-
-    SEX_CHOICES = (
-        (MALE, "Male"),
-        (FEMALE, "Female")
-    )
-    sex = models.CharField("Applicant Sex", help_text="Please choose your sex", max_length=6, choices=SEX_CHOICES,
-                           default=MALE)
-    ### End Sex Choice Field ###
-
-    ethnic_background = models.TextField("Ethnic Background", help_text="Please enter your ethnic background",
-                                         max_length=300) # TODO Create a choice list for this: (African American, Alaska Native,
-                                         #TODO Asian, Hispanic, Native american, Pacific Islander, White, Multiracial, Other, Decline Response
-    ethnic_background_other = models.CharField("Ethinc Background Other", help_text="If 'Multiracial' or 'Other', please explain", max_length=100)
-    disadvantaged = models.TextField("Disadvantaged Status", help_text="Do you claim Disadvantaged Status?")
-    #TODO create choice list for this: No, First generation to attend College, Low Income, Other or multiple - Please explain
+    sex = models.CharField("Applicant Sex", help_text="Please choose your sex", max_length=6, choices=SEX_CHOICES)
+    ethnic_background = models.CharField("Ethnic Background", help_text="Please choose your ethnic background",
+                                         max_length=30, choices=ETHNIC_CHOICES)
+    ethnic_background_other = models.CharField("Ethinc Background Other", help_text="If 'Multiracial' or 'Other', please explain", max_length=150)
+    disadvantaged = models.CharField("Disadvantaged Status", help_text="Do you claim Disadvantaged Status?", max_length=30,
+                                     choices=DISADVANTAGED_CHOICES, default=NO)
     disadvantaged_other = models.CharField("Disadvantaged Other", help_text="If 'Other or multiple', please explain", max_length=200)
     citizenship = models.CharField("Citizenship", help_text="Enter your citizenship", max_length=100)
 

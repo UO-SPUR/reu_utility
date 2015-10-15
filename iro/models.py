@@ -35,7 +35,7 @@ class Applicant(models.Model):
     ethnic_background = models.CharField("Ethnic Background", help_text="Please choose your ethnic background",
                                          max_length=30, choices=ETHNIC_CHOICES)
     ethnic_background_other = models.CharField("Ethinc Background Other", help_text="If 'Multiracial' or 'Other', please explain", max_length=150)
-    disadvantaged = models.CharField("Disadvantaged Status", help_text="Do you claim Disadvantaged Status?", max_length=30,
+    disadvantaged = models.CharField("Disadvantaged Status", help_text="Do you claim Disadvantaged Status?", max_length=25,
                                      choices=DISADVANTAGED_CHOICES, default=NO)
     disadvantaged_other = models.CharField("Disadvantaged Other", help_text="If 'Other or multiple', please explain", max_length=200)
     citizenship = models.CharField("Citizenship", help_text="Enter your citizenship", max_length=100)

@@ -54,3 +54,17 @@ DISADVANTAGED_CHOICES = (
     (OTHER, "Other"),
     (MULTIPLE, "Multiple")
 )
+
+##### Learned About Program Choices ######
+
+INTERNET = "Internet"
+ABRCMS = "ABRCMS"
+SACNAS = "SACNAS"
+AISES = "AISES"
+ADVISOR = "College Advisor"
+MAILING = "Mailing"
+POSTER = "Poster"
+
+LEARNED_ABOUT_CHOICES = (
+
+)

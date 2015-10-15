@@ -179,3 +179,23 @@ class ProgressReport(models.Model):
     content = models.TextField("Progress Report", help_text="Enter your progress report")
     week = models.PositiveSmallIntegerField("Week", help_text="Which week is this progress report for?")
     intern = models.ForeignKey(Intern, verbose_name="Intern")
+
+class PISurvey(models.Model):
+    evaluator = models.CharField("Evaluator Name", help_text="Evaluator's name", max_length=50)
+    intern = models.CharField("Intern Name", help_text="Intern's name", max_length=50)
+    submission_date = models.DateField("Date of Submission", help_text="Submission Date")
+    comments = models.TextField("Other Comments", help_text="Enter any comments here", null=True)
+    #TODO Rest of the survey, including Intern, Mentor, and Program fields
+
+class InternSurvey(models.Model):
+    evaluator = models.CharField("Evaluator Name", help_text="Evaluator's name", max_length=50)
+    submission_date = models.DateField("Date of Submission", help_text="Submission Date")
+    comments = models.TextField("Other Comments", help_text="Enter any comments here", null=True)
+    #TODO Rest of the survey, including Overall experience, Lab Support, Porgram Support, Recreation and Living, Other
+
+class MentorSurvey(models.Model):
+    evaluator = models.CharField("Evaluator Name", help_text="Evaluator's name", max_length=50)
+    intern = models.CharField("Intern Name", help_text="Intern's name", max_length=50)
+    submission_date = models.DateField("Date of Submission", help_text="Submission Date")
+    comments = models.TextField("Other Comments", help_text="Enter any comments here", null=True)
+    #TODO Rest of the survey, including Overall Experience, Mentoring, Intern, PI Support, and Program

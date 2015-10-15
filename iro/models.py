@@ -30,7 +30,19 @@ class Applicant(models.Model):
     last_name = models.CharField("Applicant Last Name", help_text="Enter your last name", max_length=40)
     applicant_name = models.CharField("Applicant Full Name", help_text="Enter your full name", max_length=200)
     date_of_birth = models.DateField("Applicant Date of Birth", help_text="Please choose date of birth")
-    gender = models.TextField("Applicant Gender", help_text="Please enter your preferred gender") #TODO Create a Male / Female Choise list
+
+    ### Sex Choice Field ###
+    MALE = "Male"
+    FEMALE = "Female"
+
+    SEX_CHOICES = (
+        (MALE, "Male"),
+        (FEMALE, "Female")
+    )
+    sex = models.CharField("Applicant Sex", help_text="Please choose your sex", max_length=6, choices=SEX_CHOICES,
+                           default=MALE)
+    ### End Sex Choice Field ###
+
     ethnic_background = models.TextField("Ethnic Background", help_text="Please enter your ethnic background",
                                          max_length=300) # TODO Create a choice list for this: (African American, Alaska Native,
                                          #TODO Asian, Hispanic, Native american, Pacific Islander, White, Multiracial, Other, Decline Response

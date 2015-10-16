@@ -124,3 +124,15 @@ ADVANCED_DEGREE_CHOICES = (
     (PHD, 'Ph.D'),
     (OTHER_DEGREE, "Other Professional Degree, e.g. DDS, DVM")
 )
+
+######### Importance Choices ##########
+
+HIGH = "High"
+MEDIUM = "Medium"
+LOW = "Low"
+
+IMPORTANCE_CHOICES = (
+    (HIGH, "High"),
+    (MEDIUM, "Medium"),
+    (LOW, "Low")
+)

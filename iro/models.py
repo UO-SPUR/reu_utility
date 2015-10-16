@@ -94,13 +94,12 @@ class Applicant(models.Model):
                                                 "Explain what you hope to gain from the Summer experience and how it "
                                                 "will help you pursue your career and personal goals.")
     first_choice = models.CharField("1st Choice", help_text="Write your first choice for this program.", max_length=50)
-    #TODO Write a choice list for the importance part: High, Medium, Low
     #TODO Write a choice list for choices, not sure how to make it super general though
-    first_choice_importance = models.CharField("1st Importance", help_text="How important is this choice?", max_length=12)
+    first_choice_importance = models.CharField("1st Importance", help_text="How important is this choice?", choices=IMPORTANCE_CHOICES, max_length=12)
     second_choice = models.CharField("2nd Choice", help_text="Write your second choice for this program.", max_length=50)
-    second_choice_importance = models.CharField("2nd Importance", help_text="How important is this choice?", max_length=12)
+    second_choice_importance = models.CharField("2nd Importance", help_text="How important is this choice?", choices=IMPORTANCE_CHOICES, max_length=12)
     third_choice = models.CharField("3rd Choice", help_text="Write your third choice for this program.", max_length=50)
-    third_choice_importance = models.CharField("3rd Importance", help_text="How important is this choice?", max_length=12)
+    third_choice_importance = models.CharField("3rd Importance", help_text="How important is this choice?", choices=IMPORTANCE_CHOICES, max_length=12)
     other_choice = models.CharField("Other Choice", help_text="Others?", max_length=100, null=True)
     details = models.TextField("Details", help_text="(Optional) Please give a more detailed description of your "
                                                     "research interests: Are your interests broad? Have you "

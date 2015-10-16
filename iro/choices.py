@@ -156,3 +156,27 @@ SCIENCE_CHOICE = (
     (CHOICE_6, CHOICE_6),
     (CHOICE_7, CHOICE_7)
 )
+
+########### Decision Choice ############
+
+DECISION_CHOICES = (
+    (YES, YES),
+    (UNSURE, UNSURE),
+    (NO, NO)
+)
+
+############ Program Choices ############
+
+PROGRAM_1 = "Program 1"
+PROGRAM_2 = "Program 2"
+PROGRAM_3 = "Program 3"
+PROGRAM_4 = "Program 4"
+PROGRAM_5 = "Program 5"
+
+PROGRAM_CHOICES = (
+    (PROGRAM_1, PROGRAM_1),
+    (PROGRAM_2, PROGRAM_2),
+    (PROGRAM_3, PROGRAM_3),
+    (PROGRAM_4, PROGRAM_4),
+    (PROGRAM_5, PROGRAM_5)
+)

@@ -48,7 +48,7 @@ class Applicant(models.Model):
     stem_gpa = models.FloatField("STEM GPA", help_text="Please enter your current STEM (Science, Technology, Engineerin"
                                                        "g, Math) GPA")
     major = models.CharField("Major", help_text="Please enter your major", max_length=100)
-    program = models.CharField("Program Applied To", help_text="What program are you applying to?", max_length=20) #TODO create a choice list for this
+    program = models.CharField("Program Applied To", help_text="What program are you applying to?", choices=PROGRAM_CHOICES, max_length=20)
     available = models.DurationField("Available Dates", help_text="Choose what date range you are available")
 
     ###### End College Info ####
@@ -126,7 +126,7 @@ class Applicant(models.Model):
     triage = models.CharField("Triage", max_length=10) #TODO Figure out what this is supposed to do
     ranking = models.CharField("Ranking", help_text="What is the ranking of this applicant?", max_length=20)
     likely_institute = models.CharField("Likely Institute", help_text="What institute would this applicant be a part of?", max_length=80)
-    decision_action = models.CharField("Decision", help_text="Final decision on applicant", max_length=20) #TODO Choice for this
+    decision_action = models.CharField("Decision", help_text="Final decision on applicant", choices=DECISION_CHOICES, max_length=10)
     comments = models.TextField("Admin Comments", help_text="Comments on Applicant")
     application_completeness = models.TextField("Application Completeness", help_text="Anything missing?")
     correspondence = models.TextField("Correspondence", help_text="Correspondence")

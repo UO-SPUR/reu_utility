@@ -54,15 +54,13 @@ class Applicant(models.Model):
     ###### End College Info ####
 
     ###### Misc Info ########
-    learned_of = models.CharField("Learned of Program", help_text="How did you learn about this program?", max_length=50)
-    #TODO Create choice list for this: Internet Search, ABRCMS meeting, SACNAS meeting, AISES meeting, College Advisor, Mailing or poster, other
+    learned_of = models.CharField("Learned of Program", help_text="How did you learn about this program?",choices=LEARNED_ABOUT_CHOICES, max_length=15)
     previous_program = models.BooleanField("Previous Program?", help_text="Have you participated previously in a summer undergraduate research program at another institution?")
     previous_program_other = models.CharField("Previous Program Other", help_text="If so, list name of the Program and Institution", max_length=200)
     marc_current = models.BooleanField("MARC?", help_text="Are you currently a MARC Scholar?")
     marc_past = models.BooleanField("MARC (past)?", help_text="Did you used to be a MARC Scholar?")
-    research_career = models.CharField("Research Career?", help_text="Do you want to pursue a career in research?", max_length=6) #TODO create a choice list for this
-    gre_mcat = models.CharField("GRE/MCAT", help_text="Do you plan to take the GRE, MCAT or other graduate/professional school admissions standardized exam?", max_length=20)
-    #TODO Create choice list for gre_mcat with: No, GRE, MCAT, DAT, VCAT, LSAT, GMAT, Other
+    research_career = models.CharField("Research Career?", help_text="Do you want to pursue a career in research?", choices=RESEARCH_LIFE_CHOICES, max_length=6)
+    gre_mcat = models.CharField("GRE/MCAT", help_text="Do you plan to take the GRE, MCAT or other graduate/professional school admissions standardized exam?", choices=EXAM_CHOICES, max_length=6)
     date_of_test = models.DateField("GRE/MCAT Date", help_text="When did you take the GRE/MCAT (if applicable)?", null=True)
 
     ########### Degree section of application model ##############

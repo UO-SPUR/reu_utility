@@ -66,5 +66,43 @@ MAILING = "Mailing"
 POSTER = "Poster"
 
 LEARNED_ABOUT_CHOICES = (
+    (INTERNET, "Internet"),
+    (ABRCMS, "ABRCMS Meeting"),
+    (SACNAS, "SACNAS Meeting"),
+    (AISES, "AISES Meeting"),
+    (ADVISOR, "College Advisor"),
+    (MAILING, "Mailing"),
+    (POSTER, "Poster"),
+    (OTHER, "Other")
+)
 
+###### Research Career Choices #######
+
+UNSURE = "Unsure"
+
+RESEARCH_LIFE_CHOICES = (
+    (YES, "Yes"),
+    (NO, "No"),
+    (UNSURE, "Unsure")
+)
+
+####### Exam Choices ########
+
+GRE = "GRE"
+MCAT = "MCAT"
+LSAT = "LSAT"
+GMAT = "GMAT"
+DAT = "DAT"
+VCAT = "VCAT"
+
+EXAM_CHOICES = (
+    (NO, "No"),
+    (GRE, "GRE"),
+    (MCAT, "MCAT"),
+    (LSAT, "LSAT"),
+    (GMAT, "GMAT"),
+    (DAT, "DAT"),
+    (VCAT, "VCAT"),
+    (OTHER, "Other"),
+    (UNSURE, "Unsure")
 )

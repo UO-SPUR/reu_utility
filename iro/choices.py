@@ -106,3 +106,21 @@ EXAM_CHOICES = (
     (OTHER, "Other"),
     (UNSURE, "Unsure")
 )
+
+######## Degree Choices #########
+
+MD = 'MD'
+POSSIBLE_PHD = 'Possibly PhD'
+PHD_MD = 'PhD and MD'
+MASTERS = 'Masters'
+PHD = 'PhD'
+OTHER_DEGREE = "Other Professional Degree, e.g. DDS, DVM"
+ADVANCED_DEGREE_CHOICES = (
+    (NO, "No"),
+    (UNSURE, "Unsure"),
+    (MASTERS, "Masters"),
+    (MD, 'MD'),
+    (PHD_MD, 'Ph.D and MD'),
+    (PHD, 'Ph.D'),
+    (OTHER_DEGREE, "Other Professional Degree, e.g. DDS, DVM")
+)

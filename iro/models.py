@@ -64,23 +64,8 @@ class Applicant(models.Model):
     date_of_test = models.DateField("GRE/MCAT Date", help_text="When did you take the GRE/MCAT (if applicable)?", null=True)
 
     ########### Degree section of application model ##############
-    #TODO Add more, such as MD, 'Other Professional Degree, e.g. DDS, DVM, etc.', Unsure, possibly PhD, PhD and MD, Unsure, No
-    HIGH_SCHOOL = 'High School'
-    ASSOCIATES = 'Associates'
-    BACHELOR = 'Bachelors'
-    MASTERS = 'Masters'
-    PHD = 'PhD'
-    ADVANCED_DEGREE_CHOICES = (
-        (HIGH_SCHOOL, 'High School'),
-        (ASSOCIATES, 'Associates'),
-        (BACHELOR, 'Bachelors'),
-        (MASTERS, 'Masters'),
-        (PHD, 'Ph.D')
-    )
-
-    advanced_degree = models.CharField("Adanced Degree", max_length=11,
-                                       choices=ADVANCED_DEGREE_CHOICES,
-                                       default=HIGH_SCHOOL)
+    advanced_degree = models.CharField("Advanced Degree", max_length=50,
+                                       choices=ADVANCED_DEGREE_CHOICES)
     advanced_degree_other = models.CharField("Other Advanced Degree", help_text="If 'Other', please specify", max_length=20)
     ########## End Degree Section ###################################
 

@@ -136,3 +136,23 @@ IMPORTANCE_CHOICES = (
     (MEDIUM, "Medium"),
     (LOW, "Low")
 )
+
+########## Science Choices ##########
+
+CHOICE_1 = "Choice 1"
+CHOICE_2 = "Choice 2"
+CHOICE_3 = "Choice 3"
+CHOICE_4 = "Choice 4"
+CHOICE_5 = "Choice 5"
+CHOICE_6 = "Choice 6"
+CHOICE_7 = "Choice 7"
+
+SCIENCE_CHOICE = (
+    (CHOICE_1, CHOICE_1),
+    (CHOICE_2, CHOICE_2),
+    (CHOICE_3, CHOICE_3),
+    (CHOICE_4, CHOICE_4),
+    (CHOICE_5, CHOICE_5),
+    (CHOICE_6, CHOICE_6),
+    (CHOICE_7, CHOICE_7)
+)

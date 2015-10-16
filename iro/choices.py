@@ -14,8 +14,8 @@ MALE = "Male"
 FEMALE = "Female"
 
 SEX_CHOICES = (
-    (MALE, "Male"),
-    (FEMALE, "Female")
+    (MALE, MALE),
+    (FEMALE, FEMALE)
 )
 
 ### Ethnic Background/ Race  ####
@@ -29,16 +29,16 @@ WHITE = "White"
 MULTIRACIAL = "Multiracial"
 
 ETHNIC_CHOICES = (
-    (AFRICAN, "African American"),
-    (ALASKAN, "Alaska Native"),
-    (ASIAN, "Asian"),
-    (HISPANIC, "Hispanic"),
-    (NATIVE, "Native American"),
-    (ISLANDER, "Pacific Islander"),
-    (WHITE, "White"),
-    (MULTIRACIAL, "Multiracial"),
-    (OTHER, "Other"),
-    (DECLINE, "Decline Response")
+    (AFRICAN, AFRICAN),
+    (ALASKAN, ALASKAN),
+    (ASIAN, ASIAN),
+    (HISPANIC, HISPANIC),
+    (NATIVE, NATIVE),
+    (ISLANDER, ISLANDER),
+    (WHITE, WHITE),
+    (MULTIRACIAL, MULTIRACIAL),
+    (OTHER, OTHER),
+    (DECLINE, DECLINE)
 )
 
 
@@ -48,11 +48,11 @@ FIRST = "First Generation College"
 INCOME = "Low Income"
 
 DISADVANTAGED_CHOICES = (
-    (NO, "No"),
-    (FIRST, "First Generation College"),
-    (INCOME, "Low Income"),
-    (OTHER, "Other"),
-    (MULTIPLE, "Multiple")
+    (NO, NO),
+    (FIRST, FIRST),
+    (INCOME, INCOME),
+    (OTHER, OTHER),
+    (MULTIPLE, MULTIPLE)
 )
 
 ##### Learned About Program Choices ######
@@ -66,14 +66,14 @@ MAILING = "Mailing"
 POSTER = "Poster"
 
 LEARNED_ABOUT_CHOICES = (
-    (INTERNET, "Internet"),
-    (ABRCMS, "ABRCMS Meeting"),
-    (SACNAS, "SACNAS Meeting"),
-    (AISES, "AISES Meeting"),
-    (ADVISOR, "College Advisor"),
-    (MAILING, "Mailing"),
-    (POSTER, "Poster"),
-    (OTHER, "Other")
+    (INTERNET, INTERNET),
+    (ABRCMS, ABRCMS),
+    (SACNAS, SACNAS),
+    (AISES, AISES),
+    (ADVISOR, ADVISOR),
+    (MAILING, MAILING),
+    (POSTER, POSTER),
+    (OTHER, OTHER)
 )
 
 ###### Research Career Choices #######
@@ -81,9 +81,9 @@ LEARNED_ABOUT_CHOICES = (
 UNSURE = "Unsure"
 
 RESEARCH_LIFE_CHOICES = (
-    (YES, "Yes"),
-    (NO, "No"),
-    (UNSURE, "Unsure")
+    (YES, YES),
+    (NO, NO),
+    (UNSURE, UNSURE)
 )
 
 ####### Exam Choices ########
@@ -96,15 +96,15 @@ DAT = "DAT"
 VCAT = "VCAT"
 
 EXAM_CHOICES = (
-    (NO, "No"),
-    (GRE, "GRE"),
-    (MCAT, "MCAT"),
-    (LSAT, "LSAT"),
-    (GMAT, "GMAT"),
-    (DAT, "DAT"),
-    (VCAT, "VCAT"),
-    (OTHER, "Other"),
-    (UNSURE, "Unsure")
+    (NO, NO),
+    (GRE, GRE),
+    (MCAT, MCAT),
+    (LSAT, LSAT),
+    (GMAT, GMAT),
+    (DAT, DAT),
+    (VCAT, VCAT),
+    (OTHER, OTHER),
+    (UNSURE, UNSURE)
 )
 
 ######## Degree Choices #########
@@ -116,13 +116,13 @@ MASTERS = 'Masters'
 PHD = 'PhD'
 OTHER_DEGREE = "Other Professional Degree, e.g. DDS, DVM"
 ADVANCED_DEGREE_CHOICES = (
-    (NO, "No"),
-    (UNSURE, "Unsure"),
-    (MASTERS, "Masters"),
-    (MD, 'MD'),
-    (PHD_MD, 'Ph.D and MD'),
-    (PHD, 'Ph.D'),
-    (OTHER_DEGREE, "Other Professional Degree, e.g. DDS, DVM")
+    (NO, NO),
+    (UNSURE, UNSURE),
+    (MASTERS, MASTERS),
+    (MD, MD),
+    (PHD_MD, PHD_MD),
+    (PHD, PHD),
+    (OTHER_DEGREE, OTHER_DEGREE)
 )
 
 ######### Importance Choices ##########
@@ -132,9 +132,9 @@ MEDIUM = "Medium"
 LOW = "Low"
 
 IMPORTANCE_CHOICES = (
-    (HIGH, "High"),
-    (MEDIUM, "Medium"),
-    (LOW, "Low")
+    (HIGH, HIGH),
+    (MEDIUM, MEDIUM),
+    (LOW, LOW)
 )
 
 ########## Science Choices ##########

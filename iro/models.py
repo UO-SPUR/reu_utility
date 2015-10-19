@@ -6,13 +6,13 @@ from iro.choices import *
 
 class Mentor(models.Model):
     mentor_name = models.CharField(max_length=200)
-    professor = models.CharField("PI Name", help_text="Professor's name", max_length=200)#TODO ForeignKey?
-    email_address = models.EmailField("Email Address", help_text="Enter the mentor's email address")
+    professor = models.CharField("PI Name", help_text="Professor's name", max_length=200, null=True)#TODO ForeignKey?
+    email_address = models.EmailField("Email Address", help_text="Enter the mentor's email address", null=True)
 
 class Faculty(models.Model):
     faculty_name = models.CharField(max_length=200)
-    email_template = models.TextField("Email Template", help_text="Enter a template for emails")
-    correspondence = models.TextField("Correspondence", help_text="Correspondence with Professor")
+    email_template = models.TextField("Email Template", help_text="Enter a template for emails", null=True)
+    correspondence = models.TextField("Correspondence", help_text="Correspondence with Professor", null=True)
 
 class Address(models.Model):
     street = models.TextField("Street", help_text="Enter street name")
@@ -31,9 +31,9 @@ class Applicant(models.Model):
     last_name = models.CharField("Applicant Last Name", help_text="Enter your last name", max_length=40)
     applicant_name = models.CharField("Applicant Full Name", help_text="Enter your full name", max_length=200)
     date_of_birth = models.DateField("Applicant Date of Birth", help_text="Please choose date of birth")
-    sex = models.CharField("Applicant Sex", help_text="Please choose your sex", max_length=6, choices=SEX_CHOICES)
+    sex = models.CharField("Applicant Sex", help_text="Please choose your sex", max_length=6, choices=SEX_CHOICES, default=DECLINE)
     ethnic_background = models.CharField("Ethnic Background", help_text="Please choose your ethnic background",
-                                         max_length=30, choices=ETHNIC_CHOICES)
+                                         max_length=30, choices=ETHNIC_CHOICES, default=OTHER)
     ethnic_background_other = models.CharField("Ethinc Background Other", help_text="If 'Multiracial' or 'Other', please explain", max_length=150)
     disadvantaged = models.CharField("Disadvantaged Status", help_text="Do you claim Disadvantaged Status?", max_length=25,
                                      choices=DISADVANTAGED_CHOICES, default=NO)
@@ -48,24 +48,24 @@ class Applicant(models.Model):
     stem_gpa = models.FloatField("STEM GPA", help_text="Please enter your current STEM (Science, Technology, Engineerin"
                                                        "g, Math) GPA")
     major = models.CharField("Major", help_text="Please enter your major", max_length=100)
-    program = models.CharField("Program Applied To", help_text="What program are you applying to?", choices=PROGRAM_CHOICES, max_length=20)
+    program = models.CharField("Program Applied To", help_text="What program are you applying to?", choices=PROGRAM_CHOICES, default=PROGRAM_1, max_length=20)
     available = models.DurationField("Available Dates", help_text="Choose what date range you are available")
 
     ###### End College Info ####
 
     ###### Misc Info ########
-    learned_of = models.CharField("Learned of Program", help_text="How did you learn about this program?",choices=LEARNED_ABOUT_CHOICES, max_length=15)
+    learned_of = models.CharField("Learned of Program", help_text="How did you learn about this program?",choices=LEARNED_ABOUT_CHOICES,default=OTHER, max_length=15)
     previous_program = models.BooleanField("Previous Program?", help_text="Have you participated previously in a summer undergraduate research program at another institution?")
     previous_program_other = models.CharField("Previous Program Other", help_text="If so, list name of the Program and Institution", max_length=200)
     marc_current = models.BooleanField("MARC?", help_text="Are you currently a MARC Scholar?")
     marc_past = models.BooleanField("MARC (past)?", help_text="Did you used to be a MARC Scholar?")
-    research_career = models.CharField("Research Career?", help_text="Do you want to pursue a career in research?", choices=RESEARCH_LIFE_CHOICES, max_length=6)
-    gre_mcat = models.CharField("GRE/MCAT", help_text="Do you plan to take the GRE, MCAT or other graduate/professional school admissions standardized exam?", choices=EXAM_CHOICES, max_length=6)
+    research_career = models.CharField("Research Career?", help_text="Do you want to pursue a career in research?", choices=RESEARCH_LIFE_CHOICES, default=UNSURE, max_length=6)
+    gre_mcat = models.CharField("GRE/MCAT", help_text="Do you plan to take the GRE, MCAT or other graduate/professional school admissions standardized exam?", choices=EXAM_CHOICES, default=NO, max_length=6)
     date_of_test = models.DateField("GRE/MCAT Date", help_text="When did you take the GRE/MCAT (if applicable)?", null=True)
 
     ########### Degree section of application model ##############
     advanced_degree = models.CharField("Advanced Degree", max_length=50,
-                                       choices=ADVANCED_DEGREE_CHOICES)
+                                       choices=ADVANCED_DEGREE_CHOICES, default=OTHER_DEGREE)
     advanced_degree_other = models.CharField("Other Advanced Degree", help_text="If 'Other', please specify", max_length=20)
     ########## End Degree Section ###################################
 
@@ -93,12 +93,12 @@ class Applicant(models.Model):
     goals = models.TextField("Goals", help_text="Why do you want to participate in a Summer research experience? "
                                                 "Explain what you hope to gain from the Summer experience and how it "
                                                 "will help you pursue your career and personal goals.")
-    first_choice = models.CharField("1st Choice", help_text="Write your first choice for this program.", choices=SCIENCE_CHOICE, max_length=50)
-    first_choice_importance = models.CharField("1st Importance", help_text="How important is this choice?", choices=IMPORTANCE_CHOICES, max_length=12)
-    second_choice = models.CharField("2nd Choice", help_text="Write your second choice for this program.", choices=SCIENCE_CHOICE, max_length=50)
-    second_choice_importance = models.CharField("2nd Importance", help_text="How important is this choice?", choices=IMPORTANCE_CHOICES, max_length=12)
-    third_choice = models.CharField("3rd Choice", help_text="Write your third choice for this program.", choices=SCIENCE_CHOICE, max_length=50)
-    third_choice_importance = models.CharField("3rd Importance", help_text="How important is this choice?", choices=IMPORTANCE_CHOICES, max_length=12)
+    first_choice = models.CharField("1st Choice", help_text="Write your first choice for this program.", choices=SCIENCE_CHOICE, default=CHOICE_1, max_length=50)
+    first_choice_importance = models.CharField("1st Importance", help_text="How important is this choice?", choices=IMPORTANCE_CHOICES, default=MEDIUM, max_length=12)
+    second_choice = models.CharField("2nd Choice", help_text="Write your second choice for this program.", choices=SCIENCE_CHOICE, default=CHOICE_1, max_length=50)
+    second_choice_importance = models.CharField("2nd Importance", help_text="How important is this choice?", choices=IMPORTANCE_CHOICES, default=MEDIUM, max_length=12)
+    third_choice = models.CharField("3rd Choice", help_text="Write your third choice for this program.", choices=SCIENCE_CHOICE, default=CHOICE_1, max_length=50)
+    third_choice_importance = models.CharField("3rd Importance", help_text="How important is this choice?", choices=IMPORTANCE_CHOICES, default=MEDIUM, max_length=12)
     other_choice = models.CharField("Other Choice", help_text="Others?", max_length=100, null=True)
     details = models.TextField("Details", help_text="(Optional) Please give a more detailed description of your "
                                                     "research interests: Are your interests broad? Have you "
@@ -126,7 +126,7 @@ class Applicant(models.Model):
     triage = models.CharField("Triage", max_length=10) #TODO Figure out what this is supposed to do
     ranking = models.CharField("Ranking", help_text="What is the ranking of this applicant?", max_length=20)
     likely_institute = models.CharField("Likely Institute", help_text="What institute would this applicant be a part of?", max_length=80)
-    decision_action = models.CharField("Decision", help_text="Final decision on applicant", choices=DECISION_CHOICES, max_length=10)
+    decision_action = models.CharField("Decision", help_text="Final decision on applicant", choices=DECISION_CHOICES, null=True, max_length=10)
     comments = models.TextField("Admin Comments", help_text="Comments on Applicant")
     application_completeness = models.TextField("Application Completeness", help_text="Anything missing?")
     correspondence = models.TextField("Correspondence", help_text="Correspondence")
@@ -150,7 +150,7 @@ class Intern(models.Model):
 
 
 class ReferenceLetter(models.Model):
-    status = models.CharField("Status", help_text="Status of Letter of Rec", choices=LETTER_CHOICES, max_length=10)
+    status = models.CharField("Status", help_text="Status of Letter of Rec", choices=LETTER_CHOICES, default=WAITING_LETTER, max_length=10)
     letter = models.FileField("Letter of Rec", help_text="Recommendation Letter", upload_to="references")
     comments = models.TextField("Comments", help_text="Any comments on Letter of Recommendation?")
     applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference")

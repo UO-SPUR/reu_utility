@@ -15,7 +15,8 @@ FEMALE = "Female"
 
 SEX_CHOICES = (
     (MALE, MALE),
-    (FEMALE, FEMALE)
+    (FEMALE, FEMALE),
+    (DECLINE, DECLINE)
 )
 
 ### Ethnic Background/ Race  ####

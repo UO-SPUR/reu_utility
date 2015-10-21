@@ -180,3 +180,9 @@ class MentorSurvey(models.Model):
     submission_date = models.DateField("Date of Submission", help_text="Submission Date")
     comments = models.TextField("Other Comments", help_text="Enter any comments here", null=True)
     #TODO Rest of the survey, including Overall Experience, Mentoring, Intern, PI Support, and Program
+
+
+class IroSetup(models.Model):
+    program_name = models.CharField("Program Name", help_text="Enter the name of the program", max_length=50)
+    acronym = models.CharField("Program Acronym", help_text="Enter the acronym of the program, if any", max_length=20, null=True)
+    base_url = models.URLField("URL of site", help_text="Enter the main URL of the program (e.x. spur.uoregon.edu)")

@@ -3,6 +3,8 @@ from django.contrib import admin
 # Register your models here.
 from .models import *
 
+# Defining ModelAdmin here.
+
 admin.site.register(Applicant)
 admin.site.register(Faculty)
 admin.site.register(Mentor)

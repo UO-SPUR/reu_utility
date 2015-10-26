@@ -8,13 +8,18 @@ from .models import *
 
 class LetterInline(admin.StackedInline):
     model = ReferenceLetter
+    extra = 3
 
 class InternInline(admin.StackedInline):
     model = Intern
+    extra = 1
 
 class AddressInline(admin.StackedInline):
     model = Address
+    extra = 1
 # Defining ModelAdmin here.
+
+@admin.register(Applicant)
 class ApplicantAdmin(TabbedModelAdmin):
     tab_admin = (
         ('Course Work', {
@@ -23,9 +28,7 @@ class ApplicantAdmin(TabbedModelAdmin):
         ('Application Status', {
             'fields': (('triage', 'short_list'), ('ranking', 'likely_institute'), ('possible_pis', 'decision_action'))
         }),
-        ('Letters of Recommendation', {
-            LetterInline,
-        }),
+        LetterInline,
         ('Admin', {
             'fields': ('comments', 'application_completeness', 'correspondence')
         })
@@ -37,10 +40,6 @@ class ApplicantAdmin(TabbedModelAdmin):
         ('College', {
             'fields': (('college', 'college_class'), ('expected_graduation', 'major'), 'transfer', ('gpa', 'stem_gpa'), ('program', 'available'))
         }),
-        ('Addresses', {
-            AddressInline,
-            AddressInline
-        }),
         ('Demographic Information', {
             'fields': (('date_of_birth', 'citizenship'), 'sex', ('ethnic_background', 'ethnic_background_other'), ('disadvantaged', 'disadvantaged_other'))
         }),
@@ -48,17 +47,22 @@ class ApplicantAdmin(TabbedModelAdmin):
             'fields': (('learned_of', 'previous_program'), ('marc_current', 'marc_past'), ('advanced_degree', 'advanced_degree_other'), ('research_career', 'gre_mcat'), 'date_of_test')
         }),
         ('Application Questions', {
-            'fields': ('background', 'goals', ('first_choice', 'first_importance'), ('second_choice', 'second_importance'), ('third_choice', 'third_importance'), 'other_choice', 'details', 'lab_preferences', 'outside_interests', 'transcripts')
+            'fields': ('background', 'goals', ('first_choice', 'first_choice_importance'), ('second_choice', 'second_choice_importance'), ('third_choice', 'third_choice_importance'), 'other_choice', 'details', 'lab_preferences', 'outside_interests', 'transcript')
         }),
         ('Faculty', {
             'fields': (('faculty_reference_one', 'faculty_reference_one_email'), ('faculty_reference_two', 'faculty_reference_two_email'), ('faculty_reference_three', 'faculty_reference_three_email'))
         })
     )
     tab_intern = (
-        InternInline
+        InternInline,
     )
 
-admin.site.register(Applicant)
+    tabs = [
+        ('Admin', tab_admin),
+        ('Application', tab_application),
+        ('Intern Profile', tab_intern)
+    ]
+
 admin.site.register(Faculty)
 admin.site.register(Mentor)
 admin.site.register(Intern)

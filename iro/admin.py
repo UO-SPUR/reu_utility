@@ -18,7 +18,7 @@ class AddressInline(admin.StackedInline):
 class ApplicantAdmin(TabbedModelAdmin):
     tab_admin = (
         ('Course Work', {
-            'fields': (('gpa', 'stem_gpa'), 'relevant_coursework')
+            'fields': (('gpa', 'stem_gpa'), 'grades')
         }),
         ('Application Status', {
             'fields': (('triage', 'short_list'), ('ranking', 'likely_institute'), ('possible_pis', 'decision_action'))
@@ -40,8 +40,19 @@ class ApplicantAdmin(TabbedModelAdmin):
         ('Addresses', {
             AddressInline,
             AddressInline
+        }),
+        ('Demographic Information', {
+            'fields': (('date_of_birth', 'citizenship'), 'sex', ('ethnic_background', 'ethnic_background_other'), ('disadvantaged', 'disadvantaged_other'))
+        }),
+        ('Survey Questions', {
+            'fields': (('learned_of', 'previous_program'), ('marc_current', 'marc_past'), ('advanced_degree', 'advanced_degree_other'), ('research_career', 'gre_mcat'), 'date_of_test')
+        }),
+        ('Application Questions', {
+            'fields': ('background', 'goals', ('first_choice', 'first_importance'), ('second_choice', 'second_importance'), ('third_choice', 'third_importance'), 'other_choice', 'details', 'lab_preferences', 'outside_interests', 'transcripts')
+        }),
+        ('Faculty', {
+            'fields': (('faculty_reference_one', 'faculty_reference_one_email'), ('faculty_reference_two', 'faculty_reference_two_email'), ('faculty_reference_three', 'faculty_reference_three_email'))
         })
-
     )
     tab_intern = (
         InternInline

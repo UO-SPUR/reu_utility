@@ -134,6 +134,7 @@ class Applicant(models.Model):
     correspondence = models.TextField("Correspondence", help_text="Correspondence")
     year_created = models.DateField("Created Year", help_text="Year Created")
     short_list = models.CharField("Short List?", choices=SHORT_LIST_CHOICES, default=UNSURE, max_length=10)
+    transcript = models.FileField('Transcript', upload_to='transcripts')
     #########End Administrative fields ###########################################################
 
 class Intern(models.Model):

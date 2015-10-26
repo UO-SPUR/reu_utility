@@ -192,3 +192,23 @@ LETTER_CHOICES = (
     (LETTER_UPLOADED, LETTER_UPLOADED),
     (WAITING_LETTER, WAITING_LETTER)
 )
+
+############## Short List Choices ###############
+SHORT_LIST_CHOICES = (
+    (YES, YES),
+    (UNSURE, UNSURE),
+    (NO, NO)
+)
+
+############### College Class Choices ################
+FRESHMAN = "Freshman"
+SOPHMORE = "Sophmore"
+JUNIOR = "Junior"
+SENIOR = "Senior"
+
+CLASS_CHOICES = (
+    (FRESHMAN, FRESHMAN),
+    (SOPHMORE, SOPHMORE),
+    (JUNIOR, JUNIOR),
+    (SENIOR, SENIOR)
+)

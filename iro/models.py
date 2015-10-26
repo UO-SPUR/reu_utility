@@ -42,6 +42,7 @@ class Applicant(models.Model):
 
     ##### College Info #####
     college = models.CharField("College", help_text="Enter the name of your college or university", max_length=70)
+    college_class = models.CharField("Class", help_text="What year are you in college?", choices=CLASS_CHOICES, default=FRESHMAN, max_length=15)
     expected_graduation = models.DateField("Expected Graduation", help_text="Choose your expected graduation time")
     transfer = models.CharField("Transfer?", help_text="If you transferred from another institution, please list.", max_length=100)
     gpa = models.FloatField("GPA", help_text="Please type your current GPA.")
@@ -50,6 +51,7 @@ class Applicant(models.Model):
     major = models.CharField("Major", help_text="Please enter your major", max_length=100)
     program = models.CharField("Program Applied To", help_text="What program are you applying to?", choices=PROGRAM_CHOICES, default=PROGRAM_1, max_length=20)
     available = models.DurationField("Available Dates", help_text="Choose what date range you are available")
+    relevant_coursework = models.CharField("Relevant Coursework", help_text="Course work relevant to program", max_length=400, null=True)
 
     ###### End College Info ####
 
@@ -131,6 +133,7 @@ class Applicant(models.Model):
     application_completeness = models.TextField("Application Completeness", help_text="Anything missing?")
     correspondence = models.TextField("Correspondence", help_text="Correspondence")
     year_created = models.DateField("Created Year", help_text="Year Created")
+    short_list = models.CharField("Short List?", choices=SHORT_LIST_CHOICES, default=UNSURE, max_length=10)
     #########End Administrative fields ###########################################################
 
 class Intern(models.Model):

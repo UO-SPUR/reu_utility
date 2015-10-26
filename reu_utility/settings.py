@@ -107,3 +107,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static/'
+
+#Email settings
+DEFAULT_FROM_EMAIL = 'summerpgms@uoregon.edu'

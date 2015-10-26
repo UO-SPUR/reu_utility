@@ -56,6 +56,9 @@ class ApplicantAdmin(TabbedModelAdmin):
     tab_intern = (
         InternInline,
     )
+    tab_possible_pis = (
+        
+    )
 
     tabs = [
         ('Admin', tab_admin),

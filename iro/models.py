@@ -4,6 +4,18 @@ from iro.choices import *
 
 # Create your models here.
 
+class Address(models.Model):
+    street = models.TextField("Street", help_text="Enter street name")
+    city = models.TextField("City", help_text="Enter your city's name")
+    state = models.TextField("State", help_text="Enter your state")
+    zipcode = models.TextField("Zip Code", help_text="Enter ZIP Code")
+
+class Institute(models.Model):
+    name = models.CharField(max_length=200)
+    address = models.ForeignKey(Address, null=True)
+    discipline = models.CharField(max_length=200, null=True)
+
+
 class Mentor(models.Model):
     mentor_name = models.CharField(max_length=200)
     professor = models.CharField("PI Name", help_text="Professor's name", max_length=200, null=True)#TODO ForeignKey?
@@ -13,12 +25,7 @@ class Faculty(models.Model):
     faculty_name = models.CharField(max_length=200)
     email_template = models.TextField("Email Template", help_text="Enter a template for emails", null=True)
     correspondence = models.TextField("Correspondence", help_text="Correspondence with Professor", null=True)
-
-class Address(models.Model):
-    street = models.TextField("Street", help_text="Enter street name")
-    city = models.TextField("City", help_text="Enter your city's name")
-    state = models.TextField("State", help_text="Enter your state")
-    zipcode = models.TextField("Zip Code", help_text="Enter ZIP Code")
+    institute = models.ForeignKey(Institute, null=True)
 
 class Abstract(models.Model):
     title = models.TextField("Abstract Title", help_text="Title of Abstract")
@@ -197,4 +204,3 @@ class IroSetup(models.Model):
     program_phone_number = models.CharField("Program Phone Number", validators=[phone_regex], blank=True, max_length=15)
     program_fax_number = models.CharField("Program Fax Number (Optional)", validators=[phone_regex], blank=True, max_length=15)
     logo = models.FileField("Program Logo", upload_to="logo", null=True)
-    list_of_institutions = models.TextField("List of participating Intitutes (One name per line)", null=True)

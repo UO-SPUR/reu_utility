@@ -110,3 +110,7 @@ STATIC_ROOT = '/static/'
 
 #Email settings
 DEFAULT_FROM_EMAIL = 'summerpgms@uoregon.edu'
+EMAIL_HOST = "uoregon.edu"
+EMAIL_PORT = "47"
+EMAIL_HOST_USER = "jacob"
+EMAIL_HOST_PASSWORD = "123456"

@@ -5,4 +5,4 @@ Built on Django, this implementation of the original REU utility, located here: 
 by default. 
 
 # TODO
-Everything
+Forms, setup page, some encryption(i.e. SSN)

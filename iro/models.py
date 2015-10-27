@@ -25,7 +25,7 @@ class Faculty(models.Model):
     faculty_name = models.CharField(max_length=200)
     email_template = models.TextField("Email Template", help_text="Enter a template for emails", null=True)
     correspondence = models.TextField("Correspondence", help_text="Correspondence with Professor", null=True)
-    institute = models.ForeignKey(Institute, null=True)
+    institute = models.ForeignKey(Institute, on_delete=models.SET_NULL, null=True)
 
 class Abstract(models.Model):
     title = models.TextField("Abstract Title", help_text="Title of Abstract")
@@ -87,8 +87,8 @@ class Applicant(models.Model):
     phone_number = models.CharField("Applicant Phone Number", validators=[phone_regex], blank=True, max_length=15) # validators should be a list
     cell_phone_number = models.CharField("Applicant Cell Phone Number", validators=[phone_regex], blank=True, max_length=15) # validators should be a list
     applicant_email = models.EmailField("Applicant Email", help_text="Enter your email address")
-    address = models.ForeignKey(Address, verbose_name="Applicant Address", related_name="applicant_address")
-    permanent_address = models.ForeignKey(Address, verbose_name="Permanent Address", related_name="applicant_perm_address")
+    address = models.ForeignKey(Address, verbose_name="Applicant Address", related_name="applicant_address", on_delete=models.SET_NULL, null=True)
+    permanent_address = models.ForeignKey(Address, verbose_name="Permanent Address", related_name="applicant_perm_address", on_delete=models.SET_NULL, null=True)
 
     ####### End Contact Info ####################################
 
@@ -130,8 +130,8 @@ class Applicant(models.Model):
     ########## End Question Fields and preferences ############################################
 
     ######### Administrative fields ###########################################################
-    mentors = models.ManyToManyField(Mentor, verbose_name="Possible Mentors", symmetrical=False)
-    possible_pis = models.ManyToManyField(Faculty, verbose_name="Possible PIs", symmetrical=False)
+    mentors = models.ManyToManyField(Mentor, verbose_name="Possible Mentors", symmetrical=False, on_delete=models.SET_NULL, null=True)
+    possible_pis = models.ManyToManyField(Faculty, verbose_name="Possible PIs", symmetrical=False, on_delete=models.SET_NULL, null=True)
     triage = models.CharField("Triage", max_length=10) #TODO Figure out what this is supposed to do
     ranking = models.CharField("Ranking", help_text="What is the ranking of this applicant?", max_length=20)
     likely_institute = models.CharField("Likely Institute", help_text="What institute would this applicant be a part of?", max_length=80)
@@ -145,18 +145,18 @@ class Applicant(models.Model):
     #########End Administrative fields ###########################################################
 
 class Intern(models.Model):
-    application = models.OneToOneField(Applicant, verbose_name="Intern Application")
+    application = models.OneToOneField(Applicant, verbose_name="Intern Application") # Deleted if Applicant is deleted
     program = models.CharField("Program", help_text="Program the intern is participating in.", max_length=40)
     arrival_date = models.DateField("Arrives", help_text="Date of arrival")
     departure_date = models.DateField("Departs", help_text="Date of departure")
-    professor = models.ForeignKey(Faculty, verbose_name="Professor")
-    mentors = models.ManyToManyField(Mentor, verbose_name="Mentors")
-    institute = models.ForeignKey(Institute, verbose_name="Institute")
+    professor = models.ForeignKey(Faculty, verbose_name="Professor", on_delete=models.SET_NULL, null=True)
+    mentors = models.ManyToManyField(Mentor, verbose_name="Mentors", on_delete=models.SET_NULL, null=True)
+    institute = models.ForeignKey(Institute, verbose_name="Institute", on_delete=models.SET_NULL, null=True)
     symposium_session = models.CharField("Sympo. Session", help_text="Symposium Session", max_length=100, null=True)
     picture = models.ImageField(upload_to='interns', null=True)
     social_security_number = models.CharField("SSN", help_text="Social Security Number", max_length=9)
     student_id = models.CharField("Student ID", help_text="Student ID number", max_length=11)
-    abstract = models.OneToOneField(Abstract, verbose_name="Abstract", null=True)
+    abstract = models.OneToOneField(Abstract, verbose_name="Abstract", null=True, on_delete=models.SET_NULL)
     presentation_oral = models.URLField("Oral Presentation URL", help_text="URL to oral presentation", null=True)
     presentation_poster = models.URLField("Poster Presentation URL", help_text="URL to poster presentation", null=True)
 
@@ -165,13 +165,13 @@ class ReferenceLetter(models.Model):
     status = models.CharField("Status", help_text="Status of Letter of Rec", choices=LETTER_CHOICES, default=WAITING_LETTER, max_length=10)
     letter = models.FileField("Letter of Rec", help_text="Recommendation Letter", upload_to="references")
     comments = models.TextField("Comments", help_text="Any comments on Letter of Recommendation?")
-    applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference")
+    applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference") # Deleted if Applicant is deleted
 
 class ProgressReport(models.Model):
     last_updated = models.DateField("Last Updated", help_text="Last modified timestamp", auto_now=True)
     content = models.TextField("Progress Report", help_text="Enter your progress report")
     week = models.PositiveSmallIntegerField("Week", help_text="Which week is this progress report for?")
-    intern = models.ForeignKey(Intern, verbose_name="Intern")
+    intern = models.ForeignKey(Intern, verbose_name="Intern") # Deleted if Intern is deleted
 
 class PISurvey(models.Model):
     evaluator = models.CharField("Evaluator Name", help_text="Evaluator's name", max_length=50)

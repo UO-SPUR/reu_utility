@@ -151,6 +151,7 @@ class Intern(models.Model):
     departure_date = models.DateField("Departs", help_text="Date of departure")
     professor = models.ForeignKey(Faculty, verbose_name="Professor")
     mentors = models.ManyToManyField(Mentor, verbose_name="Mentors")
+    institute = models.ForeignKey(Institute, verbose_name="Institute")
     symposium_session = models.CharField("Sympo. Session", help_text="Symposium Session", max_length=100, null=True)
     picture = models.ImageField(upload_to='interns', null=True)
     social_security_number = models.CharField("SSN", help_text="Social Security Number", max_length=9)

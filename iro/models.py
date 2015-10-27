@@ -1,6 +1,14 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from iro.choices import *
+from django.core.exceptions import ValidationError
+
+# Allow only one model to be created (For Setup)
+def validate_only_one_instance(obj):
+    model = obj.__class__
+    if (model.objects.count() > 0 and
+                obj.id != model.objects.get().id):
+        raise ValidationError("Can only create 1 %s instance" % model.__name__)
 
 # Create your models here.
 
@@ -130,8 +138,8 @@ class Applicant(models.Model):
     ########## End Question Fields and preferences ############################################
 
     ######### Administrative fields ###########################################################
-    mentors = models.ManyToManyField(Mentor, verbose_name="Possible Mentors", symmetrical=False, on_delete=models.SET_NULL, null=True)
-    possible_pis = models.ManyToManyField(Faculty, verbose_name="Possible PIs", symmetrical=False, on_delete=models.SET_NULL, null=True)
+    mentors = models.ManyToManyField(Mentor, verbose_name="Possible Mentors", symmetrical=False)
+    possible_pis = models.ManyToManyField(Faculty, verbose_name="Possible PIs", symmetrical=False)
     triage = models.CharField("Triage", max_length=10) #TODO Figure out what this is supposed to do
     ranking = models.CharField("Ranking", help_text="What is the ranking of this applicant?", max_length=20)
     likely_institute = models.CharField("Likely Institute", help_text="What institute would this applicant be a part of?", max_length=80)
@@ -150,7 +158,7 @@ class Intern(models.Model):
     arrival_date = models.DateField("Arrives", help_text="Date of arrival")
     departure_date = models.DateField("Departs", help_text="Date of departure")
     professor = models.ForeignKey(Faculty, verbose_name="Professor", on_delete=models.SET_NULL, null=True)
-    mentors = models.ManyToManyField(Mentor, verbose_name="Mentors", on_delete=models.SET_NULL, null=True)
+    mentors = models.ManyToManyField(Mentor, verbose_name="Mentors")
     institute = models.ForeignKey(Institute, verbose_name="Institute", on_delete=models.SET_NULL, null=True)
     symposium_session = models.CharField("Sympo. Session", help_text="Symposium Session", max_length=100, null=True)
     picture = models.ImageField(upload_to='interns', null=True)
@@ -205,3 +213,5 @@ class IroSetup(models.Model):
     program_phone_number = models.CharField("Program Phone Number", validators=[phone_regex], blank=True, max_length=15)
     program_fax_number = models.CharField("Program Fax Number (Optional)", validators=[phone_regex], blank=True, max_length=15)
     logo = models.FileField("Program Logo", upload_to="logo", null=True)
+    def clean(self):
+        validate_only_one_instance(self)

@@ -202,7 +202,7 @@ SHORT_LIST_CHOICES = (
 
 ############### College Class Choices ################
 FRESHMAN = "Freshman"
-SOPHMORE = "Sophmore"
+SOPHMORE = "Sophomore"
 JUNIOR = "Junior"
 SENIOR = "Senior"
 
@@ -211,4 +211,14 @@ CLASS_CHOICES = (
     (SOPHMORE, SOPHMORE),
     (JUNIOR, JUNIOR),
     (SENIOR, SENIOR)
+)
+
+################ Citizenship Choices #################
+AMERICAN = "U.S. Citizen"
+GREEN_CARD = "Green Card"
+
+CITIZEN_CHOICES = (
+    (AMERICAN, AMERICAN),
+    (GREEN_CARD, GREEN_CARD),
+    (OTHER, OTHER)
 )

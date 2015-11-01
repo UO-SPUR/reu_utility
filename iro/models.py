@@ -53,7 +53,7 @@ class Applicant(models.Model):
     disadvantaged = models.CharField("Disadvantaged Status", help_text="Do you claim Disadvantaged Status?", max_length=25,
                                      choices=DISADVANTAGED_CHOICES, default=NO)
     disadvantaged_other = models.CharField("Disadvantaged Other", help_text="If 'Other or multiple', please explain", max_length=200)
-    citizenship = models.CharField("Citizenship", help_text="Enter your citizenship", max_length=100)
+    citizenship = models.CharField("Citizenship", help_text="Enter your citizenship", choices=CITIZEN_CHOICES, default=AMERICAN, max_length=100)
 
     ##### College Info #####
     college = models.CharField("College", help_text="Enter the name of your college or university", max_length=70)

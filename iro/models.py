@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import RegexValidator
 from iro.choices import *
 from django.core.exceptions import ValidationError
+from django.forms import ModelForm
 
 # Allow only one model to be created (For Setup)
 def validate_only_one_instance(obj):
@@ -18,16 +19,24 @@ class Address(models.Model):
     state = models.TextField("State", help_text="Enter your state")
     zipcode = models.TextField("Zip Code", help_text="Enter ZIP Code")
 
+    def __str__(self):
+        return self.street
+
 class Institute(models.Model):
     name = models.CharField(max_length=200)
     address = models.ForeignKey(Address, null=True)
     discipline = models.CharField(max_length=200, null=True)
 
+    def __str__(self):
+        return self.name
 
 class Mentor(models.Model):
     mentor_name = models.CharField(max_length=200)
     professor = models.CharField("PI Name", help_text="Professor's name", max_length=200, null=True)#TODO ForeignKey?
     email_address = models.EmailField("Email Address", help_text="Enter the mentor's email address", null=True)
+
+    def __str__(self):
+        return self.mentor_name
 
 class Faculty(models.Model):
     faculty_name = models.CharField(max_length=200)
@@ -35,10 +44,16 @@ class Faculty(models.Model):
     correspondence = models.TextField("Correspondence", help_text="Correspondence with Professor", null=True)
     institute = models.ForeignKey(Institute, on_delete=models.SET_NULL, null=True)
 
+    def __str__(self):
+        return self.faculty_name
+
 class Abstract(models.Model):
     title = models.TextField("Abstract Title", help_text="Title of Abstract")
     last_updated = models.DateField("Last Updated", help_text="Timestamp of last modification", auto_now=True)
     content = models.TextField("Abstract", help_text="Enter the abstract here")
+
+    def __str__(self):
+        return self.title
 
 class Applicant(models.Model):
     ############## Basic Info ###############################
@@ -152,7 +167,11 @@ class Applicant(models.Model):
     transcript = models.FileField('Transcript', upload_to='transcripts', null=True)
     #########End Administrative fields ###########################################################
 
+    def __str__(self):
+        return self.applicant_name
+
 class Intern(models.Model):
+    name = models.CharField("Applicant Full Name", help_text="Enter your full name", max_length=200, null=True)
     application = models.OneToOneField(Applicant, verbose_name="Intern Application") # Deleted if Applicant is deleted
     program = models.CharField("Program", help_text="Program the intern is participating in.", max_length=40)
     arrival_date = models.DateField("Arrives", help_text="Date of arrival")
@@ -167,6 +186,9 @@ class Intern(models.Model):
     abstract = models.OneToOneField(Abstract, verbose_name="Abstract", null=True, on_delete=models.SET_NULL)
     presentation_oral = models.URLField("Oral Presentation URL", help_text="URL to oral presentation", null=True)
     presentation_poster = models.URLField("Poster Presentation URL", help_text="URL to poster presentation", null=True)
+
+    def __str__(self):
+        return self.name
 
 
 class ReferenceLetter(models.Model):
@@ -215,3 +237,6 @@ class IroSetup(models.Model):
     logo = models.FileField("Program Logo", upload_to="logo", null=True)
     def clean(self):
         validate_only_one_instance(self)
+
+    def __str__(self):
+        return self.program_name

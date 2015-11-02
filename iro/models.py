@@ -170,6 +170,15 @@ class Applicant(models.Model):
     def __str__(self):
         return self.applicant_name
 
+class ApplicantForm(ModelForm):
+    class Meta:
+        model = Applicant
+        # Exclude the administrative fields
+        exclude = ['mentors', 'possible_pis', 'triage', 'ranking',
+                   'likely_institute', 'decision_action', 'comments',
+                   'application_completeness', 'correspondence', 'year_created',
+                   'short_list', 'transcript']
+
 class Intern(models.Model):
     name = models.CharField("Applicant Full Name", help_text="Enter your full name", max_length=200, null=True)
     application = models.OneToOneField(Applicant, verbose_name="Intern Application") # Deleted if Applicant is deleted

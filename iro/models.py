@@ -229,6 +229,10 @@ class PISurvey(models.Model):
     comments = models.TextField("Other Comments", help_text="Enter any comments here", null=True)
     #TODO Rest of the survey, including Intern, Mentor, and Program fields
 
+class PISurveryForm(ModelForm):
+    model = PISurvey
+    fields = ["intern", "comments"]
+
 class InternSurvey(models.Model):
     evaluator = models.CharField("Evaluator Name", help_text="Evaluator's name", max_length=50)
     submission_date = models.DateField("Date of Submission", help_text="Submission Date")

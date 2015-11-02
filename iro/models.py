@@ -204,13 +204,23 @@ class ReferenceLetter(models.Model):
     status = models.CharField("Status", help_text="Status of Letter of Rec", choices=LETTER_CHOICES, default=WAITING_LETTER, max_length=10)
     letter = models.FileField("Letter of Rec", help_text="Recommendation Letter", upload_to="references")
     comments = models.TextField("Comments", help_text="Any comments on Letter of Recommendation?")
-    applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference") # Deleted if Applicant is deleted
+    applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference", help_text="Which Applicant is this letter for?") # Deleted if Applicant is deleted
+
+class ReferenceLetterForm(ModelForm):
+    class Meta:
+        model = ReferenceLetter
+        fields = ['letter', 'applicant']
 
 class ProgressReport(models.Model):
     last_updated = models.DateField("Last Updated", help_text="Last modified timestamp", auto_now=True)
     content = models.TextField("Progress Report", help_text="Enter your progress report")
     week = models.PositiveSmallIntegerField("Week", help_text="Which week is this progress report for?")
     intern = models.ForeignKey(Intern, verbose_name="Intern") # Deleted if Intern is deleted
+
+class ProgressReportForm(ModelForm):
+    class Meta:
+        model = ProgressReport
+        fields = ['content', 'week']
 
 class PISurvey(models.Model):
     evaluator = models.CharField("Evaluator Name", help_text="Evaluator's name", max_length=50)

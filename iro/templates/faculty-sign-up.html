@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<form action="/iro/" method="post">
+    {% csrf_token %}
+    {{ faculty_form }}
+    <input type="submit" value="Submit" />
+</form>
+</body>
+</html>

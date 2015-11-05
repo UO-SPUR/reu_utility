@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from iro.models import ApplicantForm
+from iro.models import ApplicantForm, FacultyForm, MentorForm
 # Create your views here.
 
 def get_application(request):
@@ -25,7 +25,7 @@ def get_faculty(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = FacutlyForm(request.POST)
+        form = FacultyForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required

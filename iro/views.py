@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.views.generic.edit import CreateView
+from django.contrib.auth.models import User
+from django.contrib.auth.models import Group
+from django.core.urlresolvers import reverse
 from iro.models import ApplicantForm, FacultyForm, MentorForm
 # Create your views here.
 
@@ -56,3 +60,33 @@ def get_mentor(request):
         form = MentorForm()
 
     return render(request, 'mentor-sign-up.html', {'mentor_form': form})
+
+class FacultyCreate(CreateView):
+    model = User
+    fields = ['username'] #only expose the username field for the sake of simplicity add more fields as you need
+
+    #this one is called when a user has been created successfully
+    def get_success_url(self):
+        g = Group.objects.get(name='faculty') # assuming you have a group 'test' created already. check the auth_user_group table in your DB
+        g.user_set.add(self.object)
+        return reverse('faculty')
+
+class MentorCreate(CreateView):
+    model = User
+    fields = ['username'] #only expose the username field for the sake of simplicity add more fields as you need
+
+    #this one is called when a user has been created successfully
+    def get_success_url(self):
+        g = Group.objects.get(name='mentors') # assuming you have a group 'test' created already. check the auth_user_group table in your DB
+        g.user_set.add(self.object)
+        return reverse('mentors')
+
+class InternCreate(CreateView):
+    model = User
+    fields = ['username'] #only expose the username field for the sake of simplicity add more fields as you need
+
+    #this one is called when a user has been created successfully
+    def get_success_url(self):
+        g = Group.objects.get(name='interns') # assuming you have a group 'test' created already. check the auth_user_group table in your DB
+        g.user_set.add(self.object)
+        return reverse('interns')

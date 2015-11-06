@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
 from tabbed_admin import TabbedModelAdmin
 
 # Register your models here.
@@ -6,12 +8,23 @@ from .models import *
 
 # Inline models here
 
+class FacultyInline(admin.StackedInline):
+    model = Faculty
+    can_delete = False
+    verbose_name_plural = "Faculty"
+
+class MentorInline(admin.StackedInline):
+    model = Mentor
+    can_delete = False
+    verbose_name_plural = "Mentors"
+
 class LetterInline(admin.StackedInline):
     model = ReferenceLetter
     extra = 3
 
 class InternInline(admin.StackedInline):
     model = Intern
+    can_delete = False
     extra = 1
 
 class AddressInline(admin.StackedInline):
@@ -66,6 +79,11 @@ class ApplicantAdmin(TabbedModelAdmin):
         ('Intern Profile', tab_intern)
     ]
 
+class UserAdmin(UserAdmin):
+    inlines = (FacultyInline, MentorInline, InternInline)
+
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
 admin.site.register(Faculty)
 admin.site.register(Mentor)
 admin.site.register(Intern)

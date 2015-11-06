@@ -26,10 +26,6 @@ class InternInline(admin.StackedInline):
     model = Intern
     can_delete = False
     extra = 1
-
-class AddressInline(admin.StackedInline):
-    model = Address
-    extra = 1
 # Defining ModelAdmin here.
 
 @admin.register(Applicant)
@@ -44,6 +40,10 @@ class ApplicantAdmin(TabbedModelAdmin):
         LetterInline,
         ('Admin', {
             'fields': ('comments', 'application_completeness', 'correspondence')
+        }),
+        ('Addresses', {
+            'fields': (('street', 'city', 'state', 'zipcode'),
+                       ('perm_street', 'perm_city', 'perm_state', 'perm_zipcode'))
         })
     )
     tab_application = (
@@ -84,6 +84,7 @@ class UserAdmin(UserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+
 admin.site.register(Faculty)
 admin.site.register(Mentor)
 admin.site.register(Intern)
@@ -95,4 +96,3 @@ admin.site.register(IroSetup)
 admin.site.register(PISurvey)
 admin.site.register(InternSurvey)
 admin.site.register(MentorSurvey)
-admin.site.register(Address)

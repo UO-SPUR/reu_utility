@@ -14,18 +14,12 @@ def validate_only_one_instance(obj):
 
 # Create your models here.
 
-class Address(models.Model):
-    street = models.TextField("Street", help_text="Enter street name")
-    city = models.TextField("City", help_text="Enter your city's name")
-    state = models.TextField("State", help_text="Enter your state")
-    zipcode = models.TextField("Zip Code", help_text="Enter ZIP Code")
-
-    def __str__(self):
-        return self.street
-
 class Institute(models.Model):
     name = models.CharField(max_length=200)
-    address = models.ForeignKey(Address, null=True)
+    street = models.CharField("Street", help_text="Enter street name", max_length=200, null=True)
+    city = models.CharField("City", help_text="Enter your city's name", max_length=200, null=True)
+    state = models.CharField("State", help_text="Enter your state", max_length=200, null=True)
+    zipcode = models.CharField("Zip Code", help_text="Enter ZIP Code", max_length=200, null=True)
     discipline = models.CharField(max_length=200, null=True)
 
     def __str__(self):
@@ -124,8 +118,14 @@ class Applicant(models.Model):
     phone_number = models.CharField("Applicant Phone Number", validators=[phone_regex], blank=True, max_length=15) # validators should be a list
     cell_phone_number = models.CharField("Applicant Cell Phone Number", validators=[phone_regex], blank=True, max_length=15) # validators should be a list
     applicant_email = models.EmailField("Applicant Email", help_text="Enter your email address")
-    address = models.ForeignKey(Address, verbose_name="Applicant Address", related_name="applicant_address", on_delete=models.SET_NULL, null=True)
-    permanent_address = models.ForeignKey(Address, verbose_name="Permanent Address", related_name="applicant_perm_address", on_delete=models.SET_NULL, null=True)
+    street = models.CharField("Street", help_text="Enter street name", max_length=200, null=True)
+    city = models.CharField("City", help_text="Enter your city's name", max_length=200, null=True)
+    state = models.CharField("State", help_text="Enter your state", max_length=200, null=True)
+    zipcode = models.CharField("Zip Code", help_text="Enter ZIP Code", max_length=200, null=True)
+    perm_street = models.CharField(" Permanent Street", help_text="Enter permanent street name", max_length=200, null=True)
+    perm_city = models.CharField("Permanent City", help_text="Enter your permanent city's name", max_length=200, null=True)
+    perm_state = models.CharField("Permanent State", help_text="Enter your permanent state of residence", max_length=200, null=True)
+    perm_zipcode = models.CharField("Permanent Zip Code", help_text="Enter Permanent ZIP Code", max_length=200, null=True)
 
     ####### End Contact Info ####################################
 

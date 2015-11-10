@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from django.core.validators import RegexValidator
 from iro.choices import *
 from django.core.exceptions import ValidationError
@@ -26,7 +27,7 @@ class Institute(models.Model):
         return self.name
 
 class Mentor(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
     mentor_name = models.CharField(max_length=200)
     professor = models.CharField("PI Name", help_text="Professor's name", max_length=200, null=True)#TODO ForeignKey?
     email_address = models.EmailField("Email Address", help_text="Enter the mentor's email address", null=True)
@@ -40,7 +41,7 @@ class MentorForm(ModelForm):
         fields = ['mentor_name', 'professor', 'email_address']
 
 class Faculty(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
     faculty_name = models.CharField(max_length=200)
     email_address = models.EmailField("Email Address", help_text="Enter the mentor's email address", null=True)
     email_template = models.TextField("Email Template", help_text="Enter a template for emails", null=True)
@@ -194,7 +195,7 @@ class ApplicantForm(ModelForm):
                    'short_list', 'transcript']
 
 class Intern(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
     name = models.CharField("Applicant Full Name", help_text="Enter your full name", max_length=200, null=True)
     application = models.OneToOneField(Applicant, verbose_name="Intern Application") # Deleted if Applicant is deleted
     program = models.CharField("Program", help_text="Program the intern is participating in.", max_length=40)

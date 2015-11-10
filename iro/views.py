@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic.edit import CreateView
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
+from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
 from iro.models import ApplicantForm, FacultyForm, MentorForm
 # Create your views here.
@@ -61,9 +62,8 @@ def get_mentor(request):
 
     return render(request, 'mentor-sign-up.html', {'mentor_form': form})
 
-class FacultyCreate(CreateView):
-    model = User
-    fields = ['username'] #only expose the username field for the sake of simplicity add more fields as you need
+################################### Creation of Users Below #####################################################
+class FacultyCreate(UserCreationForm):
 
     #this one is called when a user has been created successfully
     def get_success_url(self):

@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^iro/', include('iro.urls')),
     url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^admin/', include(admin.site.urls)),
+    (r'^accounts/', include('registration.backends.default.urls')), # registration-redux URLS
     url('^', include('django.contrib.auth.urls'))
 ]

@@ -30,7 +30,6 @@ class Mentor(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     mentor_name = models.CharField(max_length=200)
     professor = models.CharField("PI Name", help_text="Professor's name", max_length=200, null=True)#TODO ForeignKey?
-    email_address = models.EmailField("Email Address", help_text="Enter the mentor's email address", null=True)
 
     def __str__(self):
         return self.mentor_name
@@ -38,12 +37,11 @@ class Mentor(models.Model):
 class MentorForm(ModelForm):
     class Meta:
         model = Mentor
-        fields = ['mentor_name', 'professor', 'email_address']
+        fields = ['mentor_name', 'professor']
 
 class Faculty(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     faculty_name = models.CharField(max_length=200)
-    email_address = models.EmailField("Email Address", help_text="Enter the mentor's email address", null=True)
     email_template = models.TextField("Email Template", help_text="Enter a template for emails", null=True)
     correspondence = models.TextField("Correspondence", help_text="Correspondence with Professor", null=True)
     institute = models.ForeignKey(Institute, on_delete=models.SET_NULL, null=True)
@@ -54,7 +52,7 @@ class Faculty(models.Model):
 class FacultyForm(ModelForm):
     class Meta:
         model = Faculty
-        fields = ['faculty_name', 'institute', 'email_address']
+        fields = ['faculty_name', 'institute']
 
 class Abstract(models.Model):
     title = models.TextField("Abstract Title", help_text="Title of Abstract")

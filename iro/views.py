@@ -71,6 +71,8 @@ class FacultyCreate(UserCreationForm):
         g.user_set.add(self.object)
         return reverse('faculty')
 
+
+
 class MentorCreate(CreateView):
     model = User
     fields = ['username'] #only expose the username field for the sake of simplicity add more fields as you need

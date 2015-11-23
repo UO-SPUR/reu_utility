@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'tabbed_admin',
 )
 
+SITE_ID = 1
 TABBED_ADMIN_USE_JQUERY_UI = True
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window.
 REGISTRATION_AUTO_LOGIN = True # Automatically log the user in.

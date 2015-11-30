@@ -18,10 +18,10 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    url(r'^home/', TemplateView.as_view(template_name='index.html'), name='index'),
     url(r'^iro/', include('iro.urls')),
     url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('registration.backends.default.urls')), # registration-redux URLS
-    url('^', include('django.contrib.auth.urls'))
+    url('^auth/', include('django.contrib.auth.urls')),
+    url(r'^', TemplateView.as_view(template_name='index.html'), name='index')
 ]

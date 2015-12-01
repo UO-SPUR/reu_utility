@@ -272,6 +272,7 @@ class IroSetup(models.Model):
     program_phone_number = models.CharField("Program Phone Number", validators=[phone_regex], blank=True, max_length=15)
     program_fax_number = models.CharField("Program Fax Number (Optional)", validators=[phone_regex], blank=True, max_length=15)
     logo = models.FileField("Program Logo", upload_to="logo", null=True)
+
     def clean(self):
         validate_only_one_instance(self)
 

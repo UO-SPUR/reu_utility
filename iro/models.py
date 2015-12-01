@@ -87,7 +87,8 @@ class Applicant(models.Model):
                                                        "g, Math) GPA")
     major = models.CharField("Major", help_text="Please enter your major", max_length=100)
     program = models.CharField("Program Applied To", help_text="What program are you applying to?", choices=PROGRAM_CHOICES, default=PROGRAM_1, max_length=20)
-    available = models.DurationField("Available Dates", help_text="Choose what date range you are available")
+    available_start = models.DateField("Available Start Date", help_text="Choose what date you are available to start")
+    available_end = models.DateField("Available End Date", help_text="Choose the last date you are available")
     relevant_coursework = models.CharField("Relevant Coursework", help_text="Course work relevant to program", max_length=400, null=True)
 
     ###### End College Info ####
@@ -197,8 +198,8 @@ class Intern(models.Model):
     name = models.CharField("Applicant Full Name", help_text="Enter your full name", max_length=200, null=True)
     application = models.OneToOneField(Applicant, verbose_name="Intern Application") # Deleted if Applicant is deleted
     program = models.CharField("Program", help_text="Program the intern is participating in.", max_length=40)
-    arrival_date = models.DateField("Arrives", help_text="Date of arrival")
-    departure_date = models.DateField("Departs", help_text="Date of departure")
+    arrival_date = models.DateField("Arrives", help_text="Date of arrival", null=True)
+    departure_date = models.DateField("Departs", help_text="Date of departure", null=True)
     professor = models.ForeignKey(Faculty, verbose_name="Professor", on_delete=models.SET_NULL, null=True)
     mentors = models.ManyToManyField(Mentor, verbose_name="Mentors")
     institute = models.ForeignKey(Institute, verbose_name="Institute", on_delete=models.SET_NULL, null=True)

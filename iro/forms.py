@@ -2,7 +2,7 @@ __author__ = 'Jacob Bieker'
 
 from registration.forms import RegistrationForm
 from django import forms
-from iro.models import Institute, Faculty
+from iro.models import Institute, Faculty, Applicant
 
 class MentorRegistrationForm(RegistrationForm):
     mentor_name = forms.CharField(max_length=200)
@@ -13,5 +13,6 @@ class FacultyRegistrationForm(RegistrationForm):
     institute = forms.ModelChoiceField(queryset=Institute.objects.all())
 
 class InternRegistrationForm(RegistrationForm):
+    application = forms.ModelChoiceField(queryset=Applicant.objects.all())
     institute = forms.ModelChoiceField(queryset=Institute.objects.all())
     professor = forms.ModelChoiceField(queryset=Faculty.objects.all())

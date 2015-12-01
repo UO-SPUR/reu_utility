@@ -41,11 +41,12 @@ class InternRegistrationView(RegistrationView):
         user_profile.application = form_class.cleaned_data['application']
         user_profile.institute = form_class.cleaned_data['institute']
         user_profile.professor = form_class.cleaned_data['professor']
+        user_profile.mentors = form_class.cleaned_data['mentors']
         # Now try to take the data from Application to fill out rest of form
         user_profile.name = user_profile.application.applicant_name
         user_profile.program = user_profile.application.program
         user_profile.arrival_date = user_profile.application.available_start
-        user_profile.arrival_date = user_profile.application.available_end
+        user_profile.departure_date = user_profile.application.available_end
         # End taking things from application
         user_profile.save()
         return user_profile

@@ -16,12 +16,16 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
+import iro.regbackend as regbackend
 
 urlpatterns = [
     url(r'^iro/', include('iro.urls')),
     url(r'^grappelli/', include('grappelli.urls')), # grappelli URLS
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('registration.backends.default.urls')), # registration-redux URLS
+    url(r'^accounts/register/mentors', regbackend.MentorRegistrationView.as_view(), name='registration_register'),
+    url(r'^accounts/register/faculty', regbackend.FacultyRegistrationView.as_view(), name='registration_register'),
+    url(r'^accounts/register/interns', regbackend.InternRegistrationView.as_view(), name='registration_register'),
     url('^auth/', include('django.contrib.auth.urls')),
     url(r'^', TemplateView.as_view(template_name='index.html'), name='index')
 ]

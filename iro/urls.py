@@ -1,7 +1,6 @@
 __author__ = 'jacob'
 
 from django.conf.urls import url
-import iro.regbackend as regbackend
 from . import views
 
 urlpatterns = [

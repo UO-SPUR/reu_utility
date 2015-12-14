@@ -14,6 +14,6 @@ class FacultyRegistrationForm(RegistrationForm):
 
 class InternRegistrationForm(RegistrationForm):
     application = forms.ModelChoiceField(queryset=Applicant.objects.all())
-    institute = forms.ModelChoiceField(queryset=Institute.objects.all())
-    professor = forms.ModelChoiceField(queryset=Faculty.objects.all())
-    mentors = forms.ModelMultipleChoiceField(queryset=Mentor.objects.all())
+    institute = forms.ModelChoiceField(queryset=Institute.objects.all(), required=False)
+    professor = forms.ModelChoiceField(queryset=Faculty.objects.all(), required=False)
+    mentors = forms.ModelMultipleChoiceField(queryset=Mentor.objects.all(), required=False)

@@ -205,7 +205,6 @@ class Intern(models.Model):
     institute = models.ForeignKey(Institute, verbose_name="Institute", on_delete=models.SET_NULL, null=True)
     symposium_session = models.CharField("Sympo. Session", help_text="Symposium Session", max_length=100, null=True)
     picture = models.ImageField(upload_to='interns', null=True)
-    social_security_number = models.CharField("SSN", help_text="Social Security Number", max_length=9)
     student_id = models.CharField("Student ID", help_text="Student ID number", max_length=11)
     abstract = models.OneToOneField(Abstract, verbose_name="Abstract", null=True, on_delete=models.SET_NULL)
     presentation_oral = models.URLField("Oral Presentation URL", help_text="URL to oral presentation", null=True)

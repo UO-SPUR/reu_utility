@@ -5,7 +5,7 @@ Built on Django, this implementation of the original REU utility, located here: 
 by default. 
 
 # TODO
-Forms, setup page, some encryption(i.e. SSN)
+Forms, setup page, PDF generation, more
 
 # Authentication
 Authentication, when implemented, will work like this: 

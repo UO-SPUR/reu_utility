@@ -111,4 +111,4 @@ def mentor_view(request):
 # Checks for User is part of Faculty
 @is_faculty
 def faculty_view(request):
-    return render(request, 'faculty')
+    return render(request, 'faculty.html')

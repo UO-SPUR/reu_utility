@@ -65,48 +65,46 @@ def get_mentor(request):
 
     return render(request, 'mentor-sign-up.html', {'mentor_form': form})
 
-################################### Creation of Users Below #####################################################
-class FacultyCreate(UserCreationForm):
-
-    #this one is called when a user has been created successfully
-    def get_success_url(self):
-        g = Group.objects.get(name='faculty') # assuming you have a group 'test' created already. check the auth_user_group table in your DB
-        g.user_set.add(self.object)
-        return reverse('faculty')
-
-
-
-class MentorCreate(CreateView):
-    model = User
-    fields = ['username'] #only expose the username field for the sake of simplicity add more fields as you need
-
-    #this one is called when a user has been created successfully
-    def get_success_url(self):
-        g = Group.objects.get(name='mentors') # assuming you have a group 'test' created already. check the auth_user_group table in your DB
-        g.user_set.add(self.object)
-        return reverse('mentors')
-
-class InternCreate(CreateView):
-    model = User
-    fields = ['username'] #only expose the username field for the sake of simplicity add more fields as you need
-
-    #this one is called when a user has been created successfully
-    def get_success_url(self):
-        g = Group.objects.get(name='interns') # assuming you have a group 'test' created already. check the auth_user_group table in your DB
-        g.user_set.add(self.object)
-        return reverse('interns')
-
 # Views that are restricted based on group user is in
 
 # Tests for the different groups
 
-def not_in_intern_group(user):
-    if user:
-        return user.groups.filter(name=INTERN_GROUP_NAME).count() == 0
-    return False
+# Checks Intern:
+def is_intern(function=None):
+    """Use this decorator to restrict access to
+    authenticated users who are in the "Intern" group."""
+    actual_decorator = user_passes_test(
+        lambda u: u.is_authenticated() and u.groups.filter(name=INTERN_GROUP_NAME).exists()
+    )
+    return actual_decorator(function)
 
+def is_mentor(function=None):
+    """Use this decorator to restrict access to
+    authenticated users who are in the "Mentor" group."""
+    actual_decorator = user_passes_test(
+        lambda u: u.is_authenticated() and u.groups.filter(name=MENTOR_GROUP_NAME).exists()
+    )
+    return actual_decorator(function)
 
-@login_required
-@user_passes_test(not_in_intern_group, login_url='/')
+def is_faculty(function=None):
+    """Use this decorator to restrict access to
+    authenticated users who are in the "Faculty" group."""
+    actual_decorator = user_passes_test(
+        lambda u: u.is_authenticated() and u.groups.filter(name=FACULTY_GROUP_NAME).exists()
+    )
+    return actual_decorator(function)
+
+# Checks for User is part of Intern
+@is_intern
 def intern_view(request):
     return reverse('interns')
+
+# Checks for User is part of Mentor
+@is_mentor
+def mentor_view(request):
+    return reverse('mentor')
+
+# Checks for User is part of Faculty
+@is_faculty
+def faculty_view(request):
+    return reverse('faculty')

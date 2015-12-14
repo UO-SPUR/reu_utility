@@ -106,11 +106,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Group vaiables
-INTERN_GROUP_NAME = "Interns"
-MENTOR_GROUP_NAME = "Mentors"
-FACULTY_GROUP_NAME = "Faculty"
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 

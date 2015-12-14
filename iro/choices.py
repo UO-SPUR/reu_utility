@@ -222,3 +222,8 @@ CITIZEN_CHOICES = (
     (GREEN_CARD, GREEN_CARD),
     (OTHER, OTHER)
 )
+
+################# Group vaiables ##################
+INTERN_GROUP_NAME = "Interns"
+MENTOR_GROUP_NAME = "Mentors"
+FACULTY_GROUP_NAME = "Faculty"

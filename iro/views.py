@@ -6,6 +6,8 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
 from iro.models import ApplicantForm, FacultyForm, MentorForm
+from django.contrib.auth.decorators import login_required, user_passes_test
+from iro.choices import INTERN_GROUP_NAME, FACULTY_GROUP_NAME, MENTOR_GROUP_NAME
 
 # Create your views here.
 
@@ -93,3 +95,18 @@ class InternCreate(CreateView):
         g = Group.objects.get(name='interns') # assuming you have a group 'test' created already. check the auth_user_group table in your DB
         g.user_set.add(self.object)
         return reverse('interns')
+
+# Views that are restricted based on group user is in
+
+# Tests for the different groups
+
+def not_in_intern_group(user):
+    if user:
+        return user.groups.filter(name=INTERN_GROUP_NAME).count() == 0
+    return False
+
+
+@login_required
+@user_passes_test(not_in_intern_group, login_url='/')
+def intern_view(request):
+    return reverse('interns')

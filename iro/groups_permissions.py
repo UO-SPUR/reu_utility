@@ -1,9 +1,10 @@
 __author__ = 'jacob'
 
-from reu_utility.settings import INTERN_GROUP_NAME, FACULTY_GROUP_NAME, MENTOR_GROUP_NAME
+from iro.choices import INTERN_GROUP_NAME, FACULTY_GROUP_NAME, MENTOR_GROUP_NAME
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from iro.models import Faculty, Intern, Mentor
+
 
 Intern_group, intern_group_created = Group.objects.get_or_create(name=INTERN_GROUP_NAME)
 Faculty_group, faculty_group_created = Group.objects.get_or_create(name=FACULTY_GROUP_NAME)

@@ -1,6 +1,6 @@
 __author__ = 'jacob'
 
-from reu_utility.settings import *
+from reu_utility.settings import INTERN_GROUP_NAME, FACULTY_GROUP_NAME, MENTOR_GROUP_NAME
 from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from iro.models import Faculty, Intern, Mentor

@@ -3,12 +3,9 @@ __author__ = 'Jacob Bieker'
 from registration.backends.default.views import RegistrationView
 from iro.forms import FacultyRegistrationForm, InternRegistrationForm, MentorRegistrationForm
 from iro.models import Faculty, Intern, Mentor
-from iro.groups_permissions import Intern_group, Mentor_group, Faculty_group
+from iro.groups_permissions import Intern_group, Mentor_group, Faculty_group, add_user_to_faculty_group, add_user_to_intern_group, add_user_to_mentor_group
 from django.db.models.signals import post_save
-from django.contrib.auth.models import User, Group
-
-
-post_save.connect(add_user_to_public_group, sender=User)
+from django.contrib.auth.models import User
 
 class FacultyRegistrationView(RegistrationView):
 
@@ -21,6 +18,7 @@ class FacultyRegistrationView(RegistrationView):
         user_profile.faculty_name = form_class.cleaned_data['faculty_name']
         user_profile.institute = form_class.cleaned_data['institute']
         user_profile.save()
+        post_save.connect(add_user_to_faculty_group, sender=User)
         return user_profile
 
 class MentorRegistrationView(RegistrationView):
@@ -34,6 +32,7 @@ class MentorRegistrationView(RegistrationView):
         user_profile.mentor_name = form_class.cleaned_data['mentor_name']
         user_profile.professor = form_class.cleaned_data['professor']
         user_profile.save()
+        post_save.connect(add_user_to_mentor_group, sender=User)
         return user_profile
 
 class InternRegistrationView(RegistrationView):
@@ -55,4 +54,5 @@ class InternRegistrationView(RegistrationView):
         user_profile.departure_date = user_profile.application.available_end
         # End taking things from application
         user_profile.save()
+        post_save.connect(add_user_to_intern_group, sender=User)
         return user_profile

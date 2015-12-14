@@ -3,7 +3,7 @@ __author__ = 'Jacob Bieker'
 from registration.backends.default.views import RegistrationView
 from iro.forms import FacultyRegistrationForm, InternRegistrationForm, MentorRegistrationForm
 from iro.models import Faculty, Intern, Mentor
-from iro.groups_permissions import Intern_group, Mentor_group, Faculty_group, add_user_to_faculty_group, add_user_to_intern_group, add_user_to_mentor_group
+from iro.groups_permissions import add_user_to_faculty_group, add_user_to_intern_group, add_user_to_mentor_group
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 

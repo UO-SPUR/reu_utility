@@ -3,8 +3,7 @@ __author__ = 'Jacob Bieker'
 from registration.backends.default.views import RegistrationView
 from iro.forms import FacultyRegistrationForm, InternRegistrationForm, MentorRegistrationForm
 from iro.models import Faculty, Intern, Mentor
-
-
+from iro.groups_permissions import Intern_group, Mentor_group, Faculty_group
 
 class FacultyRegistrationView(RegistrationView):
 

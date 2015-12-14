@@ -5,9 +5,9 @@ from django.contrib.auth.models import Group, Permission
 from django.contrib.contenttypes.models import ContentType
 from iro.models import Faculty, Intern, Mentor
 
-intern_group = Group.objects.get_or_create(name=INTERN_GROUP_NAME)
-faculty_group = Group.objects.get_or_create(name=FACULTY_GROUP_NAME)
-mentor_group = Group.objects.get_or_create(name=MENTOR_GROUP_NAME)
+Intern_group, intern_group_created = Group.objects.get_or_create(name=INTERN_GROUP_NAME)
+Faculty_group, faculty_group_created = Group.objects.get_or_create(name=FACULTY_GROUP_NAME)
+Mentor_group, mentor_group_created = Group.objects.get_or_create(name=MENTOR_GROUP_NAME)
 
 # Code to add permission to group
 faculty_ct = ContentType.objects.get_for_model(Faculty)

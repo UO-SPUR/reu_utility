@@ -4,6 +4,11 @@ from registration.backends.default.views import RegistrationView
 from iro.forms import FacultyRegistrationForm, InternRegistrationForm, MentorRegistrationForm
 from iro.models import Faculty, Intern, Mentor
 from iro.groups_permissions import Intern_group, Mentor_group, Faculty_group
+from django.db.models.signals import post_save
+from django.contrib.auth.models import User, Group
+
+
+post_save.connect(add_user_to_public_group, sender=User)
 
 class FacultyRegistrationView(RegistrationView):
 

@@ -17,10 +17,43 @@ mentor_ct = ContentType.objects.get_for_model(Mentor)
 # Getting the relevant Permissions to be assigned later
 
 # Intern Permissions
-permission = Permission.objects.create(codename='can_add_project',
-                                       name='Can add project',
-                                       content_type=ct)
+permission = Permission.objects.create(codename='can_add_abstract',
+                                       name='Can add abstract',
+                                       content_type=intern_ct)
 
 # Faculty Permissions
 
 # Mentor Permissions
+
+
+# Adding to group ones
+
+
+def add_user_to_intern_group(sender, instance, created, **kwargs):
+    """Post-create user signal that adds the user to everyone group."""
+
+    try:
+        if created:
+            instance.groups.add(Group.objects.get(name=INTERN_GROUP_NAME))
+    except Group.DoesNotExist:
+        pass
+
+
+def add_user_to_mentor_group(sender, instance, created, **kwargs):
+    """Post-create user signal that adds the user to everyone group."""
+
+    try:
+        if created:
+            instance.groups.add(Group.objects.get(name=MENTOR_GROUP_NAME))
+    except Group.DoesNotExist:
+        pass
+
+
+def add_user_to_faculty_group(sender, instance, created, **kwargs):
+    """Post-create user signal that adds the user to everyone group."""
+
+    try:
+        if created:
+            instance.groups.add(Group.objects.get(name=FACULTY_GROUP_NAME))
+    except Group.DoesNotExist:
+        pass

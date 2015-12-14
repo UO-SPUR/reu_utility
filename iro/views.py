@@ -6,20 +6,8 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.forms import UserCreationForm
 from django.core.urlresolvers import reverse
 from iro.models import ApplicantForm, FacultyForm, MentorForm
-from easy_pdf.views import PDFTemplateView
 
 # Create your views here.
-
-
-class HelloPDFView(PDFTemplateView):
-    template_name = "pdf_base.html"
-
-    def get_context_data(self, **kwargs):
-        return super(HelloPDFView, self).get_context_data(
-            pagesize="A4",
-            title="Hi there!",
-            **kwargs
-        )
 
 def get_application(request):
     # if this is a POST request we need to process the form data

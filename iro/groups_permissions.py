@@ -10,9 +10,9 @@ Faculty_group, faculty_group_created = Group.objects.get_or_create(name=FACULTY_
 Mentor_group, mentor_group_created = Group.objects.get_or_create(name=MENTOR_GROUP_NAME)
 
 # Code to add permission to group
-#faculty_ct = ContentType.objects.get_for_model(Faculty)
-#intern_ct = ContentType.objects.get_for_model(Intern)
-#mentor_ct = ContentType.objects.get_for_model(Mentor)
+faculty_ct = ContentType.objects.get_for_model(Faculty)
+intern_ct = ContentType.objects.get_for_model(Intern)
+mentor_ct = ContentType.objects.get_for_model(Mentor)
 
 # Getting the relevant Permissions to be assigned later
 

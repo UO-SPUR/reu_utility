@@ -11,6 +11,11 @@ intern_group = Group.objects.get_or_create(name=INTERN_GROUP_NAME)
 faculty_group = Group.objects.get_or_create(name=FACULTY_GROUP_NAME)
 mentor_group = Group.objects.get_or_create(name=MENTOR_GROUP_NAME)
 
+# Code to add permission to group
+faculty_ct = ContentType.objects.get_for_model(Faculty)
+intern_ct = ContentType.objects.get_for_model(Intern)
+mentor_ct = ContentType.objects.get_for_model(Mentor)
+
 class FacultyRegistrationView(RegistrationView):
 
     form_class = FacultyRegistrationForm

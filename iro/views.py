@@ -65,6 +65,10 @@ def get_mentor(request):
 
     return render(request, 'mentor-sign-up.html', {'mentor_form': form})
 
+def thanks(request):
+    # Redirection page to say sign up was succesful
+    return render(request, 'thanks.html')
+
 # Views that are restricted based on group user is in
 
 # Tests for the different groups

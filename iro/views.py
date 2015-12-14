@@ -101,14 +101,14 @@ def is_faculty(function=None):
 # Checks for User is part of Intern
 @is_intern
 def intern_view(request):
-    return reverse('interns')
+    return render(request, 'intern.html')
 
 # Checks for User is part of Mentor
 @is_mentor
 def mentor_view(request):
-    return reverse('mentor')
+    return render(request, 'mentor.html')
 
 # Checks for User is part of Faculty
 @is_faculty
 def faculty_view(request):
-    return reverse('faculty')
+    return render(request, 'faculty')

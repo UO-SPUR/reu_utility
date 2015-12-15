@@ -7,7 +7,7 @@ urlpatterns = [
     url(r'^application', views.get_application, name='application'),
     url(r'^thanks', views.thanks, name='thanks'),
     url(r'reference-letter', views.get_reference, name='reference letter upload'),
-    url(r'^faculty', include([
+    url(r'^faculty/', include([
         url(r'^survey', views.faculty_survey, name='faculty survey'),
         url(r'^overview', views.faculty_overview, name='faculty overview'),
         url(r'^sign-up', views.get_faculty, name='faculty-sign-up'),

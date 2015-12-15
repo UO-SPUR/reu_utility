@@ -1,23 +1,29 @@
 __author__ = 'jacob'
 
-from django.conf.urls import url
+from django.conf.urls import url, include
 from . import views
 
 urlpatterns = [
     url(r'^application', views.get_application, name='application'),
-    url(r'^faculty-sign-up', views.get_faculty, name='faculty-sign-up'),
-    url(r'^mentor-sign-up', views.get_mentor, name='mentor-sign-up'),
     url(r'^thanks', views.thanks, name='thanks'),
-    url(r'intern', views.intern_view, name='intern'),
-    url(r'faculty', views.faculty_view, name='faculty'),
-    url(r'mentor', views.mentor_view, name='mentor'),
-    url(r'intern-overview', views.intern_overview, name='intern overview'),
-    url(r'faculty-overview', views.faculty_overview, name='faculty overview'),
-    url(r'mentor-overview', views.mentor_overview, name='mentor overview'),
     url(r'reference-letter', views.get_reference, name='reference letter upload'),
-    url(r'intern-survey', views.intern_survey, name='intern survey'),
-    url(r'faculty-sruvey', views.faculty_survey, name='faculty survey'),
-    url(r'mentor-survey', views.mentor_survey, name='mentor survey'),
-    url(r'intern-progress-report', views.progress_report_add, name='intern progress report'),
-    url(r'intern-abstract', views.intern_abstract_edit, name='intern abstract'),
+    url(r'^faculty', include([
+        url(r'^survey', views.faculty_survey, name='faculty survey'),
+        url(r'^overview', views.faculty_overview, name='faculty overview'),
+        url(r'^sign-up', views.get_faculty, name='faculty-sign-up'),
+        url(r'^', views.faculty_view, name='faculty'),
+    ])),
+    url(r'^mentor/', include([
+        url(r'^survey', views.mentor_survey, name='mentor survey'),
+        url(r'^overview', views.mentor_overview, name='mentor overview'),
+        url(r'^sign-up', views.get_mentor, name='mentor-sign-up'),
+        url(r'^', views.mentor_view, name='mentor'),
+    ])),
+    url(r'^intern/', include([
+        url(r'^progress-report', views.progress_report_add, name='intern progress report'),
+        url(r'^abstract', views.intern_abstract_edit, name='intern abstract'),
+        url(r'^survey', views.intern_survey, name='intern survey'),
+        url(r'^overview', views.intern_overview, name='intern overview'),
+        url(r'^', views.intern_view, name='intern'),
+    ]))
 ]

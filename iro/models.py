@@ -25,14 +25,6 @@ class Institute(models.Model):
     def __str__(self):
         return self.name
 
-class Mentor(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
-    mentor_name = models.CharField(max_length=200)
-    professor = models.CharField("PI Name", help_text="Professor's name", max_length=200, null=True)#TODO ForeignKey?
-
-    def __str__(self):
-        return self.mentor_name
-
 class Faculty(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     faculty_name = models.CharField(max_length=200)
@@ -42,6 +34,14 @@ class Faculty(models.Model):
 
     def __str__(self):
         return self.faculty_name
+
+class Mentor(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    mentor_name = models.CharField(max_length=200)
+    professor = models.ManyToManyField(Faculty, verbose_name="Mentors", null=True)
+
+    def __str__(self):
+        return self.mentor_name
 
 class Abstract(models.Model):
     title = models.TextField("Abstract Title", help_text="Title of Abstract")

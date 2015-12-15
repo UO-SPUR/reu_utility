@@ -3,8 +3,6 @@ from django.conf import settings
 from django.core.validators import RegexValidator
 from iro.choices import *
 from django.core.exceptions import ValidationError
-from django.forms import ModelForm
-from django.contrib.auth.models import User
 
 # Allow only one model to be created (For Setup)
 def validate_only_one_instance(obj):
@@ -34,11 +32,6 @@ class Mentor(models.Model):
     def __str__(self):
         return self.mentor_name
 
-class MentorForm(ModelForm):
-    class Meta:
-        model = Mentor
-        fields = ['mentor_name', 'professor']
-
 class Faculty(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     faculty_name = models.CharField(max_length=200)
@@ -48,11 +41,6 @@ class Faculty(models.Model):
 
     def __str__(self):
         return self.faculty_name
-
-class FacultyForm(ModelForm):
-    class Meta:
-        model = Faculty
-        fields = ['faculty_name', 'institute']
 
 class Abstract(models.Model):
     title = models.TextField("Abstract Title", help_text="Title of Abstract")
@@ -184,15 +172,6 @@ class Applicant(models.Model):
     def __str__(self):
         return self.applicant_name
 
-class ApplicantForm(ModelForm):
-    class Meta:
-        model = Applicant
-        # Exclude the administrative fields
-        exclude = ['mentors', 'possible_pis', 'triage', 'ranking',
-                   'likely_institute', 'decision_action', 'comments',
-                   'application_completeness', 'correspondence', 'year_created',
-                   'short_list', 'transcript']
-
 class Intern(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     name = models.CharField("Applicant Full Name", help_text="Enter your full name", max_length=200, null=True)
@@ -220,21 +199,12 @@ class ReferenceLetter(models.Model):
     comments = models.TextField("Comments", help_text="Any comments on Letter of Recommendation?")
     applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference", help_text="Which Applicant is this letter for?") # Deleted if Applicant is deleted
 
-class ReferenceLetterForm(ModelForm):
-    class Meta:
-        model = ReferenceLetter
-        fields = ['letter', 'applicant']
-
 class ProgressReport(models.Model):
     last_updated = models.DateField("Last Updated", help_text="Last modified timestamp", auto_now=True)
     content = models.TextField("Progress Report", help_text="Enter your progress report")
     week = models.PositiveSmallIntegerField("Week", help_text="Which week is this progress report for?")
     intern = models.ForeignKey(Intern, verbose_name="Intern") # Deleted if Intern is deleted
 
-class ProgressReportForm(ModelForm):
-    class Meta:
-        model = ProgressReport
-        fields = ['content', 'week']
 
 class PISurvey(models.Model):
     evaluator = models.CharField("Evaluator Name", help_text="Evaluator's name", max_length=50)
@@ -242,10 +212,6 @@ class PISurvey(models.Model):
     submission_date = models.DateField("Date of Submission", help_text="Submission Date")
     comments = models.TextField("Other Comments", help_text="Enter any comments here", null=True)
     #TODO Rest of the survey, including Intern, Mentor, and Program fields
-
-class PISurveryForm(ModelForm):
-    model = PISurvey
-    fields = ["intern", "comments"]
 
 class InternSurvey(models.Model):
     evaluator = models.CharField("Evaluator Name", help_text="Evaluator's name", max_length=50)

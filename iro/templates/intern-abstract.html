@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form action="/iro/" method="post">
+        {% csrf_token %}
+        {{ reference_form }}
+        <input type="submit" value="Submit" />
+    </form>
+
+{% endblock %}

@@ -18,4 +18,6 @@ urlpatterns = [
     url(r'intern-survey', views.intern_survey, name='intern survey'),
     url(r'faculty-sruvey', views.faculty_survey, name='faculty survey'),
     url(r'mentor-survey', views.mentor_survey, name='mentor survey'),
+    url(r'intern-progress-report', views.progress_report_add, name='intern progress report'),
+    url(r'intern-abstract', views.intern_abstract_edit, name='intern abstract'),
 ]

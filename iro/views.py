@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from iro.forms import ApplicantForm, FacultyForm, MentorForm, ReferenceLetterForm, AbstractForm
+from iro.forms import ApplicantForm, FacultyForm, MentorForm, ReferenceLetterForm, AbstractForm, ProgressReportForm
 from django.contrib.auth.decorators import user_passes_test
 from iro.choices import INTERN_GROUP_NAME, FACULTY_GROUP_NAME, MENTOR_GROUP_NAME
 
@@ -77,6 +77,42 @@ def get_reference(request):
         form = ReferenceLetterForm()
 
     return render(request, 'reference-letter-upload.html', {'reference_form': form})
+
+def progress_report_add(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ProgressReportForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ProgressReportForm()
+
+    return render(request, 'intern-progress.html', {'progress_form': form})
+
+def intern_abstract_edit(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = AbstractForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = AbstractForm()
+
+    return render(request, 'intern-abstract.html', {'abstract_form': form})
 
 def thanks(request):
     # Redirection page to say sign up was succesful

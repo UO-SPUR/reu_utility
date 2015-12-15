@@ -4,4 +4,9 @@
 
 {% block content %}
     <h1>Faculty Overview Page</h1>
+    <form action="/iro/" method="post">
+        {% csrf_token %}
+        {{ faculty_overview_form }}
+        <input type="submit" value="Submit" />
+    </form>
 {% endblock %}

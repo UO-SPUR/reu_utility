@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from iro.forms import ApplicantForm, FacultyForm, MentorForm, ReferenceLetterForm, AbstractForm, ProgressReportForm
+from iro.forms import *
 from django.contrib.auth.decorators import user_passes_test
 from iro.choices import INTERN_GROUP_NAME, FACULTY_GROUP_NAME, MENTOR_GROUP_NAME
 from iro.models import Intern, Faculty, Mentor
@@ -161,9 +161,29 @@ def intern_abstract_edit(request):
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = AbstractForm()
+        form = AbstractForm(instance=current_intern.abstract)
 
     return render(request, 'intern-abstract.html', {'abstract_form': form})
+
+@is_intern
+def intern_overview(request):
+    current_intern = request.user.intern
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = InternOverviewForm(request.POST, instance=current_intern)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return render(request, 'intern-overview.html', {'abstract_form': form})
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = InternOverviewForm(instance=current_intern)
+
+    return render(request, 'intern-overview.html', {'abstract_form': form})
 
 # Checks for User is part of Mentor
 @is_mentor

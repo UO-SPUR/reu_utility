@@ -2,15 +2,8 @@ __author__ = 'Jacob Bieker'
 
 from registration.forms import RegistrationForm
 from django import forms
-from iro.models import Institute, Faculty, Applicant, Mentor, ReferenceLetter, ProgressReport, PISurvey, Abstract
+from iro.models import Institute, Faculty, Applicant, Mentor, Intern, ReferenceLetter, ProgressReport, PISurvey, Abstract
 from django.forms import ModelForm
-
-class PrePoluateModelForm(ModelForm):
-    def __init__(self, user, *args, **kwargs):
-        super(ModelForm, self).__init__(*args, **kwargs)
-        if self.initial:
-            self.fields['password'].initial = ''
-            self.fields['retype_password'].initial = ''
 
 # Registration Forms
 class MentorRegistrationForm(RegistrationForm):
@@ -38,7 +31,14 @@ class FacultyOverviewForm(ModelForm):
 
 class InternOverviewForm(ModelForm):
     class Meta:
+        model = Intern
 
+    def __init__(self, *args, **kwargs):
+        super(InternOverviewForm, self).__init__(*args, **kwargs)
+        uneditable_fields = ['application', 'user', 'name', 'program', 'student_id', 'institute', 'professor',
+                             'mentors', 'arrival_date', 'departure_date', 'symposium_session']
+        for field in uneditable_fields:
+            self.fields[field].widget.attrs['readonly'] = 'true'
 # Model Forms
 
 class ReferenceLetterForm(ModelForm):

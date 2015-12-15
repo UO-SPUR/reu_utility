@@ -3,6 +3,7 @@ from django.conf import settings
 from django.core.validators import RegexValidator
 from iro.choices import *
 from django.core.exceptions import ValidationError
+import uuid
 
 # Allow only one model to be created (For Setup)
 def validate_only_one_instance(obj):
@@ -167,6 +168,7 @@ class Applicant(models.Model):
     year_created = models.DateField("Created Year", help_text="Year Created")
     short_list = models.CharField("Short List?", choices=SHORT_LIST_CHOICES, default=UNSURE, max_length=10)
     transcript = models.FileField('Transcript', upload_to='transcripts', null=True)
+    uuid = models.TextField("UUID", default=uuid.uuid4(), null=False)
     #########End Administrative fields ###########################################################
 
     def __str__(self):

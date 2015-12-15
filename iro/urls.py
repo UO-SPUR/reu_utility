@@ -11,4 +11,7 @@ urlpatterns = [
     url(r'intern', views.intern_view, name='intern'),
     url(r'faculty', views.faculty_view, name='faculty'),
     url(r'mentor', views.mentor_view, name='mentor'),
+    url(r'intern-overview', views.intern_overview, name='intern overview'),
+    url(r'faculty-overview', views.faculty_overview, name='faculty overview'),
+    url(r'mentor-overview', views.mentor_overview, name='mentor overview'),
 ]

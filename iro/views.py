@@ -103,12 +103,24 @@ def is_faculty(function=None):
 def intern_view(request):
     return render(request, 'intern.html')
 
+@is_intern
+def intern_overview(request):
+    return render(request, 'intern-overview.html')
+
 # Checks for User is part of Mentor
 @is_mentor
 def mentor_view(request):
     return render(request, 'mentor.html')
 
+@is_mentor
+def mentor_overview(request):
+    return render(request, 'mentor-overview.html')
+
 # Checks for User is part of Faculty
 @is_faculty
 def faculty_view(request):
     return render(request, 'faculty.html')
+
+@is_faculty
+def faculty_overview(request):
+    return render(request, 'faculty-overview.html')

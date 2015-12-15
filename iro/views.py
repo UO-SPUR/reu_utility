@@ -177,13 +177,13 @@ def intern_overview(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            return render(request, 'intern-overview.html', {'abstract_form': form})
+            return render(request, 'intern-overview.html', {'intern_overview_form': form})
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = InternOverviewForm(instance=current_intern)
 
-    return render(request, 'intern-overview.html', {'abstract_form': form})
+    return render(request, 'intern-overview.html', {'intern_overview_form': form})
 
 # Checks for User is part of Mentor
 @is_mentor
@@ -198,6 +198,26 @@ def mentor_overview(request):
 def mentor_survey(request):
     return render(request, 'mentor-survey.html')
 
+@is_mentor
+def mentor_overview(request):
+    current_mentor = request.user.mentor
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = MentorForm(request.POST, instance=current_mentor)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return render(request, 'mentor-overview.html', {'mentor_overview_form': form})
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = MentorForm(instance=current_mentor)
+
+    return render(request, 'mentor-overview.html', {'mentor_overview_form': form})
+
 # Checks for User is part of Faculty
 @is_faculty
 def faculty_view(request):
@@ -210,3 +230,23 @@ def faculty_overview(request):
 @is_faculty
 def faculty_survey(request):
     return render(request, 'faculty-survey.html')
+
+@is_faculty
+def faculty_overview(request):
+    current_faculty = request.user.faculty
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = FacultyOverviewForm(request.POST, instance=current_faculty)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return render(request, 'faculty-overview.html', {'faculty_overview_form': form})
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = FacultyOverviewForm(instance=current_faculty)
+
+    return render(request, 'faculty-overview.html', {'faculty_overview_form': form})

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from iro.forms import ApplicantForm, FacultyForm, MentorForm
+from iro.forms import ApplicantForm, FacultyForm, MentorForm, ReferenceLetterForm, AbstractForm
 from django.contrib.auth.decorators import user_passes_test
 from iro.choices import INTERN_GROUP_NAME, FACULTY_GROUP_NAME, MENTOR_GROUP_NAME
 
@@ -60,6 +60,24 @@ def get_mentor(request):
 
     return render(request, 'mentor-sign-up.html', {'mentor_form': form})
 
+def get_reference(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = ReferenceLetterForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+            # redirect to a new URL:
+            return HttpResponseRedirect('/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = ReferenceLetterForm()
+
+    return render(request, 'reference-letter-upload.html', {'reference_form': form})
+
 def thanks(request):
     # Redirection page to say sign up was succesful
     return render(request, 'thanks.html')
@@ -102,6 +120,10 @@ def intern_view(request):
 def intern_overview(request):
     return render(request, 'intern-overview.html')
 
+@is_intern
+def intern_survey(request):
+    return render(request, 'intern-survey.html')
+
 # Checks for User is part of Mentor
 @is_mentor
 def mentor_view(request):
@@ -111,6 +133,10 @@ def mentor_view(request):
 def mentor_overview(request):
     return render(request, 'mentor-overview.html')
 
+@is_mentor
+def mentor_survey(request):
+    return render(request, 'mentor-survey.html')
+
 # Checks for User is part of Faculty
 @is_faculty
 def faculty_view(request):
@@ -119,3 +145,7 @@ def faculty_view(request):
 @is_faculty
 def faculty_overview(request):
     return render(request, 'faculty-overview.html')
+
+@is_faculty
+def faculty_survey(request):
+    return render(request, 'faculty-survey.html')

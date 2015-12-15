@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1> Reference Letter Upload</h1>
+    <form action="/iro/" method="post">
+        {% csrf_token %}
+        {{ reference_form }}
+        <input type="submit" value="Submit" />
+    </form>
+
 {% endblock %}

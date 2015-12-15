@@ -14,4 +14,8 @@ urlpatterns = [
     url(r'intern-overview', views.intern_overview, name='intern overview'),
     url(r'faculty-overview', views.faculty_overview, name='faculty overview'),
     url(r'mentor-overview', views.mentor_overview, name='mentor overview'),
+    url(r'reference-letter', views.get_reference, name='reference letter upload'),
+    url(r'intern-survey', views.intern_survey, name='intern survey'),
+    url(r'faculty-sruvey', views.faculty_survey, name='faculty survey'),
+    url(r'mentor-survey', views.mentor_survey, name='mentor survey'),
 ]

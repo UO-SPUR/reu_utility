@@ -5,6 +5,7 @@ from django import forms
 from iro.models import Institute, Faculty, Applicant, Mentor, ReferenceLetter, ProgressReport, PISurvey, Abstract
 from django.forms import ModelForm
 
+# Registration Forms
 class MentorRegistrationForm(RegistrationForm):
     mentor_name = forms.CharField(max_length=200)
     professor = forms.CharField(max_length=200)

@@ -16,6 +16,7 @@ def get_application(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
+            form.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/thanks/')
 
@@ -34,6 +35,7 @@ def get_faculty(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
+            form.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/thanks/')
 
@@ -52,6 +54,7 @@ def get_mentor(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
+            form.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/thanks/')
 
@@ -70,6 +73,7 @@ def get_reference(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
+            form.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/thanks/')
 
@@ -132,6 +136,7 @@ def progress_report_add(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
+            form.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/thanks/')
 
@@ -152,6 +157,7 @@ def intern_abstract_edit(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
+            form.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/thanks/')
 
@@ -172,6 +178,7 @@ def intern_overview(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
+            form.save()
             # redirect to a new URL:
             return render(request, 'form_only.html', {'input_form': form})
 
@@ -201,6 +208,7 @@ def mentor_overview(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
+            form.save()
             # redirect to a new URL:
             return render(request, 'form_only.html', {'input_form': form})
 
@@ -230,6 +238,7 @@ def faculty_overview(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
+            form.save()
             # redirect to a new URL:
             return render(request, 'form_only.html', {'input_form': form})
 

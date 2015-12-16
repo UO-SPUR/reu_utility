@@ -38,7 +38,7 @@ class Faculty(models.Model):
 class Mentor(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     mentor_name = models.CharField(max_length=200)
-    professor = models.ManyToManyField(Faculty, verbose_name="Mentors", null=True)
+    professor = models.ManyToManyField(Faculty, verbose_name="Mentors")
 
     def __str__(self):
         return self.mentor_name

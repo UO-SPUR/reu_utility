@@ -32,6 +32,9 @@ class FacultyOverviewForm(ModelForm):
 class InternOverviewForm(ModelForm):
     class Meta:
         model = Intern
+        fields = ['application', 'user', 'name', 'program', 'student_id', 'institute', 'professor',
+                  'mentors', 'arrival_date', 'departure_date', 'symposium_session', 'picture', 'abstract',
+                  'presentation_oral', 'presentation_poster']
 
     def __init__(self, *args, **kwargs):
         super(InternOverviewForm, self).__init__(*args, **kwargs)

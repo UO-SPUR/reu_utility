@@ -5,6 +5,7 @@ from iro.forms import FacultyRegistrationForm, InternRegistrationForm, MentorReg
 from iro.models import Faculty, Intern, Mentor
 from iro.groups_permissions import add_user_to_faculty_group, add_user_to_intern_group, add_user_to_mentor_group
 from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.contrib.auth.models import User
 
 class FacultyRegistrationView(RegistrationView):

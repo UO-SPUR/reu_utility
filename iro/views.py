@@ -23,7 +23,7 @@ def get_application(request):
     else:
         form = ApplicantForm()
 
-    return render(request, 'application.html', {'application_form': form})
+    return render(request, 'form_only.html', {'input_form': form})
 
 def get_faculty(request):
     # if this is a POST request we need to process the form data
@@ -41,7 +41,7 @@ def get_faculty(request):
     else:
         form = FacultyForm()
 
-    return render(request, 'faculty-sign-up.html', {'faculty_form': form})
+    return render(request, 'form_only.html', {'input_form': form})
 
 def get_mentor(request):
     # if this is a POST request we need to process the form data
@@ -59,7 +59,7 @@ def get_mentor(request):
     else:
         form = MentorForm()
 
-    return render(request, 'mentor-sign-up.html', {'mentor_form': form})
+    return render(request, 'form_only.html', {'input_form': form})
 
 def get_reference(request):
     # if this is a POST request we need to process the form data
@@ -77,7 +77,7 @@ def get_reference(request):
     else:
         form = ReferenceLetterForm()
 
-    return render(request, 'reference-letter-upload.html', {'reference_form': form})
+    return render(request, 'form_only.html', {'input_form': form})
 
 def thanks(request):
     # Redirection page to say sign up was succesful
@@ -118,10 +118,6 @@ def intern_view(request):
     return render(request, 'intern.html')
 
 @is_intern
-def intern_overview(request):
-    return render(request, 'intern-overview.html')
-
-@is_intern
 def intern_survey(request):
     return render(request, 'intern-survey.html')
 
@@ -143,7 +139,7 @@ def progress_report_add(request):
     else:
         form = ProgressReportForm()
 
-    return render(request, 'intern-progress.html', {'progress_form': form})
+    return render(request, 'form_only.html', {'input_form': form})
 
 @is_intern
 def intern_abstract_edit(request):
@@ -163,7 +159,7 @@ def intern_abstract_edit(request):
     else:
         form = AbstractForm(instance=current_intern.abstract)
 
-    return render(request, 'intern-abstract.html', {'abstract_form': form})
+    return render(request, 'form_only.html', {'input_form': form})
 
 @is_intern
 def intern_overview(request):
@@ -177,22 +173,18 @@ def intern_overview(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            return render(request, 'intern-overview.html', {'intern_overview_form': form})
+            return render(request, 'form_only.html', {'input_form': form})
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = InternOverviewForm(instance=current_intern)
 
-    return render(request, 'intern-overview.html', {'intern_overview_form': form})
+    return render(request, 'form_only.html', {'input_form': form})
 
 # Checks for User is part of Mentor
 @is_mentor
 def mentor_view(request):
     return render(request, 'mentor.html')
-
-@is_mentor
-def mentor_overview(request):
-    return render(request, 'mentor-overview.html')
 
 @is_mentor
 def mentor_survey(request):
@@ -210,13 +202,13 @@ def mentor_overview(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            return render(request, 'mentor-overview.html', {'mentor_overview_form': form})
+            return render(request, 'form_only.html', {'input_form': form})
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = MentorForm(instance=current_mentor)
 
-    return render(request, 'mentor-overview.html', {'mentor_overview_form': form})
+    return render(request, 'form_only.html', {'input_form': form})
 
 # Checks for User is part of Faculty
 @is_faculty
@@ -224,12 +216,8 @@ def faculty_view(request):
     return render(request, 'faculty.html')
 
 @is_faculty
-def faculty_overview(request):
-    return render(request, 'faculty-overview.html')
-
-@is_faculty
 def faculty_survey(request):
-    return render(request, 'faculty-survey.html')
+    return render(request, 'form_only.html')
 
 @is_faculty
 def faculty_overview(request):
@@ -243,10 +231,10 @@ def faculty_overview(request):
             # process the data in form.cleaned_data as required
             # ...
             # redirect to a new URL:
-            return render(request, 'faculty-overview.html', {'faculty_overview_form': form})
+            return render(request, 'form_only.html', {'input_form': form})
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = FacultyOverviewForm(instance=current_faculty)
 
-    return render(request, 'faculty-overview.html', {'faculty_overview_form': form})
+    return render(request, 'form_only.html', {'input_form': form})

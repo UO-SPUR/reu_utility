@@ -30,7 +30,7 @@ def get_faculty(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = FacultyForm(request.POST)
+        form = FacultyForm(request.POST, instance=request.user)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -84,7 +84,7 @@ def get_reference(request):
     return render(request, 'form_only.html', {'input_form': form})
 
 def thanks(request):
-    # Redirection page to say sign up was succesful
+    # Redirection page to say sign up was successful
     return render(request, 'thanks.html')
 
 # Views that are restricted based on group user is in

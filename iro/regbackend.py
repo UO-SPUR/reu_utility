@@ -19,7 +19,7 @@ class FacultyRegistrationView(RegistrationView):
         user_profile.faculty_name = form_class.cleaned_data['faculty_name']
         user_profile.institute = form_class.cleaned_data['institute']
         user_profile.correspondence = "None"
-        user_profile.email_template = "Email Template"
+        user_profile.email_template = "Insert Template Here"
         user_profile.save()
         return user_profile
 
@@ -52,6 +52,7 @@ class InternRegistrationView(RegistrationView):
         user_profile.institute = form_class.cleaned_data['institute']
         user_profile.professor = form_class.cleaned_data['professor']
         user_profile.mentors = form_class.cleaned_data['mentors']
+        user_profile.student_id = "Enter ID Here"
         # Now try to take the data from Application to fill out rest of form
         user_profile.name = user_profile.application.applicant_name
         user_profile.program = user_profile.application.program

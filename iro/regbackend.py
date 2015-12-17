@@ -18,10 +18,12 @@ class FacultyRegistrationView(RegistrationView):
         user_profile.user = new_user
         user_profile.faculty_name = form_class.cleaned_data['faculty_name']
         user_profile.institute = form_class.cleaned_data['institute']
+        user_profile.correspondence = "None"
+        user_profile.email_template = "Email Template"
         user_profile.save()
         return user_profile
 
-    post_save.connect(add_user_to_faculty_group, sender=User)
+    #post_save.connect(add_user_to_faculty_group, sender=User, dispatch_uid="iro.regbackend.facultyRegistration")
 
 class MentorRegistrationView(RegistrationView):
 
@@ -36,7 +38,7 @@ class MentorRegistrationView(RegistrationView):
         user_profile.save()
         return user_profile
 
-    post_save.connect(add_user_to_mentor_group, sender=User)
+    #post_save.connect(add_user_to_mentor_group, sender=User, dispatch_uid="iro.regbackend.mentorRegistration")
 
 class InternRegistrationView(RegistrationView):
 
@@ -59,4 +61,4 @@ class InternRegistrationView(RegistrationView):
         user_profile.save()
         return user_profile
 
-    post_save.connect(add_user_to_intern_group, sender=User)
+    #post_save.connect(add_user_to_intern_group, sender=User, dispatch_uid="iro.regbackend.internRegistration")

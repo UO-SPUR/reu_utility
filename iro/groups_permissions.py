@@ -31,8 +31,8 @@ def add_user_to_intern_group(sender, instance, created, **kwargs):
     """Post-create user signal that adds the user to everyone group."""
 
     try:
-        if created and instance.intern is not None:
-            instance.groups.add(Group.objects.get(name=INTERN_GROUP_NAME))
+        if created and instance.user is not None:
+            instance.user.groups.add(Group.objects.get(name=INTERN_GROUP_NAME))
     except Group.DoesNotExist:
         pass
 
@@ -41,8 +41,8 @@ def add_user_to_mentor_group(sender, instance, created, **kwargs):
     """Post-create user signal that adds the user to everyone group."""
 
     try:
-        if created and instance.mentor is not None:
-            instance.groups.add(Group.objects.get(name=MENTOR_GROUP_NAME))
+        if created and instance.user is not None:
+            instance.user.groups.add(Group.objects.get(name=MENTOR_GROUP_NAME))
     except Group.DoesNotExist:
         pass
 
@@ -51,7 +51,7 @@ def add_user_to_faculty_group(sender, instance, created, **kwargs):
     """Post-create user signal that adds the user to everyone group."""
 
     try:
-        if created and instance.faculty is not None:
-            instance.groups.add(Group.objects.get(name=FACULTY_GROUP_NAME))
+        if created and instance.user is not None:
+            instance.user.groups.add(Group.objects.get(name=FACULTY_GROUP_NAME))
     except Group.DoesNotExist:
         pass

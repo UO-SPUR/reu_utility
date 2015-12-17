@@ -23,7 +23,7 @@ class FacultyRegistrationView(RegistrationView):
         user_profile.save()
         return user_profile
 
-    #post_save.connect(add_user_to_faculty_group, sender=User, dispatch_uid="iro.regbackend.facultyRegistration")
+    post_save.connect(add_user_to_faculty_group, sender=Faculty, dispatch_uid="iro.regbackend.facultyRegistration")
 
 class MentorRegistrationView(RegistrationView):
 
@@ -38,7 +38,7 @@ class MentorRegistrationView(RegistrationView):
         user_profile.save()
         return user_profile
 
-    #post_save.connect(add_user_to_mentor_group, sender=User, dispatch_uid="iro.regbackend.mentorRegistration")
+    post_save.connect(add_user_to_mentor_group, sender=Mentor, dispatch_uid="iro.regbackend.mentorRegistration")
 
 class InternRegistrationView(RegistrationView):
 
@@ -62,4 +62,4 @@ class InternRegistrationView(RegistrationView):
         user_profile.save()
         return user_profile
 
-    #post_save.connect(add_user_to_intern_group, sender=User, dispatch_uid="iro.regbackend.internRegistration")
+    post_save.connect(add_user_to_intern_group, sender=Intern, dispatch_uid="iro.regbackend.internRegistration")

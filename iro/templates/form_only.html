@@ -2,6 +2,9 @@
 {% load i18n %}
 
 {% block content %}
+    {% block title %}
+        <h1>Base Form Template</h1>
+    {% endblock %}
     <form action="/iro/faculty/sign-up" method="post">
         {% csrf_token %}
         {{ input_form }}

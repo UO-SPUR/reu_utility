@@ -3,7 +3,9 @@ from django.http import HttpResponseRedirect, HttpResponse
 from iro.forms import *
 from django.contrib.auth.decorators import user_passes_test
 from iro.choices import INTERN_GROUP_NAME, FACULTY_GROUP_NAME, MENTOR_GROUP_NAME
-from reportlab.pdfgen import canvas
+from weasyprint import HTML, CSS
+from django.template.loader import get_template
+from django.template import RequestContext
 
 # Create your views here.
 
@@ -237,18 +239,14 @@ def faculty_application_overview(request):
 def faculty_application_pdfs(request, applicant):
     # Get information from applicant
     filename = applicant.applicant_name + '.pdf'
-    # Create the HttpResponse object with the appropriate PDF headers.
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=' + filename
 
-    # Create the PDF object, using the response object as its "file."
-    p = canvas.Canvas(response)
+    html_template = get_template('templates/applicant_pdf.html')
 
-    # Draw things on the PDF. Here's where the PDF generation happens.
-    # See the ReportLab documentation for the full list of functionality.
-    p.drawString(100, 100, "Hello world.")
+    rendered_html = html_template.render(RequestContext(request, {'applicant': applicant})).encode(encoding="UTF-8")
 
-    # Close the PDF object cleanly, and we're done.
-    p.showPage()
-    p.save()
-    return response
+    pdf_file = HTML(string=rendered_html).write_pdf()
+
+    http_response = HttpResponse(pdf_file, content_type='application/pdf')
+    http_response['Content-Disposition'] = 'filename=' + filename
+
+    return http_response

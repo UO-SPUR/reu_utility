@@ -242,7 +242,7 @@ def faculty_application_pdfs(request, applicant):
 
     html_template = get_template('templates/applicant_pdf.html')
 
-    rendered_html = html_template.render(RequestContext(request, {'applicant': applicant})).encode(encoding="UTF-8")
+    rendered_html = html_template.render(RequestContext(request, {'application': applicant})).encode(encoding="UTF-8")
 
     pdf_file = HTML(string=rendered_html).write_pdf()
 

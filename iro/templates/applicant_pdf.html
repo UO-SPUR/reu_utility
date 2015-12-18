@@ -1,5 +1,19 @@
-{% extends "base.html" %}
-{% block content %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="{{ STATIC_URL }}style.css" />
+    <title>{% block title %}User test{% endblock %}</title>
+</head>
+
+<body>
+<div id="header">
+    {% block header %}
+    {% endblock %}
+</div>
+
+<div id="content">
     <h1>{{ application.applicant_name }}</h1>
     <br />
     {% for name, value in application.get_fields %}
@@ -7,4 +21,13 @@
             {{ name }} : {{ value }}
         {% endif %}
     {% endfor %}
-{% endblock %}
+</div>
+
+<div id="footer">
+    {% block footer %}
+        <hr />
+    {% endblock %}
+</div>
+</body>
+
+</html>

@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from iro.forms import *
 from django.contrib.auth.decorators import user_passes_test
 from iro.choices import INTERN_GROUP_NAME, FACULTY_GROUP_NAME, MENTOR_GROUP_NAME
-from weasyprint import HTML, CSS
+#from weasyprint import HTML, CSS
 from django.template.loader import get_template
 from django.template import RequestContext
 
@@ -235,6 +235,7 @@ def faculty_application_overview(request):
     # TODO: List applications, with the links being to another view that generates the PDFs of application/ Reference Letters
     return render(request, 'faculty_overview.html')
 
+'''
 @is_faculty
 def faculty_application_pdfs(request, applicant):
     # Get information from applicant
@@ -250,3 +251,4 @@ def faculty_application_pdfs(request, applicant):
     http_response['Content-Disposition'] = 'filename=' + filename
 
     return http_response
+'''

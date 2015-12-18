@@ -27,5 +27,5 @@ urlpatterns = [
     url(r'^accounts/register/faculty', regbackend.FacultyRegistrationView.as_view(), name='registration_register'),
     url(r'^accounts/register/interns', regbackend.InternRegistrationView.as_view(), name='registration_register'),
     url('^auth/', include('django.contrib.auth.urls')),
-    url(r'^', TemplateView.as_view(template_name='index.html'), name='index')
+    url(r'^$', TemplateView.as_view(template_name='index.html'), name='index')
 ]

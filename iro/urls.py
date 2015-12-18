@@ -10,13 +10,12 @@ urlpatterns = [
     url(r'^faculty/', include([
         url(r'^survey', views.faculty_survey, name='faculty survey'),
         url(r'^overview', views.faculty_overview, name='faculty overview'),
-        url(r'^sign-up', views.get_faculty, name='faculty-sign-up'),
+        url(r'applicant-pdf', views.faculty_application_pdfs, name='applicant-PDFs'),
         url(r'^', views.faculty_view, name='faculty'),
     ])),
     url(r'^mentor/', include([
         url(r'^survey', views.mentor_survey, name='mentor survey'),
         url(r'^overview', views.mentor_overview, name='mentor overview'),
-        url(r'^sign-up', views.get_mentor, name='mentor-sign-up'),
         url(r'^', views.mentor_view, name='mentor'),
     ])),
     url(r'^intern/', include([

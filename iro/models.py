@@ -212,6 +212,9 @@ class Applicant(models.Model):
     def __str__(self):
         return self.applicant_name
 
+    def get_fields(self):
+        return [(field.name, field.value_to_string(self)) for field in Applicant._meta.fields]
+
 
 class Intern(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)

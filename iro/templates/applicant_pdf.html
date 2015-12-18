@@ -1,4 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>{{ applicant.applicant_name }}</h1>
+    <h1>{{ application.applicant_name }}</h1>
+    <br />
+    {% for name, value in application.get_fields %}
+        {% if value %}
+            {{ name }} : {{ value }}
+        {% endif %}
+    {% endfor %}
 {% endblock %}

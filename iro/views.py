@@ -247,3 +247,10 @@ def faculty_overview(request):
         form = FacultyOverviewForm(instance=current_faculty)
 
     return render(request, 'form_only.html', {'input_form': form})
+
+@is_faculty
+def faculty_application_overview(request):
+    current_faculty = request.user.faculty
+    assigned_applications = current_faculty.applicant_set.all()
+
+    return render(request, 'faculty.html')

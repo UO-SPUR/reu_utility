@@ -9,4 +9,12 @@
         {{ faculty_overview_form }}
         <input type="submit" value="Submit" />
     </form>
+    {% for intern in intern_list %}
+        {{ blog.tagline }}
+        {% for entry in blog.entry_set.all %}
+            {{entry.name}}
+        {% empty %}
+            <!-- no entries -->
+        {% endfor %}
+    {% endfor %}
 {% endblock %}

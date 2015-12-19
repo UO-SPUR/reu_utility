@@ -34,7 +34,7 @@ class InternInline(admin.StackedInline):
 
 # Defining ModelAdmin here.
 class ReferenceLetterAdmin(admin.ModelAdmin):
-    list_display = ['status', 'letter', 'comments']
+    list_display = ['name', 'email', 'department', 'institution', 'status', 'letter', 'comments']
     actions = [send_request_email]
 
     def send_request_email(self, request, queryset):

@@ -18,7 +18,7 @@
     <br />
     {% for name, value in application.get_fields %}
         {% if value %}
-            {{ name }} : {{ value }}
+            <strong>{{ name }}</strong> : {{ value }}
             <br />
         {% endif %}
     {% endfor %}

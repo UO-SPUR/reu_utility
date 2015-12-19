@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^faculty/$', include([
         url(r'^survey/$', views.faculty_survey, name='faculty survey'),
         url(r'^overview/$', views.faculty_overview, name='faculty overview'),
-        url(r'applicant-pdf/$', views.faculty_application_html, name='applicant-PDFs'),
+        url(r'applicant-pdf/$', views.application_view_html, name='applicant-PDFs'),
         url(r'^$', views.faculty_view, name='faculty'),
     ])),
     url(r'^mentor/$', include([

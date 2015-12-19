@@ -84,6 +84,13 @@ def is_faculty(function=None):
     )
     return actual_decorator(function)
 
+def is_faculty_mentor(function=None):
+    """Use this decorator to restrict access to
+    authenticated users who are in the "Faculty" group."""
+    actual_decorator = user_passes_test(
+        lambda u: u.is_authenticated() and (u.groups.filter(name=FACULTY_GROUP_NAME).exists() or u.groups.filter(name=MENTOR_GROUP_NAME).exists())
+    )
+    return actual_decorator(function)
 
 # Checks for User is part of Intern
 @is_intern
@@ -253,9 +260,11 @@ def faculty_application_pdfs(request, applicant):
     return http_response
 '''
 
-# Non-HTML Applicant Info
-@is_faculty
-def faculty_application_html(request):
+# Faculty and Mentor views
+
+# Non-PDF Applicant Info
+@is_faculty_mentor
+def application_view_html(request):
 
     uuid = request.GET['uuid']
     applicant = Applicant.objects.get(uuid=uuid)

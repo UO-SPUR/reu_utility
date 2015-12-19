@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form action="/iro/" method="post">
+<form action="/iro/application" method="post">
     {% csrf_token %}
-    {{ application_form }}
+    {{ input_form }}
     <input type="submit" value="Submit" />
 </form>
 {% endblock %}

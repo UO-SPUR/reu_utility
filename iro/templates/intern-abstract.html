@@ -3,7 +3,7 @@
 {% block content %}
     <form action="/iro/" method="post">
         {% csrf_token %}
-        {{ abstract_form }}
+        {{ input_form }}
         <input type="submit" value="Submit" />
     </form>
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse, QueryDict
 from iro.forms import *
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, login_required, permission_required
 from iro.choices import INTERN_GROUP_NAME, FACULTY_GROUP_NAME, MENTOR_GROUP_NAME
 #from weasyprint import HTML, CSS
 from django.template.loader import get_template
@@ -270,6 +270,22 @@ def application_view_html(request):
     applicant = Applicant.objects.get(uuid=uuid)
 
     html_template = get_template('templates/applicant_pdf.html')
+
+    rendered_html = html_template.render(RequestContext(request, {'application': applicant})).encode(encoding="UTF-8")
+    http_response = HttpResponse(rendered_html)
+
+    return http_response
+
+
+# Admin Views
+
+@permission_required('is_superuser')
+def admin_reference_letter_view(request):
+
+    uuid = request.GET['uuid']
+    applicant = Applicant.objects.get(uuid=uuid)
+
+    html_template = get_template('templates/admin-reference-letters.html')
 
     rendered_html = html_template.render(RequestContext(request, {'application': applicant})).encode(encoding="UTF-8")
     http_response = HttpResponse(rendered_html)

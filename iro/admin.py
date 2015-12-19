@@ -51,7 +51,7 @@ class ApplicantAdmin(TabbedModelAdmin):
             'fields': (('first_name', 'last_name'), ('applicant_email', 'applicant_name'), ('cell_phone_number', 'phone_number'))
         }),
         ('College', {
-            'fields': (('college', 'college_class'), ('expected_graduation', 'major'), 'transfer', ('gpa', 'stem_gpa'), ('program', 'available'))
+            'fields': (('college', 'college_class'), ('expected_graduation', 'major'), 'transfer', ('gpa', 'stem_gpa'), ('program', 'available_start', 'available_end'))
         }),
         ('Demographic Information', {
             'fields': (('date_of_birth', 'citizenship'), 'sex', ('ethnic_background', 'ethnic_background_other'), ('disadvantaged', 'disadvantaged_other'))

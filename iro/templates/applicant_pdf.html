@@ -19,6 +19,7 @@
     {% for name, value in application.get_fields %}
         {% if value %}
             {{ name }} : {{ value }}
+            <br />
         {% endif %}
     {% endfor %}
 </div>

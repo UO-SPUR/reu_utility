@@ -9,6 +9,7 @@
         {{ faculty_overview_form }}
         <input type="submit" value="Submit" />
     </form>
+    <h2>Potential Interns</h2>
     {% for application in application_list %}
         <a href="{% url 'application-PDFs' %}?uuid={{ application.uuid }}">{{ application.name }}</a>
     {% endfor %}

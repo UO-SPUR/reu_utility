@@ -6,6 +6,8 @@ from iro.choices import INTERN_GROUP_NAME, FACULTY_GROUP_NAME, MENTOR_GROUP_NAME
 #from weasyprint import HTML, CSS
 from django.template.loader import get_template
 from django.template import RequestContext
+from django.core.mail import send_mail, EmailMultiAlternatives
+from reu_utility.settings import EMAIL_HOST_USER
 
 # Create your views here.
 
@@ -19,6 +21,12 @@ def get_application(request):
             # process the data in form.cleaned_data as required
             # ...
             form.save()
+            send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
+                      [form.Meta.model.faculty_reference_one_email], fail_silently=False)
+            send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
+                      [form.Meta.model.faculty_reference_two_email], fail_silently=False)
+            send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
+                      [form.Meta.model.faculty_reference_three_email], fail_silently=False)
             # redirect to a new URL:
             return HttpResponseRedirect('/thanks/')
 

@@ -38,7 +38,7 @@ def send_request_email(modeladmin, request, queryset):
 
 # Defining ModelAdmin here.
 class ReferenceLetterAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'department', 'institution', 'status', 'letter', 'comments']
+    list_display = [('name', 'email', 'department', 'institution'), 'status', 'letter', 'comments']
 
     def send_request_email(self, request, queryset):
         send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,

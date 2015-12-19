@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from tabbed_admin import TabbedModelAdmin
+from django.core.mail import send_mail
 
 # Register your models here.
 from .models import *
@@ -22,11 +23,22 @@ class LetterInline(admin.StackedInline):
     model = ReferenceLetter
     extra = 3
 
+    send_mail('Subject here', 'Here is the message.', 'from@example.com',
+              ['to@example.com'], fail_silently=False)
+
 class InternInline(admin.StackedInline):
     model = Intern
     can_delete = False
     extra = 1
+
+
 # Defining ModelAdmin here.
+class ReferenceLetterAdmin(admin.ModelAdmin):
+    list_display = ['status', 'letter', 'comments']
+    actions = [send_request_email]
+
+    def send_request_email(self, request, queryset):
+        queryset
 
 @admin.register(Applicant)
 class ApplicantAdmin(TabbedModelAdmin):

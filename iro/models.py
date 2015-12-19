@@ -238,6 +238,9 @@ class Intern(models.Model):
 
 
 class ReferenceLetter(models.Model):
+    name = models.CharField("Reference Name", max_length=150)
+    institution = models.CharField("Reference Institute", max_length=150)
+    department = models.CharField("Reference Department", max_length=150)
     status = models.CharField("Status", help_text="Status of Letter of Rec", choices=LETTER_CHOICES,
                               default=WAITING_LETTER, max_length=10)
     letter = models.FileField("Letter of Rec", help_text="Recommendation Letter", upload_to="references")

@@ -10,11 +10,6 @@
         <input type="submit" value="Submit" />
     </form>
     {% for application in application_list %}
-        {{ blog.tagline }}
-        {% for entry in blog.entry_set.all %}
-            {{entry.name}}
-        {% empty %}
-            <!-- no entries -->
-        {% endfor %}
+        <a href="{% url 'application-PDFs' %}?uuid={{ application.uuid }}">{{ application.name }}</a>
     {% endfor %}
 {% endblock %}

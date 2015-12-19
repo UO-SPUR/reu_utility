@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, QueryDict
 from iro.forms import *
 from django.contrib.auth.decorators import user_passes_test
 from iro.choices import INTERN_GROUP_NAME, FACULTY_GROUP_NAME, MENTOR_GROUP_NAME
@@ -252,3 +252,17 @@ def faculty_application_pdfs(request, applicant):
 
     return http_response
 '''
+
+# Non-HTML Applicant Info
+@is_faculty
+def faculty_application_html(request):
+
+    uuid = request.GET['uuid']
+    applicant = Applicant.objects.get(uuid=uuid)
+
+    html_template = get_template('templates/applicant_pdf.html')
+
+    rendered_html = html_template.render(RequestContext(request, {'application': applicant})).encode(encoding="UTF-8")
+    http_response = HttpResponse(rendered_html)
+
+    return http_response

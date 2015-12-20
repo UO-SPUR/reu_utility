@@ -8,6 +8,7 @@ from django.template.loader import get_template
 from django.template import RequestContext
 from django.core.mail import send_mail, EmailMultiAlternatives
 from reu_utility.settings import EMAIL_HOST_USER
+from iro.choices import *
 
 # Create your views here.
 
@@ -20,13 +21,52 @@ def get_application(request):
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
+
+            # Set up ReferenceLetter Models from form data
+            reference_one = ReferenceLetter
+            reference_two = ReferenceLetter
+            reference_three = ReferenceLetter
+
             form.save()
+
+            # Fill in Reference One
+            applicant = form.Meta.model
+            reference_one.applicant = applicant
+            reference_one.email = applicant.faculty_reference_one_email
+            reference_one.department = applicant.faculty_reference_one_department
+            reference_one.institution = applicant.faculty_reference_one_institution
+            reference_one.name = applicant.faculty_reference_one_name
+            reference_one.comments = ''
+            reference_one.status = WAITING_LETTER
+
+            reference_one.save()
+            # Fill in Reference Two
+            reference_two.applicant = applicant
+            reference_two.email = applicant.faculty_reference_two_email
+            reference_two.department = applicant.faculty_reference_two_department
+            reference_two.institution = applicant.faculty_reference_two_institution
+            reference_two.name = applicant.faculty_reference_two_name
+            reference_two.comments = ''
+            reference_two.status = WAITING_LETTER
+
+            reference_two.save()
+            # Fill in Reference Three
+            reference_three.applicant = applicant
+            reference_three.email = applicant.faculty_reference_three_email
+            reference_three.department = applicant.faculty_reference_three_department
+            reference_three.institution = applicant.faculty_reference_three_institution
+            reference_three.name = applicant.faculty_reference_three_name
+            reference_three.comments = ''
+            reference_three.status = WAITING_LETTER
+
+            reference_three.save()
+
             send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
-                      [form.Meta.model.faculty_reference_one_email], fail_silently=False)
+                      [reference_one.email], fail_silently=False)
             send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
-                      [form.Meta.model.faculty_reference_two_email], fail_silently=False)
+                      [reference_two.email], fail_silently=False)
             send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
-                      [form.Meta.model.faculty_reference_three_email], fail_silently=False)
+                      [reference_three.email], fail_silently=False)
             # redirect to a new URL:
             return HttpResponseRedirect('/thanks/')
 

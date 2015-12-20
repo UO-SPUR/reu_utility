@@ -183,11 +183,17 @@ class Applicant(models.Model):
     grades = models.TextField("Grades/Classes", help_text="Paste or type your classes and grades here -- (as neatly "
                                                           "as possible; no official transcripts or images; please "
                                                           "include courses you are currently taking)")
-    faculty_reference_one = models.CharField("Faculty 1", help_text="Name; Department; Institution", max_length=100)
+    faculty_reference_one_name = models.CharField("Faculty 1 Name", max_length=100)
+    faculty_reference_one_department = models.CharField("Faculty 1 Department", max_length=100)
+    faculty_reference_one_institution = models.CharField("Faculty 1 Institution", max_length=100)
     faculty_reference_one_email = models.EmailField("Faculty 1 Email", help_text="Email")
-    faculty_reference_two = models.CharField("Faculty 2", help_text="Name; Department; Institution", max_length=100)
+    faculty_reference_two_name = models.CharField("Faculty 2 Name", max_length=100)
+    faculty_reference_two_department = models.CharField("Faculty 2 Department", max_length=100)
+    faculty_reference_two_institution = models.CharField("Faculty 2 Institution", max_length=100)
     faculty_reference_two_email = models.EmailField("Faculty 2 Email", help_text="Email")
-    faculty_reference_three = models.CharField("Faculty 3", help_text="Name; Department; Institution", max_length=100)
+    faculty_reference_three_name = models.CharField("Faculty 3 Name", max_length=100)
+    faculty_reference_three_department = models.CharField("Faculty 3 Department", max_length=100)
+    faculty_reference_three_institution = models.CharField("Faculty 3 Institution", max_length=100)
     faculty_reference_three_email = models.EmailField("Faculty 3 Email", help_text="Email")
     ########## End Question Fields and preferences ############################################
 

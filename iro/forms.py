@@ -4,6 +4,7 @@ from registration.forms import RegistrationForm
 from django import forms
 from iro.models import Institute, Faculty, Applicant, Mentor, Intern, ReferenceLetter, ProgressReport, PISurvey, Abstract
 from django.forms import ModelForm
+from betterforms.multiform import MultiModelForm
 
 # Registration Forms
 class MentorRegistrationForm(RegistrationForm):
@@ -81,3 +82,31 @@ class AbstractForm(ModelForm):
     class Meta:
         model = Abstract
         fields = ['title', 'content']
+
+# MultiForms
+
+class ApplicationMultiForm(MultiModelForm):
+    form_classes = {
+        'application': ApplicantForm,
+        'reference_one': ReferenceLetterForm,
+        'reference_two': ReferenceLetterForm,
+        'reference_three': ReferenceLetterForm,
+    }
+
+    def save(self, commit=True):
+        objects = super(ApplicationMultiForm, self).save(commit=False)
+
+        if commit:
+            applicant = objects['application']
+            applicant.save()
+            reference_one = objects['reference_one']
+            reference_one.applicant = applicant
+            reference_one.save()
+            reference_two = objects['reference_two']
+            reference_two.applicant = applicant
+            reference_two.save()
+            reference_three = objects['reference_three']
+            reference_three.applicant = applicant
+            reference_three.save()
+
+        return objects

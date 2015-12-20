@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form action="/iro/intern/abstract" method="post">
+    <form action="/iro/intern/abstract/" method="post">
         {% csrf_token %}
         {{ input_form }}
         <input type="submit" value="Submit" />

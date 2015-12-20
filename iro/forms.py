@@ -50,6 +50,11 @@ class ReferenceLetterForm(ModelForm):
         model = ReferenceLetter
         fields = ['letter', 'applicant']
 
+class ReferenceLetterRequestForm(ModelForm):
+    class Meta:
+        model = ReferenceLetter
+        fields = ['name', 'email', 'institution', 'department']
+
 class ProgressReportForm(ModelForm):
     class Meta:
         model = ProgressReport

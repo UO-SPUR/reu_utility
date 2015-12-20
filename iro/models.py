@@ -240,7 +240,7 @@ class ReferenceLetter(models.Model):
     status = models.CharField("Status", help_text="Status of Letter of Rec", choices=LETTER_CHOICES,
                               default=WAITING_LETTER, max_length=10)
     letter = models.FileField("Letter of Rec", help_text="Recommendation Letter", upload_to="references")
-    comments = models.TextField("Comments", help_text="Any comments on Letter of Recommendation?")
+    comments = models.TextField("Comments", help_text="Any comments on Letter of Recommendation?", null=True)
     applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference",
                                   help_text="Which Applicant is this letter for?")  # Deleted if Applicant is deleted
 

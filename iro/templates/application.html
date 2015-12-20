@@ -4,6 +4,13 @@
 <form action="/iro/application/" method="post">
     {% csrf_token %}
     {{ input_form }}
+    <br />
+    <h3>Reference Letter Requests</h3>
+    {{ ref_letter_1 }}
+    <br />
+    {{ ref_letter_2 }}
+    <br />
+    {{ ref_letter_3 }}
     <input type="submit" value="Submit" />
 </form>
 {% endblock %}

@@ -19,20 +19,45 @@ def get_application(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = ApplicantForm(request.POST)
+        form2 = ReferenceLetterForm(request.POST)
+        form3 = ReferenceLetterForm(request.POST)
+        form4 = ReferenceLetterForm(request.POST)
+
+        application_is_valid = form.is_valid()
+        ref_letter_1_is_valid = form2.is_valid()
+        ref_letter_2_is_valid = form3.is_valid()
+        ref_letter_3_is_valid = form4.is_valid()
+
         # check whether it's valid:
-        if form.is_valid():
+        if application_is_valid and ref_letter_1_is_valid and ref_letter_2_is_valid and ref_letter_3_is_valid:
             # process the data in form.cleaned_data as required
             # ...
+            applicant = form.save()
+            ref_letter_1 = form2.save(commit=False)
+            ref_letter_2 = form3.save(commit=False)
+            ref_letter_3 = form4.save(commit=False)
 
-            form.save()
+            # Set the Applicant to the save Application
+            ref_letter_1.applicant = applicant
+            ref_letter_2.applicant = applicant
+            ref_letter_3.applicant = applicant
+
+            # Save the ReferenceLetter
+            ref_letter_1.save()
+            ref_letter_2.save()
+            ref_letter_3.save()
+
             # redirect to a new URL:
             return HttpResponseRedirect('/thanks/')
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = ApplicantForm()
+        form2 = ReferenceLetterForm()
+        form3 = ReferenceLetterForm()
+        form4 = ReferenceLetterForm()
 
-    return render(request, 'application.html', {'input_form': form})
+    return render(request, 'application.html', {'input_form': form, 'ref_letter_1': form2, 'ref_letter_2' : form3, 'ref_leter_3' : form4})
 
 class ApplicationMultiView(CreateView):
     form_class = ApplicationMultiForm

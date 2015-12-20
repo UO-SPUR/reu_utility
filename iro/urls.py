@@ -2,9 +2,11 @@ __author__ = 'jacob'
 
 from django.conf.urls import url, include
 from . import views
+from iro.views import ApplicationMultiView
 
 urlpatterns = [
-    url(r'^application/$', views.get_application, name='application'),
+    #url(r'^application/$', views.get_application, name='application'),
+    url(r'^application/$', ApplicationMultiView.as_view(template_name="application-improved.html"), name='application'),
     url(r'^thanks/$', views.thanks, name='thanks'),
     url(r'reference-letter/$', views.get_reference, name='reference letter upload'),
     url(r'^faculty/$', include([

@@ -9,6 +9,8 @@ from django.template import RequestContext
 from django.core.mail import send_mail, EmailMultiAlternatives
 from reu_utility.settings import EMAIL_HOST_USER
 from iro.choices import *
+from django.views.generic import CreateView
+from django.core.urlresolvers import reverse_lazy
 
 # Create your views here.
 
@@ -16,7 +18,7 @@ def get_application(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = ApplicationMultiForm(request.POST)
+        form = ApplicantForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -28,9 +30,13 @@ def get_application(request):
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = ApplicationMultiForm()
+        form = ApplicantForm()
 
-    return render(request, 'application-improved.html', {'input_form': form})
+    return render(request, 'application.html', {'input_form': form})
+
+class ApplicationMultiView(CreateView):
+    form_class = ApplicationMultiForm
+    success_url = reverse_lazy("/iro/application")
 
 def get_reference(request):
     # if this is a POST request we need to process the form data

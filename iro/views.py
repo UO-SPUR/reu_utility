@@ -27,8 +27,6 @@ def get_application(request):
             reference_two = ReferenceLetter
             reference_three = ReferenceLetter
 
-            form.save()
-
             # Fill in Reference One
             applicant = form.Meta.model
             reference_one.applicant = applicant
@@ -61,6 +59,7 @@ def get_application(request):
 
             reference_three.save()
 
+            form.save()
             send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
                       [reference_one.email], fail_silently=False)
             send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,

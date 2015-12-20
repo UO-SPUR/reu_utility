@@ -4,7 +4,7 @@ from django.core.validators import RegexValidator
 from iro.choices import *
 from django.core.exceptions import ValidationError
 import uuid
-from datetime import datetime
+from django.utils.timezone import now
 
 # Allow only one model to be created (For Setup)
 def validate_only_one_instance(obj):
@@ -198,7 +198,7 @@ class Applicant(models.Model):
     comments = models.TextField("Admin Comments", help_text="Comments on Applicant")
     application_completeness = models.TextField("Application Completeness", help_text="Anything missing?")
     correspondence = models.TextField("Correspondence", help_text="Correspondence", null=True)
-    year_created = models.DateField("Created Year", help_text="Year Created", default=datetime.today())
+    year_created = models.DateField("Created Year", help_text="Year Created", default=now())
     short_list = models.CharField("Short List?", choices=SHORT_LIST_CHOICES, default=UNSURE, max_length=10)
     transcript = models.FileField('Transcript', upload_to='transcripts', null=True)
     uuid = models.TextField("UUID", default=uuid.uuid4(), null=False)

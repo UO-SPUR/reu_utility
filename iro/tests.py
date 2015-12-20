@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.utils import timezone
 from iro.models import *
+from iro.choices import *
 
 # Create your tests here.
 

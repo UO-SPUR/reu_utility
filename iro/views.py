@@ -16,64 +16,21 @@ def get_application(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = ApplicantForm(request.POST)
+        form = ApplicationMultiForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
             # ...
 
-            # Set up ReferenceLetter Models from form data
-            reference_one = ReferenceLetter
-            reference_two = ReferenceLetter
-            reference_three = ReferenceLetter
-
-            # Fill in Reference One
-            applicant = form.Meta.model
-            reference_one.applicant = applicant
-            reference_one.email = applicant.faculty_reference_one_email
-            reference_one.department = applicant.faculty_reference_one_department
-            reference_one.institution = applicant.faculty_reference_one_institution
-            reference_one.name = applicant.faculty_reference_one_name
-            reference_one.comments = ''
-            reference_one.status = WAITING_LETTER
-
-            reference_one.save()
-            # Fill in Reference Two
-            reference_two.applicant = applicant
-            reference_two.email = applicant.faculty_reference_two_email
-            reference_two.department = applicant.faculty_reference_two_department
-            reference_two.institution = applicant.faculty_reference_two_institution
-            reference_two.name = applicant.faculty_reference_two_name
-            reference_two.comments = ''
-            reference_two.status = WAITING_LETTER
-
-            reference_two.save()
-            # Fill in Reference Three
-            reference_three.applicant = applicant
-            reference_three.email = applicant.faculty_reference_three_email
-            reference_three.department = applicant.faculty_reference_three_department
-            reference_three.institution = applicant.faculty_reference_three_institution
-            reference_three.name = applicant.faculty_reference_three_name
-            reference_three.comments = ''
-            reference_three.status = WAITING_LETTER
-
-            reference_three.save()
-
             form.save()
-            send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
-                      [reference_one.email], fail_silently=False)
-            send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
-                      [reference_two.email], fail_silently=False)
-            send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
-                      [reference_three.email], fail_silently=False)
             # redirect to a new URL:
             return HttpResponseRedirect('/thanks/')
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = ApplicantForm()
+        form = ApplicationMultiForm()
 
-    return render(request, 'application.html', {'input_form': form})
+    return render(request, 'application-improved.html', {'input_form': form})
 
 def get_reference(request):
     # if this is a POST request we need to process the form data

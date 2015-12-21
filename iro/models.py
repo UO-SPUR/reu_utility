@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 import uuid
 from django.utils.timezone import now
 from django.core.mail import send_mail
-
+from reu_utility.settings import EMAIL_HOST_USER
 # Allow only one model to be created (For Setup)
 def validate_only_one_instance(obj):
     model = obj.__class__
@@ -245,7 +245,8 @@ class ReferenceLetter(models.Model):
     applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference",
                                   help_text="Which Applicant is this letter for?")  # Deleted if Applicant is deleted
 
-    def save(self):
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
         if self.id:
             # So if the model already exists...
             old_letter = ReferenceLetter.objects.get(pk=self.id)

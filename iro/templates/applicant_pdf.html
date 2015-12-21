@@ -22,6 +22,17 @@
             <br />
         {% endif %}
     {% endfor %}
+
+    <h1>Reference Letters</h1>
+    <br />
+    {% for letter in letters_of_reference %}
+        {% for name, value in letter.get_fields %}
+            {% if value %}
+                <strong>{{ name }}</strong> : {{ value }}
+                <br />
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
 </div>
 
 <div id="footer">

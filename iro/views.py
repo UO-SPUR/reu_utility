@@ -317,10 +317,12 @@ def admin_reference_letter_view(request):
 
     uuid = request.GET['uuid']
     applicant = Applicant.objects.get(uuid=uuid)
+    reference_letters = applicant.referenceletter_set.all()
 
     html_template = get_template('templates/admin-reference-letters.html')
 
-    rendered_html = html_template.render(RequestContext(request, {'application': applicant})).encode(encoding="UTF-8")
+    rendered_html = html_template.render(RequestContext(request, {'application': applicant,
+                                                                  'letters_of_reference': reference_letters})).encode(encoding="UTF-8")
     http_response = HttpResponse(rendered_html)
 
     return http_response

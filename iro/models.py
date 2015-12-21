@@ -254,6 +254,9 @@ class ReferenceLetter(models.Model):
             if old_letter.status == WAITING_LETTER and self.status == REQUESTED_LETTER:
                 send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
                           [self.email], fail_silently=False)
+            if self.letter:
+                # If letter file exists, then it is uploaded
+                self.status = LETTER_UPLOADED
         else:
             send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
                       [self.email], fail_silently=False)

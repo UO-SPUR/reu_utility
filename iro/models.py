@@ -244,6 +244,9 @@ class ReferenceLetter(models.Model):
     applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference",
                                   help_text="Which Applicant is this letter for?")  # Deleted if Applicant is deleted
 
+    def __str__(self):
+        return self.applicant.applicant_name + " Letter"
+
 
 class ProgressReport(models.Model):
     last_updated = models.DateField("Last Updated", help_text="Last modified timestamp", auto_now=True)

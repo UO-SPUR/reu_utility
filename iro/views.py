@@ -57,7 +57,8 @@ def get_application(request):
         form3 = ReferenceLetterRequestForm()
         form4 = ReferenceLetterRequestForm()
 
-    return render(request, 'application.html', {'input_form': form, 'ref_letter_1': form2, 'ref_letter_2' : form3, 'ref_letter_3' : form4})
+    return render(request, 'application.html', {'input_form': form, 'ref_letter_1': form2, 'ref_letter_2': form3,
+                                                'ref_letter_3': form4})
 
 class ApplicationMultiView(CreateView):
     form_class = ApplicationMultiForm
@@ -74,7 +75,7 @@ def get_reference(request):
             # ...
             form.save()
             # redirect to a new URL:
-            return HttpResponseRedirect('/thanks/')
+            return HttpResponseRedirect('/iro/thanks/')
 
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -151,7 +152,7 @@ def progress_report_add(request):
             # ...
             form.save()
             # redirect to a new URL:
-            return HttpResponseRedirect('/thanks/')
+            return HttpResponseRedirect('/iro/thanks/')
 
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -173,7 +174,7 @@ def intern_abstract_edit(request):
             # ...
             form.save()
             # redirect to a new URL:
-            return HttpResponseRedirect('/thanks/')
+            return HttpResponseRedirect('/iro/thanks/')
 
     # if a GET (or any other method) we'll create a blank form
     else:

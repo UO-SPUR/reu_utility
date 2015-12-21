@@ -25,6 +25,7 @@ class MentorInline(admin.StackedInline):
 class LetterInline(admin.StackedInline):
     model = ReferenceLetter
     extra = 3
+    max_num = 3
 
 class InternInline(admin.StackedInline):
     model = Intern
@@ -80,9 +81,6 @@ class ApplicantAdmin(TabbedModelAdmin):
         ('Application Questions', {
             'fields': ('background', 'goals', ('first_choice', 'first_choice_importance'), ('second_choice', 'second_choice_importance'), ('third_choice', 'third_choice_importance'), 'other_choice', 'details', 'lab_preferences', 'outside_interests', 'transcript')
         }),
-        ('Faculty', {
-            'fields': (('faculty_reference_one', 'faculty_reference_one_email'), ('faculty_reference_two', 'faculty_reference_two_email'), ('faculty_reference_three', 'faculty_reference_three_email'))
-        })
     )
     tab_intern = (
         InternInline,

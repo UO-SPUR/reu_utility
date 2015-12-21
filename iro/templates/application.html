@@ -3,7 +3,7 @@
 {% block content %}
 <form action="/iro/application/" method="post">
     {% csrf_token %}
-    {{ input_form }}
+    {{ input_form.as_ul }}
     <br />
     <h3>Reference Letter Requests</h3>
     {{ ref_letter_1 }}

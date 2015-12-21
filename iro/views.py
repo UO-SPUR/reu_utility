@@ -19,9 +19,9 @@ def get_application(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
         form = ApplicantForm(request.POST)
-        form2 = ReferenceLetterForm(request.POST)
-        form3 = ReferenceLetterForm(request.POST)
-        form4 = ReferenceLetterForm(request.POST)
+        form2 = ReferenceLetterRequestForm(request.POST)
+        form3 = ReferenceLetterRequestForm(request.POST)
+        form4 = ReferenceLetterRequestForm(request.POST)
 
         application_is_valid = form.is_valid()
         ref_letter_1_is_valid = form2.is_valid()
@@ -48,16 +48,16 @@ def get_application(request):
             ref_letter_3.save()
 
             # redirect to a new URL:
-            return HttpResponseRedirect('/thanks/')
+            return HttpResponseRedirect('/iro/thanks/')
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = ApplicantForm()
-        form2 = ReferenceLetterForm()
-        form3 = ReferenceLetterForm()
-        form4 = ReferenceLetterForm()
+        form2 = ReferenceLetterRequestForm()
+        form3 = ReferenceLetterRequestForm()
+        form4 = ReferenceLetterRequestForm()
 
-    return render(request, 'application.html', {'input_form': form, 'ref_letter_1': form2, 'ref_letter_2' : form3, 'ref_leter_3' : form4})
+    return render(request, 'application.html', {'input_form': form, 'ref_letter_1': form2, 'ref_letter_2' : form3, 'ref_letter_3' : form4})
 
 class ApplicationMultiView(CreateView):
     form_class = ApplicationMultiForm

@@ -32,20 +32,7 @@ class InternInline(admin.StackedInline):
     can_delete = False
     extra = 1
 
-def send_request_email(modeladmin, request, queryset):
-    selected = request.POST.getlist(admin.ACTION_CHECKBOX_NAME)
-    ct = ContentType.objects.get_for_model(queryset.model)
-    return HttpResponseRedirect("/iro/send-reference?ct=%s&ids=%s" % (ct.pk, ",".join(selected)))
-
 # Defining ModelAdmin here.
-class ReferenceLetterAdmin(admin.ModelAdmin):
-    list_display = [('name', 'email', 'department', 'institution'), 'status', 'letter', 'comments']
-
-    def send_request_email(self, request, queryset):
-        send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
-              ['jbieker@uoregon.edu'], fail_silently=False)
-
-    actions = [send_request_email]
 
 @admin.register(Applicant)
 class ApplicantAdmin(TabbedModelAdmin):

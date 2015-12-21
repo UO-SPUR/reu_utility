@@ -5,6 +5,7 @@ from iro.choices import *
 from django.core.exceptions import ValidationError
 import uuid
 from django.utils.timezone import now
+from django.core.mail import send_mail
 
 # Allow only one model to be created (For Setup)
 def validate_only_one_instance(obj):
@@ -243,6 +244,19 @@ class ReferenceLetter(models.Model):
     comments = models.TextField("Comments", help_text="Any comments on Letter of Recommendation?", null=True)
     applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference",
                                   help_text="Which Applicant is this letter for?")  # Deleted if Applicant is deleted
+
+    def save(self):
+        if self.id:
+            # So if the model already exists...
+            old_letter = ReferenceLetter.objects.get(pk=self.id)
+            if old_letter.status == WAITING_LETTER and self.status == REQUESTED_LETTER:
+                send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
+                          [self.email], fail_silently=False)
+        else:
+            send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
+                      [self.email], fail_silently=False)
+            self.status = REQUESTED_LETTER
+        super(ReferenceLetter, self).save()
 
     def __str__(self):
         return self.applicant.applicant_name + " Letter"

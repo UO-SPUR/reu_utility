@@ -2,15 +2,12 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse, QueryDict
 from iro.forms import *
 from django.contrib.auth.decorators import user_passes_test, login_required, permission_required
-from iro.choices import INTERN_GROUP_NAME, FACULTY_GROUP_NAME, MENTOR_GROUP_NAME
+from iro.choices import *
 #from weasyprint import HTML, CSS
 from django.template.loader import get_template
 from django.template import RequestContext
-from django.core.mail import send_mail, EmailMultiAlternatives
 from reu_utility.settings import EMAIL_HOST_USER
 from iro.choices import *
-from django.views.generic import CreateView
-from django.core.urlresolvers import reverse_lazy
 
 # Create your views here.
 
@@ -59,10 +56,6 @@ def get_application(request):
 
     return render(request, 'application.html', {'input_form': form, 'ref_letter_1': form2, 'ref_letter_2': form3,
                                                 'ref_letter_3': form4})
-
-class ApplicationMultiView(CreateView):
-    form_class = ApplicationMultiForm
-    success_url = reverse_lazy("/iro/application")
 
 def get_reference(request):
     # if this is a POST request we need to process the form data

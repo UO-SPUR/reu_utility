@@ -48,7 +48,7 @@ class InternOverviewForm(ModelForm):
 class ReferenceLetterForm(ModelForm):
     class Meta:
         model = ReferenceLetter
-        fields = ['letter', 'applicant']
+        fields = ['letter']
 
 class ReferenceLetterRequestForm(ModelForm):
     class Meta:

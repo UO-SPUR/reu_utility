@@ -6,7 +6,6 @@ from iro.choices import *
 #from weasyprint import HTML, CSS
 from django.template.loader import get_template
 from django.template import RequestContext
-from reu_utility.settings import EMAIL_HOST_USER
 from iro.choices import *
 
 # Create your views here.
@@ -78,7 +77,7 @@ def get_reference(request):
     else:
         form = ReferenceLetterForm(instance=reference_letter)
 
-    return render(request, 'form_only.html', {'input_form': form})
+    return render(request, 'form-only.html', {'input_form': form})
 
 
 def thanks(request):
@@ -129,7 +128,7 @@ def is_faculty_mentor(function=None):
 
 @is_intern
 def intern_survey(request):
-    return render(request, 'form_only.html')
+    return render(request, 'form-only.html')
 
 
 @is_intern
@@ -151,7 +150,7 @@ def progress_report_add(request):
     else:
         form = ProgressReportForm()
 
-    return render(request, 'form_only.html', {'input_form': form})
+    return render(request, 'form-only.html', {'input_form': form})
 
 
 @is_intern
@@ -173,7 +172,7 @@ def intern_abstract_edit(request):
     else:
         form = AbstractForm(instance=current_intern.abstract)
 
-    return render(request, 'form_only.html', {'input_form': form})
+    return render(request, 'form-only.html', {'input_form': form})
 
 
 @is_intern
@@ -202,7 +201,7 @@ def intern_overview(request):
 
 @is_mentor
 def mentor_survey(request):
-    return render(request, 'form_only.html')
+    return render(request, 'form-only.html')
 
 
 @is_mentor
@@ -231,7 +230,7 @@ def mentor_overview(request):
 
 @is_faculty
 def faculty_survey(request):
-    return render(request, 'form_only.html')
+    return render(request, 'form-only.html')
 
 
 @is_faculty

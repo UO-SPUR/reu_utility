@@ -248,9 +248,9 @@ class ReferenceLetter(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        if self.id:
+        if self.pk:
             # So if the model already exists...
-            old_letter = ReferenceLetter.objects.get(pk=self.id)
+            old_letter = ReferenceLetter.objects.get(pk=self.pk)
             if old_letter.status == WAITING_LETTER and self.status == REQUESTED_LETTER:
                 send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
                           [self.email], fail_silently=False)

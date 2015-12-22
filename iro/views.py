@@ -78,7 +78,7 @@ def get_reference(request):
     else:
         form = ReferenceLetterForm(instance=reference_letter)
 
-    return render(request, 'reference-letter-upload.html', {'input_form': form})
+    return render(request, 'form_only.html', {'input_form': form})
 
 
 def thanks(request):
@@ -126,10 +126,6 @@ def is_faculty_mentor(function=None):
     return actual_decorator(function)
 
 # Checks for User is part of Intern
-@is_intern
-def intern_view(request):
-    return render(request, 'intern.html')
-
 
 @is_intern
 def intern_survey(request):
@@ -155,7 +151,7 @@ def progress_report_add(request):
     else:
         form = ProgressReportForm()
 
-    return render(request, 'progress-report.html', {'input_form': form})
+    return render(request, 'form_only.html', {'input_form': form})
 
 
 @is_intern
@@ -177,7 +173,7 @@ def intern_abstract_edit(request):
     else:
         form = AbstractForm(instance=current_intern.abstract)
 
-    return render(request, 'intern-abstract.html', {'input_form': form})
+    return render(request, 'form_only.html', {'input_form': form})
 
 
 @is_intern
@@ -203,10 +199,6 @@ def intern_overview(request):
 
 
 # Checks for User is part of Mentor
-@is_mentor
-def mentor_view(request):
-    return render(request, 'mentor.html')
-
 
 @is_mentor
 def mentor_survey(request):
@@ -236,10 +228,6 @@ def mentor_overview(request):
 
 
 # Checks for User is part of Faculty
-@is_faculty
-def faculty_view(request):
-    return render(request, 'faculty.html')
-
 
 @is_faculty
 def faculty_survey(request):

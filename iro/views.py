@@ -129,7 +129,7 @@ def is_faculty_mentor(function=None):
 
 @is_intern
 def intern_survey(request):
-    return render(request, 'intern-survey.html')
+    return render(request, 'form_only.html')
 
 
 @is_intern
@@ -160,7 +160,7 @@ def intern_abstract_edit(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = AbstractForm(request.POST)
+        form = AbstractForm(request.POST, instance=current_intern.abstract)
         # check whether it's valid:
         if form.is_valid():
             # process the data in form.cleaned_data as required
@@ -202,7 +202,7 @@ def intern_overview(request):
 
 @is_mentor
 def mentor_survey(request):
-    return render(request, 'mentor-survey.html')
+    return render(request, 'form_only.html')
 
 
 @is_mentor
@@ -231,7 +231,7 @@ def mentor_overview(request):
 
 @is_faculty
 def faculty_survey(request):
-    return render(request, 'faculty-survey.html')
+    return render(request, 'form_only.html')
 
 
 @is_faculty

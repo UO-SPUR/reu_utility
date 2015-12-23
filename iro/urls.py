@@ -1,6 +1,8 @@
 __author__ = 'jacob'
 
 from django.conf.urls import url, include
+from django.conf.urls.static import static
+from django.conf import settings
 from . import views
 
 urlpatterns = [
@@ -25,4 +27,4 @@ urlpatterns = [
         url(r'^overview/$', views.intern_overview, name='intern overview'),
         url(r'^$', views.intern_overview, name='intern'),
     ]))
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

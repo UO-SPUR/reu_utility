@@ -39,7 +39,7 @@ class InternOverviewForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(InternOverviewForm, self).__init__(*args, **kwargs)
         uneditable_fields = ['application', 'user', 'name', 'program', 'student_id', 'institute', 'professor',
-                             'mentors', 'arrival_date', 'departure_date', 'symposium_session']
+                             'mentors', 'arrival_date', 'departure_date', 'symposium_session', 'picture']
         for field in uneditable_fields:
             self.fields[field].widget.attrs['readonly'] = 'true'
 # Model Forms

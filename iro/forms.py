@@ -70,7 +70,7 @@ class ApplicantForm(ModelForm):
         exclude = ['mentors', 'possible_pis', 'triage', 'ranking',
                    'likely_institute', 'decision_action', 'comments',
                    'application_completeness', 'correspondence', 'year_created',
-                   'short_list', 'transcript', 'uuid']
+                   'short_list', 'uuid']
 
 class FacultyForm(ModelForm):
     class Meta:

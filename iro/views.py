@@ -14,7 +14,7 @@ def get_application(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = ApplicantForm(request.POST)
+        form = ApplicantForm(request.POST, request.FILES)
         form2 = ReferenceLetterRequestForm(request.POST)
         form3 = ReferenceLetterRequestForm(request.POST)
         form4 = ReferenceLetterRequestForm(request.POST)

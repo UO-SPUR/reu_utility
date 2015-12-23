@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-<form action="" method="post">
+    {% if form.is_multipart %}
+        <form enctype="multipart/form-data" method="post" action="">
+    {% else %}
+        <form method="post" action="">
+    {% endif %}
     {% csrf_token %}
     {{ input_form.as_ul }}
     <br />

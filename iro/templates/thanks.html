@@ -2,4 +2,13 @@
 
 {% block content %}
     <h1>Thank You! Your response has been recorded!</h1>
+    {% if application %}
+        <h2>Here is the recorded response. Please save for your records.</h2>
+        <h1>{{ application.applicant_name }}</h1>
+        <br />
+        {% for name, value in application.get_fields %}
+            <strong>{{ name }}</strong> : {{ value }}
+            <br />
+        {% endfor %}
+    {% endif %}
 {% endblock %}

@@ -44,7 +44,7 @@ def get_application(request):
             ref_letter_3.save()
 
             # redirect to a new URL:
-            return HttpResponseRedirect('/iro/thanks/')
+            return HttpResponseRedirect('/iro/thanks/?uuid=' + applicant.uuid)
 
     # if a GET (or any other method) we'll create a blank form
     else:
@@ -81,8 +81,17 @@ def get_reference(request):
 
 
 def thanks(request):
+
+    uuid = request.GET['uuid']
+    applicant = Applicant.objects.get(uuid=uuid)
+
+    html_template = get_template('templates/thanks.html')
+
+    rendered_html = html_template.render(RequestContext(request, {'application': applicant})).encode(encoding="UTF-8")
+    http_response = HttpResponse(rendered_html)
+
     # Redirection page to say sign up was successful
-    return render(request, 'thanks.html')
+    return http_response
 
 
 # Views that are restricted based on group user is in
@@ -268,7 +277,7 @@ def faculty_application_pdfs(request, applicant):
     # Get information from applicant
     filename = applicant.applicant_name + '.pdf'
 
-    html_template = get_template('templates/applicant_pdf.html')
+    html_template = get_template('templates/applicant-pdf.html')
 
     rendered_html = html_template.render(RequestContext(request, {'application': applicant})).encode(encoding="UTF-8")
 
@@ -289,13 +298,12 @@ def application_view_html(request):
     uuid = request.GET['uuid']
     applicant = Applicant.objects.get(uuid=uuid)
 
-    html_template = get_template('templates/applicant_pdf.html')
+    html_template = get_template('templates/applicant-pdf.html')
 
     rendered_html = html_template.render(RequestContext(request, {'application': applicant})).encode(encoding="UTF-8")
     http_response = HttpResponse(rendered_html)
 
     return http_response
-
 
 # Admin Views
 

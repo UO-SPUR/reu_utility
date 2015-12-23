@@ -70,8 +70,6 @@ def get_reference(request):
             # process the data in form.cleaned_data as required
             # ...
 
-            # Set the letter file to the POST data
-            form.Meta.model.letter = request.FILES['letter']
             form.save()
             # redirect to a new URL:
             return HttpResponseRedirect('/iro/thanks/')

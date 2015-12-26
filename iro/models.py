@@ -5,7 +5,9 @@ from iro.choices import *
 from django.core.exceptions import ValidationError
 import uuid
 from django.utils.timezone import now
-from django.core.mail import send_mail
+from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
+from django.template.loader import get_template
+from django.template import Context
 from reu_utility.settings import EMAIL_HOST_USER
 # Allow only one model to be created (For Setup)
 def validate_only_one_instance(obj):
@@ -252,14 +254,22 @@ class ReferenceLetter(models.Model):
             # So if the model already exists...
             old_letter = ReferenceLetter.objects.get(pk=self.pk)
             if old_letter.status == WAITING_LETTER and self.status == REQUESTED_LETTER:
-                send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
-                          [self.email], fail_silently=False)
+                htmly = get_template("reference-request-email.html")
+                context = Context({'requester': self})
+                html_content = htmly.render(context)
+                msg = EmailMessage('Reference Letter Request', html_content, EMAIL_HOST_USER, [self.email])
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
             if self.letter:
                 # If letter file exists, then it is uploaded
                 self.status = LETTER_UPLOADED
         else:
-            send_mail('Reference Letter Request', 'Here is the message.', EMAIL_HOST_USER,
-                      [self.email], fail_silently=False)
+            htmly = get_template("reference-request-email.html")
+            context = Context({'requester': self})
+            html_content = htmly.render(context)
+            msg = EmailMessage('Reference Letter Request', html_content, EMAIL_HOST_USER, [self.email])
+            msg.content_subtype = "html"  # Main content is now text/html
+            msg.send()
             self.status = REQUESTED_LETTER
         super(ReferenceLetter, self).save()
 

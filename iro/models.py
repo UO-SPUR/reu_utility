@@ -5,10 +5,10 @@ from iro.choices import *
 from django.core.exceptions import ValidationError
 import uuid
 from django.utils.timezone import now
-from django.core.mail import send_mail, EmailMultiAlternatives, EmailMessage
+from django.core.mail import EmailMultiAlternatives, EmailMessage, get_connection
 from django.template.loader import get_template
 from django.template import Context
-from reu_utility.settings import EMAIL_HOST_USER
+from django.core.mail.backends.smtp import EmailBackend
 # Allow only one model to be created (For Setup)
 def validate_only_one_instance(obj):
     model = obj.__class__
@@ -235,56 +235,6 @@ class Intern(models.Model):
         return self.name
 
 
-class ReferenceLetter(models.Model):
-    name = models.CharField("Name", max_length=150)
-    email = models.EmailField("Email")
-    institution = models.CharField("Institution", max_length=150)
-    department = models.CharField("Department", max_length=150)
-    status = models.CharField("Status", help_text="Status of Letter of Rec", choices=LETTER_CHOICES,
-                              default=WAITING_LETTER, max_length=10)
-    letter = models.FileField("Letter of Rec", help_text="Recommendation Letter", upload_to="references")
-    comments = models.TextField("Comments", help_text="Any comments on Letter of Recommendation?", null=True)
-    uuid = models.TextField("UUID", default=uuid.uuid4(), null=False)
-    applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference",
-                                  help_text="Which Applicant is this letter for?")  # Deleted if Applicant is deleted
-
-    def save(self, force_insert=False, force_update=False, using=None,
-             update_fields=None):
-        if self.pk:
-            # So if the model already exists...
-            old_letter = ReferenceLetter.objects.get(pk=self.pk)
-            if old_letter.status == WAITING_LETTER and self.status == REQUESTED_LETTER:
-                htmly = get_template("reference-request-email.html")
-                context = Context({'requester': self})
-                html_content = htmly.render(context)
-                msg = EmailMessage('Reference Letter Request', html_content, EMAIL_HOST_USER, [self.email])
-                msg.content_subtype = "html"  # Main content is now text/html
-                msg.send()
-            if self.letter:
-                # If letter file exists, then it is uploaded
-                self.status = LETTER_UPLOADED
-                # And send confirmation email
-                htmly = get_template("reference-confirmation.html")
-                context = Context({'requester': self})
-                html_content = htmly.render(context)
-                msg = EmailMessage('Reference Letter Request', html_content, EMAIL_HOST_USER, [self.email])
-                msg.content_subtype = "html"  # Main content is now text/html
-                msg.send()
-        else:
-            if self.status != REQUESTED_LETTER and self.status != LETTER_UPLOADED:
-                htmly = get_template("reference-request-email.html")
-                context = Context({'requester': self})
-                html_content = htmly.render(context)
-                msg = EmailMessage('Reference Letter Request', html_content, EMAIL_HOST_USER, [self.email])
-                msg.content_subtype = "html"  # Main content is now text/html
-                msg.send()
-                self.status = REQUESTED_LETTER
-        super(ReferenceLetter, self).save()
-
-    def __str__(self):
-        return self.applicant.applicant_name + " Letter"
-
-
 class ProgressReport(models.Model):
     last_updated = models.DateField("Last Updated", help_text="Last modified timestamp", auto_now=True)
     content = models.TextField("Progress Report", help_text="Enter your progress report")
@@ -335,3 +285,73 @@ class IroSetup(models.Model):
 
     def __str__(self):
         return self.program_name
+
+class Configuration(models.Model):
+    config_name = models.CharField(help_text="Do not Change this one!", max_length=6, default="Backend")
+    email_use_tls = models.BooleanField(default=True)
+    email_host = models.CharField(max_length=1024)
+    email_host_user = models.CharField(max_length=255)
+    email_host_password = models.CharField(max_length=255)
+    email_port = models.PositiveSmallIntegerField(default=587)
+    email_username = models.CharField(max_length=255)
+    fail_silently = models.BooleanField(default=False)
+
+    def clean(self):
+        validate_only_one_instance(self)
+
+class ReferenceLetter(models.Model):
+    name = models.CharField("Name", max_length=150)
+    email = models.EmailField("Email")
+    institution = models.CharField("Institution", max_length=150)
+    department = models.CharField("Department", max_length=150)
+    status = models.CharField("Status", help_text="Status of Letter of Rec", choices=LETTER_CHOICES,
+                              default=WAITING_LETTER, max_length=10)
+    letter = models.FileField("Letter of Rec", help_text="Recommendation Letter", upload_to="references")
+    comments = models.TextField("Comments", help_text="Any comments on Letter of Recommendation?", null=True)
+    uuid = models.TextField("UUID", default=uuid.uuid4(), null=False)
+    applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference",
+                                  help_text="Which Applicant is this letter for?")  # Deleted if Applicant is deleted
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        config = Configuration.objects.get(config_name="Backend")
+
+        backend = EmailBackend(host=config.email_host, port=config.email_port, username=config.email_username,
+                       password=config.email_password, use_tls=config.email_use_tls, fail_silently=config.fail_silently)
+        connection = get_connection(backend=backend)
+        if self.pk:
+            # So if the model already exists...
+            old_letter = ReferenceLetter.objects.get(pk=self.pk)
+            if old_letter.status == WAITING_LETTER and self.status == REQUESTED_LETTER:
+                htmly = get_template("reference-request-email.html")
+                context = Context({'requester': self})
+                html_content = htmly.render(context)
+                msg = EmailMessage('Reference Letter Request', html_content, config.email_host_user, [self.email],
+                                   connection=connection)
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
+            if self.letter:
+                # If letter file exists, then it is uploaded
+                self.status = LETTER_UPLOADED
+                # And send confirmation email
+                htmly = get_template("reference-confirmation.html")
+                context = Context({'requester': self})
+                html_content = htmly.render(context)
+                msg = EmailMessage('Reference Letter Request', html_content, config.email_host_user, [self.email],
+                                   connection=connection)
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
+        else:
+            if self.status != REQUESTED_LETTER and self.status != LETTER_UPLOADED:
+                htmly = get_template("reference-request-email.html")
+                context = Context({'requester': self})
+                html_content = htmly.render(context)
+                msg = EmailMessage('Reference Letter Request', html_content, config.email_host_user, [self.email],
+                                   connection=connection)
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
+                self.status = REQUESTED_LETTER
+        super(ReferenceLetter, self).save()
+
+    def __str__(self):
+        return self.applicant.applicant_name + " Letter"

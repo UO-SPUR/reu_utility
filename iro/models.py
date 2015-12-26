@@ -263,14 +263,22 @@ class ReferenceLetter(models.Model):
             if self.letter:
                 # If letter file exists, then it is uploaded
                 self.status = LETTER_UPLOADED
+                # And send confirmation email
+                htmly = get_template("reference-confirmation.html")
+                context = Context({'requester': self})
+                html_content = htmly.render(context)
+                msg = EmailMessage('Reference Letter Request', html_content, EMAIL_HOST_USER, [self.email])
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
         else:
-            htmly = get_template("reference-request-email.html")
-            context = Context({'requester': self})
-            html_content = htmly.render(context)
-            msg = EmailMessage('Reference Letter Request', html_content, EMAIL_HOST_USER, [self.email])
-            msg.content_subtype = "html"  # Main content is now text/html
-            msg.send()
-            self.status = REQUESTED_LETTER
+            if self.status != REQUESTED_LETTER and self.status != LETTER_UPLOADED:
+                htmly = get_template("reference-request-email.html")
+                context = Context({'requester': self})
+                html_content = htmly.render(context)
+                msg = EmailMessage('Reference Letter Request', html_content, EMAIL_HOST_USER, [self.email])
+                msg.content_subtype = "html"  # Main content is now text/html
+                msg.send()
+                self.status = REQUESTED_LETTER
         super(ReferenceLetter, self).save()
 
     def __str__(self):

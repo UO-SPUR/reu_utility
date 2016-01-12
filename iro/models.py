@@ -287,7 +287,7 @@ class IroSetup(models.Model):
         return self.program_name
 
 class Configuration(models.Model):
-    config_name = models.CharField(help_text="Do not Change this one!", max_length=6, default="Backend")
+    config_name = models.CharField(help_text="Do not Change this one!", max_length=10, default="Backend")
     email_use_tls = models.BooleanField(default=True)
     email_host = models.CharField(max_length=1024)
     email_host_user = models.CharField(max_length=255)

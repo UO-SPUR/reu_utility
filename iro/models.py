@@ -317,7 +317,7 @@ class ReferenceLetter(models.Model):
         config = Configuration.objects.get(config_name="Backend")
 
         backend = EmailBackend(host=config.email_host, port=config.email_port, username=config.email_username,
-                       password=config.email_password, use_tls=config.email_use_tls, fail_silently=config.fail_silently)
+                       password=config.email_password, use_ssl=config.email_use_tls, fail_silently=config.fail_silently)
         connection = get_connection(backend=backend)
         if self.pk:
             # So if the model already exists...

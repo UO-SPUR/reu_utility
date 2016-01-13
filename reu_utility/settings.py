@@ -117,9 +117,16 @@ STATIC_URL = '/static/'
 STATIC_ROOT = '/static_files/'
 
 #Email settings
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.uoregon.edu'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-DEFAULT_FROM_EMAIL = ''
+#EMAIL_USE_SSL = True
+#EMAIL_HOST = 'smtp.uoregon.edu'
+#EMAIL_PORT = 465
+#EMAIL_HOST_USER = ''
+#EMAIL_HOST_PASSWORD = ''
+#DEFAULT_FROM_EMAIL = ''
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'testing@example.com'

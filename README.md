@@ -19,6 +19,7 @@ The purpose of this project is to create an open-source, simple way to manage RE
 ## Downloading this project
 
 The simplest way to install this program from source is to make sure that Python 3 is installed, and download this project. Once the project is downloaded follow the steps below:
+
 1. Go into the folder containing the downloaded program
 2. Open up a Terminal or Command Prompt windows
 3. Type ```pip install -r requirements.txt``` to install Django and other required components

@@ -9,10 +9,10 @@ The purpose of this project is to create an open-source, simple way to manage RE
 
 # Installation
 ## Using pip
-
+### This is still being implemented
 1. Make sure Python 3 is installed
 2. Open up a Terminal or Command Prompt windows
-3. Type ```pip install django-iro``` to install Django and other required components
+3. Type ```pip install django-iro``` to install IRO
 4. Once Python is finished installing the dependencies, run ```python3 manage.py migrate``` to create the database
 5. To start the basic server, run ```python3 manage.py runserver```
 

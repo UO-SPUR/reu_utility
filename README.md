@@ -37,6 +37,7 @@ Authentication works like this:
 - Sign in as a superuser (e.g. program administrator) into the admin console
 - Find and click on Configuration
 - Change the entry named Backend to the appropriate values
+
 ## Authentication Schemes
 ## Fields
 ## Questions, Survey, Application

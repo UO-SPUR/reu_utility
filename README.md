@@ -8,11 +8,20 @@ by default.
 The purpose of this project is to create an open-source, simple way to manage REU programs, reducing the time needed for administration of said programs and allowing administrators, faculty, menotrs, and interns to spend more time on the research and other aspects of an REU program, instead of the paperwork side of things.
 
 # Installation
-## Simplest
-The simplest way to install this program is to make sure that Python 3 is installed, and download this project. Once the project is downloaded follow the steps below:
-1. go into the folder containing the downloaded program
-2. open up a Terminal or Command Prompt windows
-3. type ```pip install -r requirements.txt``` to install Django and other required components
+## Using pip
+
+1. Make sure Python 3 is installed
+2. Open up a Terminal or Command Prompt windows
+3. Type ```pip install django-iro``` to install Django and other required components
+4. Once Python is finished installing the dependencies, run ```python3 manage.py migrate``` to create the database
+5. To start the basic server, run ```python3 manage.py runserver```
+
+## Downloading this project
+
+The simplest way to install this program from source is to make sure that Python 3 is installed, and download this project. Once the project is downloaded follow the steps below:
+1. Go into the folder containing the downloaded program
+2. Open up a Terminal or Command Prompt windows
+3. Type ```pip install -r requirements.txt``` to install Django and other required components
 4. Once Python is finished installing the dependencies, run ```python3 manage.py migrate``` to create the database
 5. To start the basic server, run ```python3 manage.py runserver```
 

@@ -19,7 +19,7 @@ class ApplicantTestCase(TestCase):
                                  college_class=SOPHMORE,
                                  expected_graduation="06/12/2018",
                                  transfer="Johns Hopkins University",
-                                 gpa=3.7,
+                                 gpa=3.70,
                                  stem_gpa=3.87,
                                  major="Physics/Computer and Information Science",
                                  program=PROGRAM_1,
@@ -59,6 +59,7 @@ class ApplicantTestCase(TestCase):
                                  outside_interests="Hiking, photography, SCUBA, skiing, backpacking, skydiving",
                                  grades="PHYS 353, CIS 330, HC 222H, MATH 281"
                                  )
+
 
 
 class FacultyTestCase(TestCase):

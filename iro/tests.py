@@ -95,3 +95,12 @@ class ProgressReportTestCase(TestCase):
 class IroSetupTestCase(TestCase):
     def setUp(self):
         IroSetup.objects.create()
+
+class ReferenceLetterTestCase(TestCase):
+    def setUp(self):
+        ReferenceLetter.objects.create()
+
+class ApplicationTestCase(TestCase):
+    def setUp(self):
+        Applicant.objects.create()
+

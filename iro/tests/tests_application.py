@@ -33,7 +33,7 @@ class ApplicantTestCase(TestCase):
                                  research_career=PHD,
                                  gre_mcat=NO,
                                  advanced_degree=MASTERS,
-                                 phone_number=+15037544585,
+                                 phone_number=15037544585,
                                  cell_phone_number=5037544585,
                                  applicant_email="jacob@bieker.tech",
                                  street="1234 SE Orchard Ave",
@@ -59,6 +59,11 @@ class ApplicantTestCase(TestCase):
                                  grades="PHYS 353, CIS 330, HC 222H, MATH 281"
                                  )
 
+    def test_applicant_exists(self):
+        applicant = Applicant.objects.get(first_name="Jacob")
+        self.assertEqual(applicant.state(), "Oregon")
+        self.assertEqual(applicant.disadvantaged_other(), "")
+        self.assertEqual(applicant.phone_number(), 15037544585)
 
 class ReferenceLetterTestCase(TestCase):
     def setUp(self):

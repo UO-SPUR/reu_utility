@@ -65,6 +65,7 @@ class MentorTestCase(TestCase):
         self.assertEqual(mentor.user(), User.objects.get(username="iroMentor"))
         self.assertEqual(mentor.professor(), Faculty.objects.get(faculty_name="Robert Benolken"))
         self.assertEqual(mentor.mentor_name(), "Mentor One")
+        self.assertEqual(mentor.user.groups.filter(name="Mentor").exists(), True)
 
 
 class InternTestCase(TestCase):

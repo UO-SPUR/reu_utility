@@ -118,6 +118,17 @@ class ReferenceLetterTestCase(TestCase):
                                        institution="Bieker University",
                                        department="Institute of Theoretical Science",
                                        status=WAITING_LETTER)
+        ReferenceLetter.objects.create(name="Martha Bieker",
+                                       email="jacob@bieker.tech",
+                                       institution="OHSU",
+                                       department="Primate Research Lab",
+                                       status=WAITING_LETTER)
+        ReferenceLetter.objects.create(name="Robert Benolken",
+                                       email="jacob@bieker.tech",
+                                       institution="Bieker University",
+                                       department="Institute of Biology",
+                                       status=WAITING_LETTER)
+
 
 class ApplicationTestCase(TestCase):
     def setUp(self):

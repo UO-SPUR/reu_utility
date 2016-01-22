@@ -23,6 +23,11 @@ class FacultyTestCase(TestCase):
                                faculty_name="Robert Benolken",
                                institute=Institute.objects.get(city="Geneva"))
 
+    def test_faculty_exists(self):
+        faculty = Faculty.objects.get(faculty_name="Robert Benolken")
+        self.assertEqual(faculty.institute(), Institute.objects.get(city="Geneva"))
+        self.assertEqual(faculty.user(), User.objects.get(username="iroUtility"))
+        self.assertEqual(faculty.user.groups.filter(name="Faculty").exists(), True)
 
 class MentorTestCase(TestCase):
     def setUp(self):

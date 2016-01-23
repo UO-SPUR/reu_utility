@@ -1,7 +1,7 @@
 <p>Dear {{ requester.name }},</p>
 <p>The applicant {{ requester.applicant.applicant_name }} has requested a letter of reference.
-    Please click <a href="{% url 'reference-letter-upload' %}?uuid={{ requester.uuid }}">here</a> or copy the link below.</p>
+    Please click <a href="http://{{ site.domain }}{% url 'reference-letter-upload' %}?uuid={{ requester.uuid }}">here</a> or copy the link below.</p>
 <br />
-<p>{% url 'reference-letter-upload' %}?uuid={{ requester.uuid }}</p>
+<p>http://{{ site.domain }}{% url 'reference-letter-upload' %}?uuid={{ requester.uuid }}</p>
 <br />
 <p>Thank you</p>

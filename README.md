@@ -54,4 +54,4 @@ Authentication works like this:
 ## Colors, styling, etc
 
 # TODO
-PDF Generation, Correct email templates, CSS styling
+PDF Generation, Correct email templates, CSS styling, Tests, Documentation

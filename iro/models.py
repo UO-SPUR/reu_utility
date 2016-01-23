@@ -243,24 +243,29 @@ class ProgressReport(models.Model):
 
 
 class PISurvey(models.Model):
-    evaluator = models.CharField("Evaluator Name", help_text="Evaluator's name", max_length=50)
-    intern = models.CharField("Intern Name", help_text="Intern's name", max_length=50)
-    submission_date = models.DateField("Date of Submission", help_text="Submission Date")
+    evaluator = models.ForeignKey(Faculty, verbose_name="Evaluator Name", help_text="Evaluator's name", null=True,
+                                  on_delete=models.SET_NULL)
+    intern = models.ForeignKey(Intern, verbose_name="Intern Name", help_text="Intern's name", null=True,
+                               on_delete=models.SET_NULL)
+    submission_date = models.DateField("Date of Submission", help_text="Submission Date", auto_now=True)
     comments = models.TextField("Other Comments", help_text="Enter any comments here", null=True)
     # TODO Rest of the survey, including Intern, Mentor, and Program fields
 
 
 class InternSurvey(models.Model):
-    evaluator = models.CharField("Evaluator Name", help_text="Evaluator's name", max_length=50)
-    submission_date = models.DateField("Date of Submission", help_text="Submission Date")
+    evaluator = models.ForeignKey(Intern, verbose_name="Evaluator Name", help_text="Evaluator's name", null=True,
+                                  on_delete=models.SET_NULL)
+    submission_date = models.DateField("Date of Submission", help_text="Submission Date", auto_now=True)
     comments = models.TextField("Other Comments", help_text="Enter any comments here", null=True)
     # TODO Rest of the survey, including Overall experience, Lab Support, Porgram Support, Recreation and Living, Other
 
 
 class MentorSurvey(models.Model):
-    evaluator = models.CharField("Evaluator Name", help_text="Evaluator's name", max_length=50)
-    intern = models.CharField("Intern Name", help_text="Intern's name", max_length=50)
-    submission_date = models.DateField("Date of Submission", help_text="Submission Date")
+    evaluator = models.ForeignKey(Mentor, verbose_name="Evaluator Name", help_text="Evaluator's name", null=True,
+                                  on_delete=models.SET_NULL)
+    intern = models.ForeignKey(Intern, verbose_name="Intern", help_text="Intern's name", null=True,
+                               on_delete=models.SET_NULL)
+    submission_date = models.DateField("Date of Submission", help_text="Submission Date", auto_now=True)
     comments = models.TextField("Other Comments", help_text="Enter any comments here", null=True)
     # TODO Rest of the survey, including Overall Experience, Mentoring, Intern, PI Support, and Program
 
@@ -288,7 +293,7 @@ class IroSetup(models.Model):
 
 class Configuration(models.Model):
     config_name = models.CharField(help_text="Do not Change this one!", max_length=10, default="Backend")
-    email_use_tls = models.BooleanField(default=True)
+    email_use_ssl = models.BooleanField(default=True)
     email_host = models.CharField(max_length=1024)
     email_host_user = models.CharField(max_length=255)
     email_host_password = models.CharField(max_length=255)

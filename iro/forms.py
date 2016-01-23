@@ -3,17 +3,20 @@ __author__ = 'Jacob Bieker'
 from registration.forms import RegistrationForm
 from django import forms
 from iro.models import Institute, Faculty, Applicant, Mentor, Intern, ReferenceLetter, ProgressReport, PISurvey, \
-    MentorSurvey, InternSurvey,  Abstract
+    MentorSurvey, InternSurvey, Abstract
 from django.forms import ModelForm
+
 
 # Registration Forms
 class MentorRegistrationForm(RegistrationForm):
     mentor_name = forms.CharField(max_length=200)
     professor = forms.ModelMultipleChoiceField(queryset=Faculty.objects.all(), required=False)
 
+
 class FacultyRegistrationForm(RegistrationForm):
     faculty_name = forms.CharField(max_length=200)
     institute = forms.ModelChoiceField(queryset=Institute.objects.all())
+
 
 class InternRegistrationForm(RegistrationForm):
     application = forms.ModelChoiceField(queryset=Applicant.objects.all())
@@ -21,12 +24,14 @@ class InternRegistrationForm(RegistrationForm):
     professor = forms.ModelChoiceField(queryset=Faculty.objects.all(), required=False)
     mentors = forms.ModelMultipleChoiceField(queryset=Mentor.objects.all(), required=False)
 
+
 # Overview forms, for general editing of own user profile
 
 class FacultyOverviewForm(ModelForm):
     class Meta:
         model = Faculty
         fields = ['faculty_name', 'email_template', 'institute']
+
 
 # Mentor Overview form handled already by MentorForm
 
@@ -43,6 +48,8 @@ class InternOverviewForm(ModelForm):
                              'mentors', 'arrival_date', 'departure_date', 'symposium_session', 'picture']
         for field in uneditable_fields:
             self.fields[field].widget.attrs['readonly'] = 'true'
+
+
 # Model Forms
 
 class ReferenceLetterForm(ModelForm):
@@ -50,27 +57,33 @@ class ReferenceLetterForm(ModelForm):
         model = ReferenceLetter
         fields = ['letter']
 
+
 class ReferenceLetterRequestForm(ModelForm):
     class Meta:
         model = ReferenceLetter
         fields = ['name', 'email', 'institution', 'department']
+
 
 class ProgressReportForm(ModelForm):
     class Meta:
         model = ProgressReport
         fields = ['content', 'week']
 
-class PISurveryForm(ModelForm):
+
+class PISurveyForm(ModelForm):
     model = PISurvey
     fields = ["intern", "evaluator" "comments"]
+
 
 class MentorSurveyForm(ModelForm):
     model = MentorSurvey
     fields = ["intern", "evaluator", "comments"]
 
+
 class InternSurveyForm(ModelForm):
     model = InternSurvey
-    fields = ["evaulator", "comments"]
+    fields = ["evaluator", "comments"]
+
 
 class ApplicantForm(ModelForm):
     class Meta:
@@ -81,15 +94,18 @@ class ApplicantForm(ModelForm):
                    'application_completeness', 'correspondence', 'year_created',
                    'short_list', 'uuid']
 
+
 class FacultyForm(ModelForm):
     class Meta:
         model = Faculty
         fields = ['faculty_name', 'institute']
 
+
 class MentorForm(ModelForm):
     class Meta:
         model = Mentor
         fields = ['mentor_name', 'professor']
+
 
 class AbstractForm(ModelForm):
     class Meta:

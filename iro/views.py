@@ -207,12 +207,28 @@ def intern_overview(request):
     return render(request, 'intern-overview.html', {'input_form': form})
 
 
+@is_intern
+def intern_survey(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = InternSurveyForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+
+            form.save()
+            # redirect to a new URL:
+            return HttpResponseRedirect('/iro/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = InternSurveyForm()
+
+    return render(request, 'form-only.html', {'input_form': form})
+
 # Checks for User is part of Mentor
-
-@is_mentor
-def mentor_survey(request):
-    return render(request, 'form-only.html')
-
 
 @is_mentor
 def mentor_overview(request):
@@ -235,12 +251,48 @@ def mentor_overview(request):
 
     return render(request, 'mentor-overview.html', {'input_form': form})
 
+@is_mentor
+def mentor_survey(request):
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = MentorSurveyForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
 
+            form.save()
+            # redirect to a new URL:
+            return HttpResponseRedirect('/iro/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = MentorSurveyForm()
+
+    return render(request, 'form-only.html', {'input_form': form})
 # Checks for User is part of Faculty
 
 @is_faculty
 def faculty_survey(request):
-    return render(request, 'form-only.html')
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = PISurveyForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            # process the data in form.cleaned_data as required
+            # ...
+
+            form.save()
+            # redirect to a new URL:
+            return HttpResponseRedirect('/iro/thanks/')
+
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = PISurveyForm()
+
+    return render(request, 'form-only.html', {'input_form': form})
 
 
 @is_faculty

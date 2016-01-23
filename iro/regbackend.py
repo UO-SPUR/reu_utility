@@ -8,8 +8,8 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 
-class FacultyRegistrationView(RegistrationView):
 
+class FacultyRegistrationView(RegistrationView):
     form_class = FacultyRegistrationForm
 
     def register(self, request, form_class):
@@ -25,8 +25,8 @@ class FacultyRegistrationView(RegistrationView):
 
     post_save.connect(add_user_to_faculty_group, sender=Faculty, dispatch_uid="iro.regbackend.facultyRegistration")
 
-class MentorRegistrationView(RegistrationView):
 
+class MentorRegistrationView(RegistrationView):
     form_class = MentorRegistrationForm
 
     def register(self, request, form_class):
@@ -40,8 +40,8 @@ class MentorRegistrationView(RegistrationView):
 
     post_save.connect(add_user_to_mentor_group, sender=Mentor, dispatch_uid="iro.regbackend.mentorRegistration")
 
-class InternRegistrationView(RegistrationView):
 
+class InternRegistrationView(RegistrationView):
     form_class = InternRegistrationForm
 
     def register(self, request, form_class):

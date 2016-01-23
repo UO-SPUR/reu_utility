@@ -3,10 +3,11 @@ from django.http import HttpResponseRedirect, HttpResponse, QueryDict
 from iro.forms import *
 from django.contrib.auth.decorators import user_passes_test, login_required, permission_required
 from iro.choices import *
-#from weasyprint import HTML, CSS
+# from weasyprint import HTML, CSS
 from django.template.loader import get_template
 from django.template import RequestContext
 from iro.choices import *
+
 
 # Create your views here.
 
@@ -56,6 +57,7 @@ def get_application(request):
     return render(request, 'application.html', {'input_form': form, 'ref_letter_1': form2, 'ref_letter_2': form3,
                                                 'ref_letter_3': form4})
 
+
 def get_reference(request):
     # GET the uuid of the ReferenceLetter
     uuid = request.GET['uuid']
@@ -82,7 +84,6 @@ def get_reference(request):
 
 
 def thanks(request):
-
     uuid = request.GET['uuid']
     applicant = Applicant.objects.get(uuid=uuid)
 
@@ -126,13 +127,16 @@ def is_faculty(function=None):
     )
     return actual_decorator(function)
 
+
 def is_faculty_mentor(function=None):
     """Use this decorator to restrict access to
     authenticated users who are in the "Faculty" group."""
     actual_decorator = user_passes_test(
-        lambda u: u.is_authenticated() and (u.groups.filter(name=FACULTY_GROUP_NAME).exists() or u.groups.filter(name=MENTOR_GROUP_NAME).exists())
+        lambda u: u.is_authenticated() and (
+        u.groups.filter(name=FACULTY_GROUP_NAME).exists() or u.groups.filter(name=MENTOR_GROUP_NAME).exists())
     )
     return actual_decorator(function)
+
 
 # Checks for User is part of Intern
 
@@ -228,6 +232,7 @@ def intern_survey(request):
 
     return render(request, 'form-only.html', {'input_form': form})
 
+
 # Checks for User is part of Mentor
 
 @is_mentor
@@ -251,6 +256,7 @@ def mentor_overview(request):
 
     return render(request, 'mentor-overview.html', {'input_form': form})
 
+
 @is_mentor
 def mentor_survey(request):
     # if this is a POST request we need to process the form data
@@ -271,6 +277,8 @@ def mentor_survey(request):
         form = MentorSurveyForm()
 
     return render(request, 'form-only.html', {'input_form': form})
+
+
 # Checks for User is part of Faculty
 
 @is_faculty
@@ -324,6 +332,7 @@ def faculty_application_overview(request):
     # TODO: List applications, with the links being to another view that generates the PDFs of application/ Reference Letters
     return render(request, 'faculty_overview.html')
 
+
 '''
 @is_faculty
 def faculty_application_pdfs(request, applicant):
@@ -342,12 +351,12 @@ def faculty_application_pdfs(request, applicant):
     return http_response
 '''
 
+
 # Faculty and Mentor views
 
 # Non-PDF Applicant Info
 @is_faculty_mentor
 def application_view_html(request):
-
     uuid = request.GET['uuid']
     applicant = Applicant.objects.get(uuid=uuid)
 
@@ -358,11 +367,11 @@ def application_view_html(request):
 
     return http_response
 
+
 # Admin Views
 
 @permission_required('is_superuser')
 def admin_reference_letter_view(request):
-
     uuid = request.GET['uuid']
     applicant = Applicant.objects.get(uuid=uuid)
     reference_letters = applicant.referenceletter_set.all()
@@ -370,7 +379,8 @@ def admin_reference_letter_view(request):
     html_template = get_template('templates/admin-reference-letters.html')
 
     rendered_html = html_template.render(RequestContext(request, {'application': applicant,
-                                                                  'letters_of_reference': reference_letters})).encode(encoding="UTF-8")
+                                                                  'letters_of_reference': reference_letters})).encode(
+        encoding="UTF-8")
     http_response = HttpResponse(rendered_html)
 
     return http_response

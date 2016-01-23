@@ -257,7 +257,7 @@ class InternSurvey(models.Model):
                                   on_delete=models.SET_NULL)
     submission_date = models.DateField("Date of Submission", help_text="Submission Date", auto_now=True)
     comments = models.TextField("Other Comments", help_text="Enter any comments here", null=True)
-    # TODO Rest of the survey, including Overall experience, Lab Support, Porgram Support, Recreation and Living, Other
+    # TODO Rest of the survey, including Overall experience, Lab Support, Program Support, Recreation and Living, Other
 
 
 class MentorSurvey(models.Model):

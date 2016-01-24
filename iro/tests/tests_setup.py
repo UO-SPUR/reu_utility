@@ -5,9 +5,11 @@ from django.utils import timezone
 from iro.models import *
 from iro.choices import *
 
+
 class InstituteTestCase(TestCase):
     def setUp(self):
         Institute.objects.create()
+
 
 class IroSetupTestCase(TestCase):
     def setUp(self):

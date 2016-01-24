@@ -327,7 +327,8 @@ class ReferenceLetter(models.Model):
         config = Configuration.objects.get(config_name="Backend")
 
         backend = EmailBackend(host=config.email_host, port=config.email_port, username=config.email_username,
-                      password=config.email_password, use_ssl=config.email_use_tls, fail_silently=config.fail_silently)
+                               password=config.email_password, use_ssl=config.email_use_tls,
+                               fail_silently=config.fail_silently)
         connection = get_connection(backend=backend)
 
         # Full email
@@ -340,7 +341,7 @@ class ReferenceLetter(models.Model):
                 context = Context({'requester': self})
                 html_content = htmly.render(context)
                 msg = EmailMessage('Reference Letter Request', html_content, sending_email, [self.email],
-                      connection=connection)
+                                   connection=connection)
                 msg.content_subtype = "html"  # Main content is now text/html
                 msg.send()
             if self.letter:

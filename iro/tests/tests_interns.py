@@ -184,7 +184,23 @@ class ProgressReportTestCase(TestCase):
                             password="123456",
                             groups=Group.objects.get(name=INTERN_GROUP_NAME))
         Intern.objects.create(user=User.objects.get(username="iroIntern"),
-                              name=Applicant.objects.get(applicant_name="Jacob Bieker"),
+                              name=Applicant.objects.get(applicant_name="Jacob Bieker").name(),
                               professor=Faculty.objects.get(faculty_name="Robert Benolken"),
                               mentors=Mentor.objects.get(mentor_name="Mentor One"))
-        ProgressReport.objects.create()
+        ProgressReport.objects.create(intern=Intern.objects.get(professor=Faculty.objects
+                                                                .get(faculty_name="Robert Benolken")),
+                                      week=10,
+                                      content="This is a sample progress report.")
+
+    def test_progress_existence(self):
+        report = ProgressReport.objects.get(week=10)
+
+        self.assertEqual(report.content(), "This is a sample progress report.")
+
+    def test_change_progress_report(self):
+        report = ProgressReport.objects.get(week=10)
+
+        report.week = 5
+
+        self.assertEqual(report.week, 5)
+        self.assertEqual(report.content(), "This is a sample progress report.")

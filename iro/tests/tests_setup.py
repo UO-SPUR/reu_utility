@@ -32,3 +32,24 @@ class IroSetupTestCase(TestCase):
                                                  program_director="Jacob Bieker",
                                                  program_phone_number=5552221111), ValidationError)
 
+class ConfigurationTestCase(TestCase):
+    def test_configuration_creation(self):
+        configuration = Configuration.objects.create(email_use_ssl=True,
+                                                     email_host="uoregon.edu",
+                                                     email_host_user="summerpgms",
+                                                     email_host_password="123456",
+                                                     email_port=465,
+                                                     email_username="summerpgms",
+                                                     fail_silently=True)
+
+        self.assertEqual(configuration.email_use_ssl, True)
+        self.assertEqual(configuration.email_host, "uoregon.edu")
+
+        self.assertEqual(Configuration.objects.create(email_use_ssl=True,
+                                                      email_host="uoregon.edu",
+                                                      email_host_user="summerpgms",
+                                                      email_host_password="123456",
+                                                      email_port=465,
+                                                      email_username="summerpgms",
+                                                      fail_silently=True), ValidationError)
+

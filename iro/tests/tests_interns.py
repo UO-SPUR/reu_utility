@@ -95,7 +95,46 @@ class AbstractTestCase(TestCase):
                               name=Applicant.objects.get(applicant_name="Jacob Bieker"),
                               professor=Faculty.objects.get(faculty_name="Robert Benolken"),
                               mentors=Mentor.objects.get(mentor_name="Mentor One"))
-        Abstract.objects.create()
+
+    def test_abstract_creation(self):
+        intern = Intern.objects.get(user=User.objects.get(applicant_name="Jacob Bieker"))
+
+        abstract = Abstract.objects.create(title="Jacob's Ladder",
+                                           content="In this project, we looked at the world changing features of "
+                                                   "the Jacob's Ladder system.")
+
+        self.assertEqual(abstract.title, "Jacob's Ladder")
+        self.assertEqual(abstract.content, "In this project, we looked at the world changing features of "
+                                           "the Jacob's Ladder system.")
+
+    def test_abstract_change(self):
+        intern = Intern.objects.get(user=User.objects.get(applicant_name="Jacob Bieker"))
+
+        abstract = Abstract.objects.create(title="Jacob's Ladder",
+                                           content="In this project, we looked at the world changing features of "
+                                                   "the Jacob's Ladder system.")
+
+        abstract.content = "Jacob's Ladder System is amazing."
+
+        self.assertEqual(abstract.content, "Jacob's Ladder System is amazing.")
+
+        abstract.title = "Ladder of Jacob"
+
+        self.assertEqual(abstract.title, "Ladder of Jacob")
+
+    def test_abstract_to_intern(self):
+        intern = Intern.objects.get(user=User.objects.get(applicant_name="Jacob Bieker"))
+
+        abstract = Abstract.objects.create(title="Jacob's Ladder",
+                                           content="In this project, we looked at the world changing features of "
+                                                   "the Jacob's Ladder system.")
+
+        intern.abstract = abstract
+
+        self.assertEqual(intern.abstract.title, "Jacob's Ladder")
+        self.assertEqual(intern.abstract.content, "In this project, we looked at the world changing features of "
+                                                  "the Jacob's Ladder system.")
+
 
 
 class ProgressReportTestCase(TestCase):

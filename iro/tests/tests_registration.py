@@ -8,6 +8,7 @@ from iro.choices import *
 
 class FacultyTestCase(TestCase):
     def setUp(self):
+        Group.objects.create(name=FACULTY_GROUP_NAME)
         Institute.objects.create(name="Bieker Institute of Technology",
                                  street="Einstein Blvd",
                                  city="Geneva",
@@ -17,7 +18,7 @@ class FacultyTestCase(TestCase):
         User.objects.create(username="iroUtility",
                             email="no-reply@example.com",
                             password="123456",
-                            groups=Group.objects.get(name="Faculty")
+                            groups=Group.objects.get(name=FACULTY_GROUP_NAME)
                             )
         Faculty.objects.create(user=User.objects.get(username="iroUtility"),
                                faculty_name="Robert Benolken",
@@ -27,11 +28,13 @@ class FacultyTestCase(TestCase):
         faculty = Faculty.objects.get(faculty_name="Robert Benolken")
         self.assertEqual(faculty.institute(), Institute.objects.get(city="Geneva"))
         self.assertEqual(faculty.user(), User.objects.get(username="iroUtility"))
-        self.assertEqual(faculty.user.groups.filter(name="Faculty").exists(), True)
+        self.assertEqual(faculty.user.groups.filter(name=FACULTY_GROUP_NAME).exists(), True)
 
 
 class MentorTestCase(TestCase):
     def setUp(self):
+        Group.objects.create(name=FACULTY_GROUP_NAME)
+        Group.objects.create(name=MENTOR_GROUP_NAME)
         Institute.objects.create(name="Bieker Institute of Technology",
                                  street="Einstein Blvd",
                                  city="Geneva",
@@ -41,7 +44,7 @@ class MentorTestCase(TestCase):
         User.objects.create(username="iroUtility",
                             email="no-reply@example.com",
                             password="123456",
-                            groups=Group.objects.get(name="Faculty")
+                            groups=Group.objects.get(name=FACULTY_GROUP_NAME)
                             )
         Faculty.objects.create(user=User.objects.get(username="iroUtility"),
                                faculty_name="Robert Benolken",
@@ -49,7 +52,7 @@ class MentorTestCase(TestCase):
         User.objects.create(username="iroMentor",
                             email="no-reply@example.com",
                             password="123456",
-                            groups=Group.objects.get(name="Mentor"),
+                            groups=Group.objects.get(name=MENTOR_GROUP_NAME),
                             )
         Mentor.objects.create(user=User.objects.get(username="iroMentor"),
                               mentor_name="Mentor One",
@@ -60,16 +63,19 @@ class MentorTestCase(TestCase):
         mentor = Mentor.objects.get(mentor_name="Mentor One")
         self.assertEqual(faculty.institute(), Institute.objects.get(city="Geneva"))
         self.assertEqual(faculty.user(), User.objects.get(username="iroUtility"))
-        self.assertEqual(faculty.user.groups.filter(name="Faculty").exists(), True)
+        self.assertEqual(faculty.user.groups.filter(name=FACULTY_GROUP_NAME).exists(), True)
 
         self.assertEqual(mentor.user(), User.objects.get(username="iroMentor"))
         self.assertEqual(mentor.professor(), Faculty.objects.get(faculty_name="Robert Benolken"))
         self.assertEqual(mentor.mentor_name(), "Mentor One")
-        self.assertEqual(mentor.user.groups.filter(name="Mentor").exists(), True)
+        self.assertEqual(mentor.user.groups.filter(name=MENTOR_GROUP_NAME).exists(), True)
 
 
 class InternTestCase(TestCase):
     def setUp(self):
+        Group.objects.create(name=INTERN_GROUP_NAME)
+        Group.objects.create(name=FACULTY_GROUP_NAME)
+        Group.objects.create(name=MENTOR_GROUP_NAME)
         Applicant.objects.create(first_name="Jacob", last_name="Bieker",
                                  applicant_name="Jacob Bieker",
                                  date_of_birth="01/01/1996",
@@ -131,7 +137,7 @@ class InternTestCase(TestCase):
         User.objects.create(username="iroUtility",
                             email="no-reply@example.com",
                             password="123456",
-                            groups=Group.objects.get(name="Faculty")
+                            groups=Group.objects.get(name=FACULTY_GROUP_NAME)
                             )
         Faculty.objects.create(user=User.objects.get(username="iroUtility"),
                                faculty_name="Robert Benolken",
@@ -140,7 +146,7 @@ class InternTestCase(TestCase):
         User.objects.create(username="iroMentor",
                             email="no-reply@example.com",
                             password="123456",
-                            groups=Group.objects.get(name="Mentor"),
+                            groups=Group.objects.get(name=MENTOR_GROUP_NAME),
                             )
         Mentor.objects.create(user=User.objects.get(username="iroMentor"),
                               mentor_name="Mentor One",
@@ -149,6 +155,26 @@ class InternTestCase(TestCase):
         User.objects.create(username="iroIntern",
                             email="no-reply@example.com",
                             password="123456",
-                            groups=Group.objects.get(name="Intern"))
+                            groups=Group.objects.get(name=INTERN_GROUP_NAME))
         Intern.objects.create(user=User.objects.get(username="iroIntern"),
-                              name=Applicant.objects.get())
+                              name=Applicant.objects.get(applicant_name="Jacob Bieker"),
+                              professor=Faculty.objects.get(faculty_name="Robert Benolken"),
+                              mentors=Mentor.objects.get(mentor_name="Mentor One"))
+
+    def test_intern_exists(self):
+        faculty = Faculty.objects.get(faculty_name="Robert Benolken")
+        mentor = Mentor.objects.get(mentor_name="Mentor One")
+        intern = Intern.objects.get(applicant_name="Jacob Bieker")
+        self.assertEqual(faculty.institute(), Institute.objects.get(city="Geneva"))
+        self.assertEqual(faculty.user(), User.objects.get(username="iroUtility"))
+        self.assertEqual(faculty.user.groups.filter(name=FACULTY_GROUP_NAME).exists(), True)
+
+        self.assertEqual(mentor.user(), User.objects.get(username="iroMentor"))
+        self.assertEqual(mentor.professor(), Faculty.objects.get(faculty_name="Robert Benolken"))
+        self.assertEqual(mentor.mentor_name(), "Mentor One")
+        self.assertEqual(mentor.user.groups.filter(name=MENTOR_GROUP_NAME).exists(), True)
+
+        self.assertEqual(intern.user(), User.objects.get(username="iroMentor"))
+        self.assertEqual(intern.professor(), Faculty.objects.get(faculty_name="Robert Benolken"))
+        self.assertEqual(intern.name(), "Jacob Bieker")
+        self.assertEqual(intern.user.groups.filter(name=INTERN_GROUP_NAME).exists(), True)

@@ -27,6 +27,19 @@ class IroSetupTestCase(TestCase):
                                                  program_director="Jacob Bieker",
                                                  program_phone_number=5552221111), ValidationError)
 
+    def test_setup_files(self):
+        setup = IroSetup.objects.create(program_name="Summer Program For Undergraduate Research",
+                                        acronym="SPUR",
+                                        base_url="spur.uoregon.edu",
+                                        university_name="University of Oregon",
+                                        program_email="summerpgms@uoregon.edu",
+                                        program_director="Jacob Bieker",
+                                        program_phone_number=5552221111)
+
+        self.assertEqual(setup.acronym, "SPUR")
+
+        #TODO Add logo files to setup
+
 
 class ConfigurationTestCase(TestCase):
     def test_configuration_creation(self):

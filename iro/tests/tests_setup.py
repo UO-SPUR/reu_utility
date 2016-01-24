@@ -6,11 +6,6 @@ from iro.models import *
 from iro.choices import *
 
 
-class InstituteTestCase(TestCase):
-    def setUp(self):
-        Institute.objects.create()
-
-
 class IroSetupTestCase(TestCase):
     def test_setup_creation(self):
         setup = IroSetup.objects.create(program_name="Summer Program For Undergraduate Research",
@@ -32,6 +27,7 @@ class IroSetupTestCase(TestCase):
                                                  program_director="Jacob Bieker",
                                                  program_phone_number=5552221111), ValidationError)
 
+
 class ConfigurationTestCase(TestCase):
     def test_configuration_creation(self):
         configuration = Configuration.objects.create(email_use_ssl=True,
@@ -52,4 +48,3 @@ class ConfigurationTestCase(TestCase):
                                                       email_port=465,
                                                       email_username="summerpgms",
                                                       fail_silently=True), ValidationError)
-

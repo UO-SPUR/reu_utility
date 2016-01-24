@@ -196,3 +196,8 @@ class InternTestCase(TestCase):
         self.assertEqual(intern.institute, Institute.objects.get(city="Geneva"))
 
         #TODO test many to many mentor field
+
+    def test_intern_files(self):
+        intern = Intern.objects.get(applicant_name="Jacob Bieker")
+
+        #TODO uploading a picture file to the image field

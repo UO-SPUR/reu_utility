@@ -176,5 +176,23 @@ class InternTestCase(TestCase):
 
         self.assertEqual(intern.user(), User.objects.get(username="iroMentor"))
         self.assertEqual(intern.professor(), Faculty.objects.get(faculty_name="Robert Benolken"))
+        self.assertEqual(intern.mentors(), Mentor.objects.get(mentor_name="Mentor One"))
         self.assertEqual(intern.name(), "Jacob Bieker")
         self.assertEqual(intern.user.groups.filter(name=INTERN_GROUP_NAME).exists(), True)
+
+    def test_intern_urls(self):
+        intern = Intern.objects.get(applicant_name="Jacob Bieker")
+
+        intern.presentation_oral = "https://www.google.com"
+        intern.presentation_poster = "https://www.google.com"
+
+        self.assertEqual(intern.presentation_poster, "https://www.google.com")
+        self.assertEqual(intern.presentation_oral, "https://www.google.com")
+
+    def test_intern_foreign_keys(self):
+        intern = Intern.objects.get(applicant_name="Jacob Bieker")
+
+        intern.institute = Institute.objects.get(city="Geneva")
+        self.assertEqual(intern.institute, Institute.objects.get(city="Geneva"))
+
+        #TODO test many to many mentor field

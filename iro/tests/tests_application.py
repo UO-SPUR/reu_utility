@@ -144,7 +144,7 @@ class ApplicationTestCase(TestCase):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
 
-    def test_details(self):
+    def test_application(self):
         # Create an instance of a GET request.
         request = self.factory.get('/iro/application')
 
@@ -155,3 +155,34 @@ class ApplicationTestCase(TestCase):
         # Test my_view() as if it were deployed at /customer/details
         response = get_application(request)
         self.assertEqual(response.status_code, 200)
+
+        # Create an instance of a POST request
+
+        post = self.factory.post("/iro/application/", {'first_name': 'Jacob', 'last_name': 'Bieker',
+                                                       'applicant_name': 'Jacob Bieker', 'date_of_birth': '01/01/1996',
+                                                       'sex': MALE, 'ethnic_background': WHITE, 'disadvantaged': NO,
+                                                       'citizenship': AMERICAN, 'college': 'University of Oregon',
+                                                       'college_class': SOPHMORE, 'expected_graduation': '06/12/2018',
+                                                       'gpa': 3.81, 'stem_gpa': 4.00, 'major': 'Physics',
+                                                       'program': PROGRAM_1, 'available_start': '06/20/2018',
+                                                       'available_end': '08/20/2018',
+                                                       'relevant_coursework': 'Physics 251-3',
+                                                       'learned_of': INTERNET, 'previous_program': False,
+                                                       'marc_current': False, 'marc_past': False,
+                                                       'research_career': PHD, 'gre_mcat': NO,
+                                                       'advanced_degree': MASTERS, 'phone_number': 15554443322,
+                                                       'cell_phone_number': 5554443322,
+                                                       'applicant_email': 'jacob@bieker.tech',
+                                                       'street': '1234 Orchard Ave', 'city': 'Eugene',
+                                                       'state': 'Oregon', 'zipcode': '97403',
+                                                       'perm_street': '4321 NW Apple Ct', 'perm_city': 'Portland',
+                                                       'perm_state': 'Maine', 'perm_zipcode': '97086',
+                                                       'background': 'This is my background in research',
+                                                       'goals': 'Hope to get this published',
+                                                       'first_choice': CHOICE_1, 'first_choice_importance': HIGH,
+                                                       'second_choice': CHOICE_2, 'second_choice_importance': MEDIUM,
+                                                       'third_choice': CHOICE_3, 'third_choice_importance': LOW,
+                                                       'details': 'I am into computational physics',
+                                                       'lab_preferences': 'Imamura Lab, CDUX, O\'Day Lab, FisherGroup',
+                                                       'outside_interests': 'SCUBA, hiking, skiing, photography',
+                                                       'grades': 'PHYS 391, A'})

@@ -1,9 +1,11 @@
 __author__ = 'jacob'
 
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.utils import timezone
 from iro.models import *
 from iro.choices import *
+from django.contrib.auth.models import AnonymousUser, User
+from iro.views import *
 
 class ApplicantTestCase(TestCase):
     def setUp(self):
@@ -133,8 +135,23 @@ class ReferenceLetterTestCase(TestCase):
                                        institution="Bieker University",
                                        department="Institute of Biology",
                                        status=WAITING_LETTER)
+    def test_sending_reference_letter(self):
+        print("Create this")
 
 
 class ApplicationTestCase(TestCase):
     def setUp(self):
-        Applicant.objects.create()
+        # Every test needs access to the request factory.
+        self.factory = RequestFactory()
+
+    def test_details(self):
+        # Create an instance of a GET request.
+        request = self.factory.get('/iro/application')
+
+        # Or you can simulate an anonymous user by setting request.user to
+        # an AnonymousUser instance.
+        request.user = AnonymousUser()
+
+        # Test my_view() as if it were deployed at /customer/details
+        response = get_application(request)
+        self.assertEqual(response.status_code, 200)

@@ -186,3 +186,9 @@ class ApplicationTestCase(TestCase):
                                                        'lab_preferences': 'Imamura Lab, CDUX, O\'Day Lab, FisherGroup',
                                                        'outside_interests': 'SCUBA, hiking, skiing, photography',
                                                        'grades': 'PHYS 391, A'})
+
+        post.user = AnonymousUser()
+
+        # Test if the POST works
+        post_response = get_application(post)
+        self.assertEqual(post_response.status_code, 200)

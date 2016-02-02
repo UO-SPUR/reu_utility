@@ -6,6 +6,8 @@ from iro.models import *
 from iro.choices import *
 from django.contrib.auth.models import AnonymousUser, User
 from iro.views import *
+from django.core import mail
+
 
 class ApplicantTestCase(TestCase):
     def setUp(self):
@@ -66,6 +68,7 @@ class ApplicantTestCase(TestCase):
         self.assertEqual(applicant.state(), "Oregon")
         self.assertEqual(applicant.disadvantaged_other(), "")
         self.assertEqual(applicant.phone_number(), 15037544585)
+
 
 class ReferenceLetterTestCase(TestCase):
     def setUp(self):
@@ -135,7 +138,16 @@ class ReferenceLetterTestCase(TestCase):
                                        institution="Bieker University",
                                        department="Institute of Biology",
                                        status=WAITING_LETTER)
+
     def test_sending_reference_letter(self):
+        letter_one = ReferenceLetter.objects.get(name="Jacob Bieker")
+
+        letter_one.status = REQUESTED_LETTER
+        letter_one.save()
+
+        # Test that one message has been sent.
+        self.assertEqual(len(mail.outbox), 1)
+
         print("Create this")
 
 

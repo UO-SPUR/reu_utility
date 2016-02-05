@@ -111,6 +111,7 @@ class ApplicantForm(ModelForm):
         self.fields['lab_preferences'].required = False
         self.fields['outside_interests'].required = False
         self.fields['grades'].required = False
+        self.fields['transcript'].required = False
 
 
 class FacultyForm(ModelForm):

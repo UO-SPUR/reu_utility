@@ -94,6 +94,24 @@ class ApplicantForm(ModelForm):
                    'application_completeness', 'correspondence', 'year_created',
                    'short_list', 'uuid']
 
+    def __init__(self, *args, **kwargs):
+        super(ApplicantForm, self).__init__(*args, **kwargs)
+        self.fields['sex'].required = False
+        self.fields['ethnic_background'].required = False
+        self.fields['ethnic_background_other'].required = False
+        self.fields['disadvantaged'].required = False
+        self.fields['disadvantaged_other'].required = False
+        self.fields['transfer'].required = False
+        self.fields['relevant_coursework'].required = False
+        self.fields['previous_program_other'].required = False
+        self.fields['date_of_test'].required = False
+        self.fields['advanced_degree_other'].required = False
+        self.fields['other_choice'].required = False
+        self.fields['details'].required = False
+        self.fields['lab_preferences'].required = False
+        self.fields['outside_interests'].required = False
+        self.fields['grades'].required = False
+
 
 class FacultyForm(ModelForm):
     class Meta:

@@ -69,17 +69,17 @@ class Applicant(models.Model):
     applicant_name = models.CharField("Applicant Full Name", help_text="Enter your full name", max_length=200)
     date_of_birth = models.DateField("Applicant Date of Birth", help_text="Please choose date of birth")
     sex = models.CharField("Applicant Sex", help_text="Please choose your sex", max_length=6, choices=SEX_CHOICES,
-                           default=DECLINE, required=False)
+                           default=DECLINE)
     ethnic_background = models.CharField("Ethnic Background", help_text="Please choose your ethnic background",
-                                         max_length=30, choices=ETHNIC_CHOICES, default=OTHER, required=False)
+                                         max_length=30, choices=ETHNIC_CHOICES, default=OTHER)
     ethnic_background_other = models.CharField("Ethinc Background Other",
                                                help_text="If 'Multiracial' or 'Other', please explain",
-                                               max_length=150, default="", null=True, required=False)
+                                               max_length=150, default="", null=True)
     disadvantaged = models.CharField("Disadvantaged Status", help_text="Do you claim Disadvantaged Status?",
                                      max_length=25,
-                                     choices=DISADVANTAGED_CHOICES, default=NO, required=False)
+                                     choices=DISADVANTAGED_CHOICES, default=NO)
     disadvantaged_other = models.CharField("Disadvantaged Other", help_text="If 'Other or multiple', please explain",
-                                           max_length=200, default="", null=True, required=False)
+                                           max_length=200, default="", null=True)
     citizenship = models.CharField("Citizenship", help_text="Enter your citizenship", choices=CITIZEN_CHOICES,
                                    default=AMERICAN, max_length=100)
 
@@ -89,7 +89,7 @@ class Applicant(models.Model):
                                      default=FRESHMAN, max_length=15)
     expected_graduation = models.DateField("Expected Graduation", help_text="Choose your expected graduation time")
     transfer = models.CharField("Transfer?", help_text="If you transferred from another institution, please list.",
-                                max_length=100, default="", null=True, required=False)
+                                max_length=100, default="", null=True)
     gpa = models.FloatField("GPA", help_text="Please type your current GPA.")
     stem_gpa = models.FloatField("STEM GPA", help_text="Please enter your current STEM (Science, Technology, Engineerin"
                                                        "g, Math) GPA")
@@ -99,34 +99,33 @@ class Applicant(models.Model):
     available_start = models.DateField("Available Start Date", help_text="Choose what date you are available to start")
     available_end = models.DateField("Available End Date", help_text="Choose the last date you are available")
     relevant_coursework = models.CharField("Relevant Coursework", help_text="Course work relevant to program",
-                                           max_length=400, null=True, required=False)
+                                           max_length=400, null=True)
 
     ###### End College Info ####
 
     ###### Misc Info ########
     learned_of = models.CharField("Learned of Program", help_text="How did you learn about this program?",
-                                  choices=LEARNED_ABOUT_CHOICES, default=OTHER, max_length=15, required=False)
+                                  choices=LEARNED_ABOUT_CHOICES, default=OTHER, max_length=15)
     previous_program = models.BooleanField("Previous Program?",
-                                           help_text="Have you participated previously in a summer undergraduate "
-                                                     "research program at another institution?", required=False)
+                                           help_text="Have you participated previously in a summer undergraduate research program at another institution?")
     previous_program_other = models.CharField("Previous Program Other",
                                               help_text="If so, list name of the Program and Institution",
-                                              max_length=200, null=True, required=False)
-    marc_current = models.BooleanField("MARC?", help_text="Are you currently a MARC Scholar?", required=False)
-    marc_past = models.BooleanField("MARC (past)?", help_text="Did you used to be a MARC Scholar?", required=False)
+                                              max_length=200, null=True)
+    marc_current = models.BooleanField("MARC?", help_text="Are you currently a MARC Scholar?")
+    marc_past = models.BooleanField("MARC (past)?", help_text="Did you used to be a MARC Scholar?")
     research_career = models.CharField("Research Career?", help_text="Do you want to pursue a career in research?",
-                                       choices=RESEARCH_LIFE_CHOICES, default=UNSURE, max_length=6, required=False)
+                                       choices=RESEARCH_LIFE_CHOICES, default=UNSURE, max_length=6)
     gre_mcat = models.CharField("GRE/MCAT",
                                 help_text="Do you plan to take the GRE, MCAT or other graduate/professional school admissions standardized exam?",
-                                choices=EXAM_CHOICES, default=NO, max_length=6, required=False)
+                                choices=EXAM_CHOICES, default=NO, max_length=6)
     date_of_test = models.DateField("GRE/MCAT Date", help_text="When did you take the GRE/MCAT (if applicable)?",
-                                    null=True, required=False)
+                                    null=True)
 
     ########### Degree section of application model ##############
     advanced_degree = models.CharField("Advanced Degree", max_length=50,
-                                       choices=ADVANCED_DEGREE_CHOICES, default=OTHER_DEGREE, required=False)
+                                       choices=ADVANCED_DEGREE_CHOICES, default=OTHER_DEGREE)
     advanced_degree_other = models.CharField("Other Advanced Degree", help_text="If 'Other', please specify",
-                                             max_length=20, default="", null=True, required=False)
+                                             max_length=20, default="", null=True)
     ########## End Degree Section ###################################
 
     ###### End Misc Info ####
@@ -178,21 +177,19 @@ class Applicant(models.Model):
                                     choices=SCIENCE_CHOICE, default=CHOICE_1, max_length=50)
     third_choice_importance = models.CharField("3rd Importance", help_text="How important is this choice?",
                                                choices=IMPORTANCE_CHOICES, default=MEDIUM, max_length=12)
-    other_choice = models.CharField("Other Choice", help_text="Others?", max_length=100, default="", null=True,
-                                    required=False)
+    other_choice = models.CharField("Other Choice", help_text="Others?", max_length=100, default="", null=True)
     details = models.TextField("Details", help_text="(Optional) Please give a more detailed description of your "
                                                     "research interests: Are your interests broad? Have you "
                                                     "narrowed them down? Do you have defined interests in "
-                                                    "several areas?", null=True, required=False)
+                                                    "several areas?", null=True)
     lab_preferences = models.TextField("Lab Preferences", help_text="After viewing the participating laboratories, "
                                                                     "please list a few laboratories for which you "
-                                                                    "might have a preference (if any).", null=True,
-                                       required=False)
+                                                                    "might have a preference (if any).", null=True)
     outside_interests = models.TextField("Outside Activites", help_text="(Optional) Describe your outside interests "
-                                                                        "and activities.", null=True, required=False)
+                                                                        "and activities.", null=True)
     grades = models.TextField("Grades/Classes", help_text="Paste or type your classes and grades here -- (as neatly "
                                                           "as possible; no official transcripts or images; please "
-                                                          "include courses you are currently taking)", required=False)
+                                                          "include courses you are currently taking)")
     ########## End Question Fields and preferences ############################################
 
     ######### Administrative fields ###########################################################

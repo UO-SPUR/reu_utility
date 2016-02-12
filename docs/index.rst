@@ -7,7 +7,7 @@ Welcome to Interface For Research Opportunities's documentation!
 ================================================================
 The Interface For Research Opportunities (IRO) application is designed to simplify and improve the
 administration of primarily Research Experience For Undergraduates (REU) programs, although should be flexible enough
-for similar programs as well. This is the project of the Summer Program For Undergraduate Research (SPUR) of the
+for similar programs as well. This is a project of the Summer Program For Undergraduate Research (SPUR) of the
 Institute of Neuroscience at the University of Oregon.
 
 
@@ -24,4 +24,6 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+* :ref:`faq`
+* :ref:`forms`
 

@@ -5,7 +5,7 @@ Built on Django, this implementation of the original REU utility, located here: 
 by default. 
 
 # Purpose
-The purpose of this project is to create an open-source, simple way to manage REU programs, reducing the time needed for administration of said programs and allowing administrators, faculty, menotrs, and interns to spend more time on the research and other aspects of an REU program, instead of the paperwork side of things.
+The purpose of this project is to create an open-source, simple way to manage REU programs, reducing the time needed for administration of said programs and allowing administrators, faculty, mentors, and interns to spend more time on the research and other aspects of an REU program, instead of the paperwork side of things.
 
 # Installation
 ## Using pip

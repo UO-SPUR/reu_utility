@@ -9,7 +9,7 @@ The Interface For Research Opportunities (IRO) application is designed to simpli
 administration of Research Experience For Undergraduates (REU) programs, although should be flexible enough
 for similar programs as well. This is a project of the `Summer Program For Undergraduate Research <https://uospur.uoregon.edu/>`_
 (SPUR) of the `Institute of Neuroscience <https://www.neuro.uoregon.edu/>`_ at the `University of Oregon <https://uoregon.edu/>`_.
-Designed and developed by `Jacob Bieker <https://www.jacobbieker.com/>`_
+Designed and developed by `Jacob Bieker <https://www.jacobbieker.com/>`_.
 
 
 Contents:

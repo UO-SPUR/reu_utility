@@ -70,4 +70,4 @@ Application
 The Application is the basis for the whole REU system. It is what tells the utility to send the Reference Letters to,
 each Application is linked to an Intern, with many of the Intern fields being auto-filled by Application data.
 
-Here are the
+Here are the steps that must be followed for an Application to be submitted successfully.

@@ -62,3 +62,12 @@ To add an intern to the utility:
 #. They can follow that link to the url '<your-university>/accounts/register/interns/?uuid=<unique id for application>'
 #. Once they fill out the Intern registration form, the procedure is the same as for :ref:`add-mentor` and :ref:`add-faculty`
 
+.. _application:
+
+Application
+-----------
+
+The Application is the basis for the whole REU system. It is what tells the utility to send the Reference Letters to,
+each Application is linked to an Intern, with many of the Intern fields being auto-filled by Application data.
+
+Here are the

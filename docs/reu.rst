@@ -71,3 +71,11 @@ The Application is the basis for the whole REU system. It is what tells the util
 each Application is linked to an Intern, with many of the Intern fields being auto-filled by Application data.
 
 Here are the steps that must be followed for an Application to be submitted successfully.
+
+#. Navigate to '<your-university>/iro/application'
+#. Fill out the application
+#. For Reference Letters, fill all the fields, as the generated email takes that information
+#. Press submit
+#. If not redirected to the Thank You Page, there is an error in the application that needs to be fixed
+
+

@@ -27,7 +27,6 @@ as well as using ``pip`` to install it.
     * Run ``vagrant up`` to build the virtual machine
 
 .. _initial-setup:
-
 Initial Setup
 -------------
 

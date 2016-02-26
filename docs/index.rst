@@ -25,6 +25,6 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-* :ref:`installation`
+* :ref:`getting-started`
 * :ref:`faq`
 

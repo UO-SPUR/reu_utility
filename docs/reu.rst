@@ -1,3 +1,6 @@
+Research Experience For Undergraduates (REU) Setup
+==================================================
+
 .. _prepare-for-reu:
 
 Preparing for REU:

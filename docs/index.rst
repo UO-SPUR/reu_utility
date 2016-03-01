@@ -19,7 +19,7 @@ Contents:
 
    getting-started
    faq
-   Research Experience for Undergraduates (REU) <reu>
+   reu
    authentication
    registration
    troubleshooting

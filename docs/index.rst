@@ -17,6 +17,18 @@ Contents:
 .. toctree::
    :maxdepth: 2
 
+   getting-started
+   faq
+   reu
+   authentication
+   registration
+   troubleshooting
+   forms
+   groups
+   choices
+   models
+   templates
+   users
 
 
 Indices and tables

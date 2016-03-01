@@ -19,7 +19,7 @@ Contents:
 
    getting-started
    faq
-   reu
+   Research Experience for Undergraduates (REU) <reu>
    authentication
    registration
    troubleshooting
@@ -37,6 +37,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-* :ref:`getting-started`
-* :ref:`faq`
-

@@ -3,8 +3,8 @@ Research Experience For Undergraduates (REU) Setup
 
 .. _prepare-for-reu:
 
-Preparing for REU:
-------------------
+Preparing for REU
+-----------------
 
 A few steps have to be completed before the utility is ready for prime time. They include adding institutions, changing
 some choices for the application, and adding Faculty and Mentors, among others.

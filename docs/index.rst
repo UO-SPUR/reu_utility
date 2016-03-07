@@ -23,6 +23,7 @@ Contents:
    authentication
    registration
    troubleshooting
+   customization
    forms
    groups
    choices

@@ -27,3 +27,11 @@ Models
 
 To customize models, take a look at the :ref:`models.rst` page.
 
+.. _customize-url:
+URLs
+----
+
+To customize URLs, take a look at the ``urls.py`` file in ``iro/urls.py`` as well as ``reu_utility/urls.py``.
+
+
+

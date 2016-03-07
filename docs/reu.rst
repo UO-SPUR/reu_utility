@@ -31,7 +31,7 @@ Adding a Faculty
 
 To add a researcher, PI, faculty member, or whomever is going to be a PI for an intern, a Faculty user has to be created.
 
-#. Once the relevant Institutes are created, direct the faculty members to the URL '<your university>/accounts/register/faculty'
+#. Once the relevant Institutes are created, direct the faculty members to the URL ``<your university>/accounts/register/faculty``
 #. Have the Faculty member fill out the form and submit it.
 #. Make sure the Faculty member activates their account by clicking on a link sent to them in an activation email.
 #. Congratulations! The Faculty member is now part of the utility! They should be visible under the 'Facultys' section of the
@@ -44,7 +44,7 @@ Adding a Mentor
 
 To add a mentor, a Mentor user has to be created. This follows very similar steps to :ref:`add-faculty`.
 
-#. Once the relevant Faculty are created, direct the mentors to the URL '<your university>/accounts/register/mentors'
+#. Once the relevant Faculty are created, direct the mentors to the URL ``<your university>/accounts/register/mentors``
 #. Have the Mentor fill out the form and submit it.
 #. Make sure the Mentor activates their account by clicking on a link sent to them in an activation email.
 #. Congratulations! The Mentor is now part of the utility and Interns can be assigned to them. They should be visible under
@@ -62,7 +62,7 @@ To add an intern to the utility:
 #. Choose the Application corresponding to the new Intern.
 #. On the Application overview, change the 'Decision Action' to 'Yes'
 #. An email will be sent to the Applicant's email.
-#. They can follow that link to the url '<your-university>/accounts/register/interns/?uuid=<unique id for application>'
+#. They can follow that link to the url ``<your-university>/accounts/register/interns/?uuid=<unique id for application>``
 #. Once they fill out the Intern registration form, the procedure is the same as for :ref:`add-mentor` and :ref:`add-faculty`
 
 .. _application:
@@ -75,7 +75,7 @@ each Application is linked to an Intern, with many of the Intern fields being au
 
 Here are the steps that must be followed for an Application to be submitted successfully.
 
-#. Navigate to '<your-university>/iro/application'
+#. Navigate to ``<your-university>/iro/application``
 #. Fill out the application
 #. For Reference Letters, fill all the fields, as the generated email takes that information
 #. Press submit

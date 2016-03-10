@@ -2,12 +2,33 @@ Templates
 =========
 
 .. _template-email:
-Email
------
+Emails
+------
 
 .. _template-lor:
 Letter of Reference
--------------------
++++++++++++++++++++
+
+.. _template-lor-confirm:
+LOR Confirmation
+++++++++++++++++
+
+.. _template-correspondence:
+Correspondence
+++++++++++++++
+
+.. _template-accepted:
+Accepted
+++++++++
+
+.. _template-waitlist:
+Waitlist
+++++++++
+
+.. _template-regrets:
+Regrets
++++++++
+
 
 .. _template-html:
 HTML
@@ -37,7 +58,14 @@ Registration Pages
 Thanks Page
 +++++++++++
 
-.. _template_forms:
+.. _template-forms:
 Form Pages
 ++++++++++
 
+.. _template-404:
+404 Page
+++++++++
+
+.. _template-authentication:
+Authentication Pages
+++++++++++++++++++++

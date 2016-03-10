@@ -15,3 +15,9 @@ The main way of restricting access of users to sensitive parts of the site is by
 a valid group with access to the page. For example, to access to Intern Overview Page, the user must be logged in and their
 profile must be a member of the group Faculty or Mentor.
 
+.. _authenitication-customize:
+Changing Methods
+----------------
+
+To modify how IRO restricts access of specific pages to users, follow the following steps.
+

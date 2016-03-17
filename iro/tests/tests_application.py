@@ -123,6 +123,8 @@ class ReferenceLetterTestCase(TestCase):
                                  outside_interests="Hiking, photography, SCUBA, skiing, backpacking, skydiving",
                                  grades="PHYS 353, CIS 330, HC 222H, MATH 281"
                                  )
+
+    def test_sending_reference_letter(self):
         ReferenceLetter.objects.create(name="Jacob Bieker",
                                        email="jacob@bieker.tech",
                                        institution="Bieker University",
@@ -138,8 +140,6 @@ class ReferenceLetterTestCase(TestCase):
                                        institution="Bieker University",
                                        department="Institute of Biology",
                                        status=WAITING_LETTER)
-
-    def test_sending_reference_letter(self):
         letter_one = ReferenceLetter.objects.get(name="Jacob Bieker")
 
         letter_one.status = REQUESTED_LETTER

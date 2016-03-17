@@ -57,14 +57,14 @@ class MentorTestCase(TestCase):
                               mentor_name="Mentor One")
         faculty = Faculty.objects.get(faculty_name="Robert Benolken")
         mentor = Mentor.objects.get(mentor_name="Mentor One")
-        mentor.professor = faculty
-        self.assertEqual(faculty.institute(), Institute.objects.get(city="Geneva"))
-        self.assertEqual(faculty.user(), User.objects.get(username="iroUtility"))
+        mentor.professor.add(faculty)
+        self.assertEqual(faculty.institute, Institute.objects.get(city="Geneva"))
+        self.assertEqual(faculty.user, User.objects.get(username="iroUtility"))
         self.assertEqual(faculty.user.groups.filter(name=FACULTY_GROUP_NAME).exists(), True)
 
-        self.assertEqual(mentor.user(), User.objects.get(username="iroMentor"))
-        self.assertEqual(mentor.professor(), Faculty.objects.get(faculty_name="Robert Benolken"))
-        self.assertEqual(mentor.mentor_name(), "Mentor One")
+        self.assertEqual(mentor.user, User.objects.get(username="iroMentor"))
+        self.assertEqual(mentor.professor, Faculty.objects.get(faculty_name="Robert Benolken"))
+        self.assertEqual(mentor.mentor_name, "Mentor One")
         self.assertEqual(mentor.user.groups.filter(name=MENTOR_GROUP_NAME).exists(), True)
 
 
@@ -138,6 +138,7 @@ class InternTestCase(TestCase):
         Faculty.objects.create(user=User.objects.get(username="iroUtility"),
                                faculty_name="Robert Benolken",
                                institute=Institute.objects.get(city="Geneva"))
+
         ######### Create Mentor User and Object ##############
         User.objects.create(username="iroMentor",
                             email="no-reply@example.com",
@@ -145,7 +146,7 @@ class InternTestCase(TestCase):
                             )
         Mentor.objects.create(user=User.objects.get(username="iroMentor"),
                               mentor_name="Mentor One",
-                              professor=Faculty.objects.get(faculty_name="Robert Benolken"))
+                              )
         ######### Create Intern User and Object ###############
         User.objects.create(username="iroIntern",
                             email="no-reply@example.com",
@@ -154,12 +155,14 @@ class InternTestCase(TestCase):
         Intern.objects.create(user=User.objects.get(username="iroIntern"),
                               name=Applicant.objects.get(applicant_name="Jacob Bieker"),
                               professor=Faculty.objects.get(faculty_name="Robert Benolken"),
-                              mentors=Mentor.objects.get(mentor_name="Mentor One"))
+                              )
 
     def test_intern_exists(self):
         faculty = Faculty.objects.get(faculty_name="Robert Benolken")
         mentor = Mentor.objects.get(mentor_name="Mentor One")
-        intern = Intern.objects.get(applicant_name="Jacob Bieker")
+        intern = Intern.objects.get(user=User.objects.get(username="iroIntern"))
+        intern.mentors.add(mentor)
+        mentor.professor.add(faculty)
         self.assertEqual(faculty.institute(), Institute.objects.get(city="Geneva"))
         self.assertEqual(faculty.user(), User.objects.get(username="iroUtility"))
         self.assertEqual(faculty.user.groups.filter(name=FACULTY_GROUP_NAME).exists(), True)
@@ -176,7 +179,11 @@ class InternTestCase(TestCase):
         self.assertEqual(intern.user.groups.filter(name=INTERN_GROUP_NAME).exists(), True)
 
     def test_intern_urls(self):
-        intern = Intern.objects.get(applicant_name="Jacob Bieker")
+        faculty = Faculty.objects.get(faculty_name="Robert Benolken")
+        mentor = Mentor.objects.get(mentor_name="Mentor One")
+        intern = Intern.objects.get(user=User.objects.get(username="iroIntern"))
+        intern.mentors.add(mentor)
+        mentor.professor.add(faculty)
 
         intern.presentation_oral = "https://www.google.com"
         intern.presentation_poster = "https://www.google.com"
@@ -185,7 +192,11 @@ class InternTestCase(TestCase):
         self.assertEqual(intern.presentation_oral, "https://www.google.com")
 
     def test_intern_foreign_keys(self):
-        intern = Intern.objects.get(applicant_name="Jacob Bieker")
+        faculty = Faculty.objects.get(faculty_name="Robert Benolken")
+        mentor = Mentor.objects.get(mentor_name="Mentor One")
+        intern = Intern.objects.get(user=User.objects.get(username="iroIntern"))
+        intern.mentors.add(mentor)
+        mentor.professor.add(faculty)
 
         intern.institute = Institute.objects.get(city="Geneva")
         self.assertEqual(intern.institute, Institute.objects.get(city="Geneva"))
@@ -193,6 +204,10 @@ class InternTestCase(TestCase):
         #TODO test many to many mentor field
 
     def test_intern_files(self):
-        intern = Intern.objects.get(applicant_name="Jacob Bieker")
+        faculty = Faculty.objects.get(faculty_name="Robert Benolken")
+        mentor = Mentor.objects.get(mentor_name="Mentor One")
+        intern = Intern.objects.get(user=User.objects.get(username="iroIntern"))
+        intern.mentors.add(mentor)
+        mentor.professor.add(faculty)
 
         #TODO uploading a picture file to the image field

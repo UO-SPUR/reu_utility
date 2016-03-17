@@ -83,7 +83,9 @@ class AbstractTestCase(TestCase):
                             )
         Mentor.objects.create(user=User.objects.get(username="iroMentor"),
                               mentor_name="Mentor One",
-                              professor=Faculty.objects.get(faculty_name="Robert Benolken"))
+                              )
+        mentor = Mentor.objects.get(mentor_name="Mentor One")
+        mentor.professor.add(Faculty.objects.get(faculty_name="Robert Benolken"))
         ######### Create Intern User and Object ###############
         User.objects.create(username="iroIntern",
                             email="no-reply@example.com",
@@ -92,10 +94,12 @@ class AbstractTestCase(TestCase):
         Intern.objects.create(user=User.objects.get(username="iroIntern"),
                               name=Applicant.objects.get(applicant_name="Jacob Bieker"),
                               professor=Faculty.objects.get(faculty_name="Robert Benolken"),
-                              mentors=Mentor.objects.get(mentor_name="Mentor One"))
+                              )
+        intern = Intern.objects.get(professor=Faculty.objects.get(faculty_name="Robert Benolken"))
+        intern.mentors.add(Mentor.objects.get(mentor_name="Mentor One"))
 
     def test_abstract_creation(self):
-        intern = Intern.objects.get(user=User.objects.get(applicant_name="Jacob Bieker"))
+        intern = Intern.objects.get(user=User.objects.get(username="iroIntern"))
 
         abstract = Abstract.objects.create(title="Jacob's Ladder",
                                            content="In this project, we looked at the world changing features of "
@@ -106,7 +110,7 @@ class AbstractTestCase(TestCase):
                                            "the Jacob's Ladder system.")
 
     def test_abstract_change(self):
-        intern = Intern.objects.get(user=User.objects.get(applicant_name="Jacob Bieker"))
+        intern = Intern.objects.get(user=User.objects.get(username="iroIntern"))
 
         abstract = Abstract.objects.create(title="Jacob's Ladder",
                                            content="In this project, we looked at the world changing features of "
@@ -121,7 +125,7 @@ class AbstractTestCase(TestCase):
         self.assertEqual(abstract.title, "Ladder of Jacob")
 
     def test_abstract_to_intern(self):
-        intern = Intern.objects.get(user=User.objects.get(applicant_name="Jacob Bieker"))
+        intern = Intern.objects.get(user=User.objects.get(username="iroIntern"))
 
         abstract = Abstract.objects.create(title="Jacob's Ladder",
                                            content="In this project, we looked at the world changing features of "
@@ -212,16 +216,20 @@ class ProgressReportTestCase(TestCase):
                             )
         Mentor.objects.create(user=User.objects.get(username="iroMentor"),
                               mentor_name="Mentor One",
-                              professor=Faculty.objects.get(faculty_name="Robert Benolken"))
+                              )
+        mentor = Mentor.objects.get(mentor_name="Mentor One")
+        mentor.professor.add(Faculty.objects.get(faculty_name="Robert Benolken"))
         ######### Create Intern User and Object ###############
         User.objects.create(username="iroIntern",
                             email="no-reply@example.com",
                             password="123456",
                             )
         Intern.objects.create(user=User.objects.get(username="iroIntern"),
-                              name=Applicant.objects.get(applicant_name="Jacob Bieker").name(),
+                              name=Applicant.objects.get(applicant_name="Jacob Bieker"),
                               professor=Faculty.objects.get(faculty_name="Robert Benolken"),
-                              mentors=Mentor.objects.get(mentor_name="Mentor One"))
+                              )
+        intern = Intern.objects.get(user=User.objects.get(username="iroIntern"))
+        intern.mentors.add(Mentor.objects.get(mentor_name="Mentor One"))
         ProgressReport.objects.create(intern=Intern.objects.get(professor=Faculty.objects
                                                                 .get(faculty_name="Robert Benolken")),
                                       week=10,

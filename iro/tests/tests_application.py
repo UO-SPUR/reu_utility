@@ -13,21 +13,21 @@ class ApplicantTestCase(TestCase):
     def setUp(self):
         Applicant.objects.create(first_name="Jacob", last_name="Bieker",
                                  applicant_name="Jacob Bieker",
-                                 date_of_birth="01/01/1996",
+                                 date_of_birth="1996-01-01",
                                  sex=MALE,
                                  ethnic_background=WHITE,
                                  disadvantaged=NO,
                                  citizenship=AMERICAN,
                                  college="University of Oregon",
                                  college_class=SOPHMORE,
-                                 expected_graduation="06/12/2018",
+                                 expected_graduation="2018-06-20",
                                  transfer="Johns Hopkins University",
                                  gpa=3.70,
                                  stem_gpa=3.87,
                                  major="Physics/Computer and Information Science",
                                  program=PROGRAM_1,
-                                 available_start="06/20/2016",
-                                 available_end="08/20/2016",
+                                 available_start="2016-06-20",
+                                 available_end="2016-08-20",
                                  relevant_coursework="Physics 251-3, Physics 351-3, CIS 313-5, CIS 330, PHYS 391",
                                  learned_of=INTERNET,
                                  previous_program=True,
@@ -65,30 +65,30 @@ class ApplicantTestCase(TestCase):
 
     def test_applicant_exists(self):
         applicant = Applicant.objects.get(first_name="Jacob")
-        self.assertEqual(applicant.state(), "Oregon")
-        self.assertEqual(applicant.disadvantaged_other(), "")
-        self.assertEqual(applicant.phone_number(), 15037544585)
+        self.assertEqual(applicant.state, "Oregon")
+        self.assertEqual(applicant.disadvantaged_other, "")
+        self.assertEqual(applicant.phone_number, 15037544585)
 
 
 class ReferenceLetterTestCase(TestCase):
     def setUp(self):
         Applicant.objects.create(first_name="Jacob", last_name="Bieker",
                                  applicant_name="Jacob Bieker",
-                                 date_of_birth="01/01/1996",
+                                 date_of_birth="1996-01-01",
                                  sex=MALE,
                                  ethnic_background=WHITE,
                                  disadvantaged=NO,
                                  citizenship=AMERICAN,
                                  college="University of Oregon",
                                  college_class=SOPHMORE,
-                                 expected_graduation="06/12/2018",
+                                 expected_graduation="2018-06-20",
                                  transfer="Johns Hopkins University",
                                  gpa=3.70,
                                  stem_gpa=3.87,
                                  major="Physics/Computer and Information Science",
                                  program=PROGRAM_1,
-                                 available_start="06/20/2016",
-                                 available_end="08/20/2016",
+                                 available_start="2016-06-20",
+                                 available_end="2016-08-20",
                                  relevant_coursework="Physics 251-3, Physics 351-3, CIS 313-5, CIS 330, PHYS 391",
                                  learned_of=INTERNET,
                                  previous_program=True,
@@ -171,13 +171,13 @@ class ApplicationTestCase(TestCase):
         # Create an instance of a POST request
 
         post = self.factory.post("/iro/application/", {'first_name': 'Jacob', 'last_name': 'Bieker',
-                                                       'applicant_name': 'Jacob Bieker', 'date_of_birth': '01/01/1996',
+                                                       'applicant_name': 'Jacob Bieker', 'date_of_birth': '1996-01-01',
                                                        'sex': MALE, 'ethnic_background': WHITE, 'disadvantaged': NO,
                                                        'citizenship': AMERICAN, 'college': 'University of Oregon',
-                                                       'college_class': SOPHMORE, 'expected_graduation': '06/12/2018',
+                                                       'college_class': SOPHMORE, 'expected_graduation': '2018-06-20',
                                                        'gpa': 3.81, 'stem_gpa': 4.00, 'major': 'Physics',
-                                                       'program': PROGRAM_1, 'available_start': '06/20/2018',
-                                                       'available_end': '08/20/2018',
+                                                       'program': PROGRAM_1, 'available_start': '2018-06-20',
+                                                       'available_end': '2018-08-20',
                                                        'relevant_coursework': 'Physics 251-3',
                                                        'learned_of': INTERNET, 'previous_program': False,
                                                        'marc_current': False, 'marc_past': False,

@@ -67,7 +67,7 @@ class ApplicantTestCase(TestCase):
         applicant = Applicant.objects.get(first_name="Jacob")
         self.assertEqual(applicant.state, "Oregon")
         self.assertEqual(applicant.disadvantaged_other, "")
-        self.assertEqual(applicant.phone_number, 15037544585)
+        self.assertEqual(applicant.phone_number, '15037544585')
 
 
 class ReferenceLetterTestCase(TestCase):

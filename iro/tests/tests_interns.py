@@ -72,7 +72,6 @@ class AbstractTestCase(TestCase):
         User.objects.create(username="iroUtility",
                             email="no-reply@example.com",
                             password="123456",
-                            groups=Group.objects.get(name=FACULTY_GROUP_NAME)
                             )
         Faculty.objects.create(user=User.objects.get(username="iroUtility"),
                                faculty_name="Robert Benolken",
@@ -81,7 +80,6 @@ class AbstractTestCase(TestCase):
         User.objects.create(username="iroMentor",
                             email="no-reply@example.com",
                             password="123456",
-                            groups=Group.objects.get(name=MENTOR_GROUP_NAME),
                             )
         Mentor.objects.create(user=User.objects.get(username="iroMentor"),
                               mentor_name="Mentor One",
@@ -90,7 +88,7 @@ class AbstractTestCase(TestCase):
         User.objects.create(username="iroIntern",
                             email="no-reply@example.com",
                             password="123456",
-                            groups=Group.objects.get(name=INTERN_GROUP_NAME))
+                            )
         Intern.objects.create(user=User.objects.get(username="iroIntern"),
                               name=Applicant.objects.get(applicant_name="Jacob Bieker"),
                               professor=Faculty.objects.get(faculty_name="Robert Benolken"),
@@ -203,7 +201,6 @@ class ProgressReportTestCase(TestCase):
         User.objects.create(username="iroUtility",
                             email="no-reply@example.com",
                             password="123456",
-                            groups=Group.objects.get(name=FACULTY_GROUP_NAME)
                             )
         Faculty.objects.create(user=User.objects.get(username="iroUtility"),
                                faculty_name="Robert Benolken",
@@ -212,7 +209,6 @@ class ProgressReportTestCase(TestCase):
         User.objects.create(username="iroMentor",
                             email="no-reply@example.com",
                             password="123456",
-                            groups=Group.objects.get(name=MENTOR_GROUP_NAME),
                             )
         Mentor.objects.create(user=User.objects.get(username="iroMentor"),
                               mentor_name="Mentor One",
@@ -221,7 +217,7 @@ class ProgressReportTestCase(TestCase):
         User.objects.create(username="iroIntern",
                             email="no-reply@example.com",
                             password="123456",
-                            groups=Group.objects.get(name=INTERN_GROUP_NAME))
+                            )
         Intern.objects.create(user=User.objects.get(username="iroIntern"),
                               name=Applicant.objects.get(applicant_name="Jacob Bieker").name(),
                               professor=Faculty.objects.get(faculty_name="Robert Benolken"),

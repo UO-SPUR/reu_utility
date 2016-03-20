@@ -153,7 +153,8 @@ class InternTestCase(TestCase):
                             password="123456",
                             )
         Intern.objects.create(user=User.objects.get(username="iroIntern"),
-                              name=Applicant.objects.get(applicant_name="Jacob Bieker"),
+                              name=Applicant.objects.get(applicant_name="Jacob Bieker").applicant_name,
+                              application=Applicant.objects.get(applicant_name="Jacob Bieker"),
                               professor=Faculty.objects.get(faculty_name="Robert Benolken"),
                               )
 
@@ -163,19 +164,19 @@ class InternTestCase(TestCase):
         intern = Intern.objects.get(user=User.objects.get(username="iroIntern"))
         intern.mentors.add(mentor)
         mentor.professor.add(faculty)
-        self.assertEqual(faculty.institute(), Institute.objects.get(city="Geneva"))
-        self.assertEqual(faculty.user(), User.objects.get(username="iroUtility"))
+        self.assertEqual(faculty.institute, Institute.objects.get(city="Geneva"))
+        self.assertEqual(faculty.user, User.objects.get(username="iroUtility"))
         self.assertEqual(faculty.user.groups.filter(name=FACULTY_GROUP_NAME).exists(), True)
 
-        self.assertEqual(mentor.user(), User.objects.get(username="iroMentor"))
-        self.assertEqual(mentor.professor(), Faculty.objects.get(faculty_name="Robert Benolken"))
-        self.assertEqual(mentor.mentor_name(), "Mentor One")
+        self.assertEqual(mentor.user, User.objects.get(username="iroMentor"))
+        self.assertEqual(mentor.professor, Faculty.objects.get(faculty_name="Robert Benolken"))
+        self.assertEqual(mentor.mentor_name, "Mentor One")
         self.assertEqual(mentor.user.groups.filter(name=MENTOR_GROUP_NAME).exists(), True)
 
-        self.assertEqual(intern.user(), User.objects.get(username="iroMentor"))
-        self.assertEqual(intern.professor(), Faculty.objects.get(faculty_name="Robert Benolken"))
-        self.assertEqual(intern.mentors(), Mentor.objects.get(mentor_name="Mentor One"))
-        self.assertEqual(intern.name(), "Jacob Bieker")
+        self.assertEqual(intern.user, User.objects.get(username="iroMentor"))
+        self.assertEqual(intern.professor, Faculty.objects.get(faculty_name="Robert Benolken"))
+        self.assertEqual(intern.mentors, Mentor.objects.get(mentor_name="Mentor One"))
+        self.assertEqual(intern.name, "Jacob Bieker")
         self.assertEqual(intern.user.groups.filter(name=INTERN_GROUP_NAME).exists(), True)
 
     def test_intern_urls(self):

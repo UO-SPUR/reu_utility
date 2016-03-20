@@ -225,7 +225,8 @@ class ProgressReportTestCase(TestCase):
                             password="123456",
                             )
         Intern.objects.create(user=User.objects.get(username="iroIntern"),
-                              name=Applicant.objects.get(applicant_name="Jacob Bieker"),
+                              name=Applicant.objects.get(applicant_name="Jacob Bieker").name,
+                              application=Applicant.objects.get(applicant_name="Jacob Bieker"),
                               professor=Faculty.objects.get(faculty_name="Robert Benolken"),
                               )
         intern = Intern.objects.get(user=User.objects.get(username="iroIntern"))
@@ -238,7 +239,7 @@ class ProgressReportTestCase(TestCase):
     def test_progress_existence(self):
         report = ProgressReport.objects.get(week=10)
 
-        self.assertEqual(report.content(), "This is a sample progress report.")
+        self.assertEqual(report.content, "This is a sample progress report.")
 
     def test_change_progress_report(self):
         report = ProgressReport.objects.get(week=10)
@@ -246,4 +247,4 @@ class ProgressReportTestCase(TestCase):
         report.week = 5
 
         self.assertEqual(report.week, 5)
-        self.assertEqual(report.content(), "This is a sample progress report.")
+        self.assertEqual(report.content, "This is a sample progress report.")

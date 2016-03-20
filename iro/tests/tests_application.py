@@ -7,6 +7,8 @@ from iro.choices import *
 from django.contrib.auth.models import AnonymousUser, User
 from iro.views import *
 from django.core import mail
+from iro.choices import WAITING_LETTER
+from iro.models import ReferenceLetter
 
 
 class ApplicantTestCase(TestCase):
@@ -124,22 +126,24 @@ class ReferenceLetterTestCase(TestCase):
                                  grades="PHYS 353, CIS 330, HC 222H, MATH 281"
                                  )
 
-    def test_sending_reference_letter(self):
         ReferenceLetter.objects.create(name="Jacob Bieker",
+                                       applicant=Applicant.objects.get(applicant_name="Jacob Bieker"),
                                        email="jacob@bieker.tech",
                                        institution="Bieker University",
-                                       department="Institute of Theoretical Science",
-                                       status=WAITING_LETTER)
+                                       department="Institute of Theoretical Science",)
         ReferenceLetter.objects.create(name="Martha Bieker",
                                        email="jacob@bieker.tech",
                                        institution="OHSU",
                                        department="Primate Research Lab",
-                                       status=WAITING_LETTER)
+                                       applicant=Applicant.objects.get(applicant_name="Jacob Bieker"),)
         ReferenceLetter.objects.create(name="Robert Benolken",
                                        email="jacob@bieker.tech",
                                        institution="Bieker University",
                                        department="Institute of Biology",
-                                       status=WAITING_LETTER)
+                                       applicant=Applicant.objects.get(applicant_name="Jacob Bieker"),)
+
+    def test_sending_reference_letter(self):
+
         letter_one = ReferenceLetter.objects.get(name="Jacob Bieker")
 
         letter_one.status = REQUESTED_LETTER

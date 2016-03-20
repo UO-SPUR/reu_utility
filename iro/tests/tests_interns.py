@@ -92,7 +92,8 @@ class AbstractTestCase(TestCase):
                             password="123456",
                             )
         Intern.objects.create(user=User.objects.get(username="iroIntern"),
-                              name=Applicant.objects.get(applicant_name="Jacob Bieker"),
+                              name=Applicant.objects.get(applicant_name="Jacob Bieker").applicant_name,
+                              application=Applicant.objects.get(applicant_name="Jacob Bieker"),
                               professor=Faculty.objects.get(faculty_name="Robert Benolken"),
                               )
         intern = Intern.objects.get(professor=Faculty.objects.get(faculty_name="Robert Benolken"))
@@ -225,7 +226,7 @@ class ProgressReportTestCase(TestCase):
                             password="123456",
                             )
         Intern.objects.create(user=User.objects.get(username="iroIntern"),
-                              name=Applicant.objects.get(applicant_name="Jacob Bieker").name,
+                              name=Applicant.objects.get(applicant_name="Jacob Bieker").applicant_name,
                               application=Applicant.objects.get(applicant_name="Jacob Bieker"),
                               professor=Faculty.objects.get(faculty_name="Robert Benolken"),
                               )

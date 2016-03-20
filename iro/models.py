@@ -316,7 +316,7 @@ class ReferenceLetter(models.Model):
     department = models.CharField("Department", max_length=150)
     status = models.CharField("Status", help_text="Status of Letter of Rec", choices=LETTER_CHOICES,
                               default=WAITING_LETTER, max_length=10)
-    letter = models.FileField("Letter of Rec", help_text="Recommendation Letter", upload_to="references")
+    letter = models.FileField("Letter of Rec", help_text="Recommendation Letter", upload_to="references", null=True)
     comments = models.TextField("Comments", help_text="Any comments on Letter of Recommendation?", null=True)
     uuid = models.TextField("UUID", default=uuid.uuid4(), null=False)
     applicant = models.ForeignKey(Applicant, verbose_name="Letter of Reference",

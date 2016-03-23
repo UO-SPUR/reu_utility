@@ -7,7 +7,7 @@ from iro.choices import *
 from django.template.loader import get_template
 from django.template import RequestContext
 from iro.choices import *
-
+from iro.forms import ApplicantForm
 
 # Handle uploaded files
 def handle_transcripts(file):
@@ -93,10 +93,7 @@ def get_reference(request):
 def thanks(request):
     uuid = request.GET['uuid']
     applicant = Applicant.objects.get(uuid=uuid)
-    exclude = ['mentors', 'possible_pis', 'triage', 'ranking',
-               'likely_institute', 'decision_action', 'comments',
-               'application_completeness', 'correspondence', 'year_created',
-               'short_list', 'uuid']
+    exclude = ApplicantForm.Meta.exclude
 
     html_template = get_template('thanks.html')
 

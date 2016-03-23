@@ -125,7 +125,7 @@ class ReferenceLetterTestCase(TestCase):
                                  outside_interests="Hiking, photography, SCUBA, skiing, backpacking, skydiving",
                                  grades="PHYS 353, CIS 330, HC 222H, MATH 281"
                                  )
-
+        ReferenceLetter.objects.create()
         ReferenceLetter.objects.create(name="Jacob Bieker",
                                        applicant=Applicant.objects.get(applicant_name="Jacob Bieker"),
                                        email="jacob@bieker.tech",

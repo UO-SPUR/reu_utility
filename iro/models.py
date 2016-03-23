@@ -312,8 +312,8 @@ class Configuration(models.Model):
 class ReferenceLetter(models.Model):
     name = models.CharField("Name", max_length=150)
     email = models.EmailField("Email")
-    institution = models.CharField("Institution", max_length=150)
-    department = models.CharField("Department", max_length=150)
+    institution = models.CharField("Institution", max_length=150, null=True)
+    department = models.CharField("Department", max_length=150, null=True)
     status = models.CharField("Status", help_text="Status of Letter of Rec", choices=LETTER_CHOICES,
                               default=WAITING_LETTER, max_length=10)
     letter = models.FileField("Letter of Rec", help_text="Recommendation Letter", upload_to="references", null=True)

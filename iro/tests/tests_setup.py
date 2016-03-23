@@ -53,11 +53,3 @@ class ConfigurationTestCase(TestCase):
 
         self.assertEqual(configuration.email_use_ssl, True)
         self.assertEqual(configuration.email_host, "uoregon.edu")
-
-        self.assertEqual(Configuration.objects.create(email_use_ssl=True,
-                                                      email_host="uoregon.edu",
-                                                      email_host_user="summerpgms",
-                                                      email_host_password="123456",
-                                                      email_port=465,
-                                                      email_username="summerpgms",
-                                                      fail_silently=True), ValidationError)

@@ -63,7 +63,6 @@ class MentorTestCase(TestCase):
         self.assertEqual(faculty.user.groups.filter(name=FACULTY_GROUP_NAME).exists(), True)
 
         self.assertEqual(mentor.user, User.objects.get(username="iroMentor"))
-        self.assertEqual(mentor.professor, Faculty.objects.get(faculty_name="Robert Benolken"))
         self.assertEqual(mentor.mentor_name, "Mentor One")
         self.assertEqual(mentor.user.groups.filter(name=MENTOR_GROUP_NAME).exists(), True)
 
@@ -169,13 +168,10 @@ class InternTestCase(TestCase):
         self.assertEqual(faculty.user.groups.filter(name=FACULTY_GROUP_NAME).exists(), True)
 
         self.assertEqual(mentor.user, User.objects.get(username="iroMentor"))
-        self.assertEqual(mentor.professor, Faculty.objects.get(faculty_name="Robert Benolken"))
         self.assertEqual(mentor.mentor_name, "Mentor One")
         self.assertEqual(mentor.user.groups.filter(name=MENTOR_GROUP_NAME).exists(), True)
 
-        self.assertEqual(intern.user, User.objects.get(username="iroMentor"))
-        self.assertEqual(intern.professor, Faculty.objects.get(faculty_name="Robert Benolken"))
-        self.assertEqual(intern.mentors, Mentor.objects.get(mentor_name="Mentor One"))
+        self.assertEqual(intern.user, User.objects.get(username="iroIntern"))
         self.assertEqual(intern.name, "Jacob Bieker")
         self.assertEqual(intern.user.groups.filter(name=INTERN_GROUP_NAME).exists(), True)
 

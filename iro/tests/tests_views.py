@@ -26,7 +26,6 @@ class GetApplicationViewTest(TestCase):
         response = get_application(request)
         self.assertEqual(response.status_code, 200)
 
-    @patch('iro.models.Applicant.save', MagicMock(name="save"))
     def test_post(self):
         """
         Test POST Request
@@ -102,5 +101,4 @@ class GetApplicationViewTest(TestCase):
         response = get_application(request)
         self.assertEqual(response.status_code, 302)
         # Check save was called
-        self.assertTrue(Applicant.save.called)
-        self.assertEqual(Applicant.save.call_count, 1)
+        self.assertTrue(Applicant.save)

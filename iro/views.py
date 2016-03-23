@@ -9,6 +9,13 @@ from django.template import RequestContext
 from iro.choices import *
 
 
+# Handle uploaded files
+def handle_transcripts(file):
+    with open('', 'wb+') as destination:
+        for chunk in file.chunks():
+            destination.write(chunk)
+
+
 # Create your views here.
 
 def get_application(request):
@@ -133,7 +140,7 @@ def is_faculty_mentor(function=None):
     authenticated users who are in the "Faculty" group."""
     actual_decorator = user_passes_test(
         lambda u: u.is_authenticated() and (
-        u.groups.filter(name=FACULTY_GROUP_NAME).exists() or u.groups.filter(name=MENTOR_GROUP_NAME).exists())
+            u.groups.filter(name=FACULTY_GROUP_NAME).exists() or u.groups.filter(name=MENTOR_GROUP_NAME).exists())
     )
     return actual_decorator(function)
 

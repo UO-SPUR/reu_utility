@@ -324,15 +324,8 @@ class ReferenceLetter(models.Model):
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        config = Configuration.objects.get(config_name="Backend")
-
-        backend = EmailBackend(host=config.email_host, port=config.email_port, username=config.email_username,
-                               password=config.email_password, use_ssl=config.email_use_tls,
-                               fail_silently=config.fail_silently)
-        connection = get_connection(backend=backend)
 
         # Full email
-        sending_email = str(str(config.email_username) + "@" + str(config.email_host))
         if self.pk:
             # So if the model already exists...
             old_letter = ReferenceLetter.objects.get(pk=self.pk)
@@ -340,8 +333,7 @@ class ReferenceLetter(models.Model):
                 htmly = get_template("reference-request-email.html")
                 context = Context({'requester': self})
                 html_content = htmly.render(context)
-                msg = EmailMessage('Reference Letter Request', html_content, sending_email, [self.email],
-                                   connection=connection)
+                msg = EmailMessage('Reference Letter Request', html_content, [self.email])
                 msg.content_subtype = "html"  # Main content is now text/html
                 msg.send()
             if self.letter:
@@ -351,8 +343,7 @@ class ReferenceLetter(models.Model):
                 htmly = get_template("reference-confirmation.html")
                 context = Context({'requester': self})
                 html_content = htmly.render(context)
-                msg = EmailMessage('Reference Letter Request', html_content, sending_email, [self.email],
-                                   connection=connection)
+                msg = EmailMessage('Reference Letter Request', html_content, [self.email])
                 msg.content_subtype = "html"  # Main content is now text/html
                 msg.send()
         else:
@@ -360,8 +351,7 @@ class ReferenceLetter(models.Model):
                 htmly = get_template("reference-request-email.html")
                 context = Context({'requester': self})
                 html_content = htmly.render(context)
-                msg = EmailMessage('Reference Letter Request', html_content, sending_email, [self.email],
-                                   connection=connection)
+                msg = EmailMessage('Reference Letter Request', html_content, [self.email])
                 msg.content_subtype = "html"  # Main content is now text/html
                 msg.send()
                 self.status = REQUESTED_LETTER

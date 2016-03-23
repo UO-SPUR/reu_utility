@@ -27,7 +27,7 @@ class GetApplicationViewTest(TestCase):
         self.assertEqual(response.status_code, 200)
 
     @patch('iro.models.Applicant.save', MagicMock(name="save"))
-    def test_pot(self):
+    def test_post(self):
         """
         Test POST Request
         """

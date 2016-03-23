@@ -94,7 +94,7 @@ def thanks(request):
     uuid = request.GET['uuid']
     applicant = Applicant.objects.get(uuid=uuid)
 
-    html_template = get_template('templates/thanks.html')
+    html_template = get_template('thanks.html')
 
     rendered_html = html_template.render(RequestContext(request, {'application': applicant})).encode(encoding="UTF-8")
     http_response = HttpResponse(rendered_html)

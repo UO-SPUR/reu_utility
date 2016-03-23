@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% if form.is_multipart %}
-        <form enctype="multipart/form-data" method="post" action="">
+    {% if input_form.is_multipart %}
+        <form method="post" enctype="multipart/form-data" action="">
     {% else %}
-        <form method="post" action="">
+        <form method="post" enctype="multipart/form-data" action="">
     {% endif %}
     {% csrf_token %}
     {{ input_form.as_ul }}

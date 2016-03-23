@@ -79,7 +79,7 @@ class GetApplicationViewTest(TestCase):
             'app-third_choice': CHOICE_3,
             'app-third_choice_importance': LOW,
             'app-details': "I'm into computational astrophysics, observational astronomy, "
-                       "supercomputing research, and high energy physics.",
+                           "supercomputing research, and high energy physics.",
             'app-lab_preferences': "Imamura Lab, FisherGroup, Torrence Lab, and O'Day Lab.",
             'app-outside_interests': "Hiking, photography, SCUBA, skiing, backpacking, skydiving",
             'app-grades': "PHYS 353, CIS 330, HC 222H, MATH 281",

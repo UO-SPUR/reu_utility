@@ -93,10 +93,14 @@ def get_reference(request):
 def thanks(request):
     uuid = request.GET['uuid']
     applicant = Applicant.objects.get(uuid=uuid)
+    exclude = ['mentors', 'possible_pis', 'triage', 'ranking',
+               'likely_institute', 'decision_action', 'comments',
+               'application_completeness', 'correspondence', 'year_created',
+               'short_list', 'uuid']
 
     html_template = get_template('thanks.html')
 
-    rendered_html = html_template.render(RequestContext(request, {'application': applicant})).encode(encoding="UTF-8")
+    rendered_html = html_template.render(RequestContext(request, {'application': applicant, 'excluded_fields': exclude})).encode(encoding="UTF-8")
     http_response = HttpResponse(rendered_html)
 
     # Redirection page to say sign up was successful

@@ -7,8 +7,10 @@
         <h1>{{ application.applicant_name }}</h1>
         <br />
         {% for name, value in application.get_fields %}
-            <strong>{{ name }}</strong> : {{ value }}
-            <br />
+            {% if name not in excluded_fields %}
+                <strong>{{ name }}</strong> : {{ value }}
+                <br />
+            {% endif %}
         {% endfor %}
     {% endif %}
 {% endblock %}

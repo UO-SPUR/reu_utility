@@ -15,10 +15,10 @@ def get_application(request):
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
-        form = ApplicantForm(request.POST, request.FILES)
-        form2 = ReferenceLetterRequestForm(request.POST)
-        form3 = ReferenceLetterRequestForm(request.POST)
-        form4 = ReferenceLetterRequestForm(request.POST)
+        form = ApplicantForm(request.POST, request.FILES, prefix="app")
+        form2 = ReferenceLetterRequestForm(request.POST, prefix="ref1")
+        form3 = ReferenceLetterRequestForm(request.POST, prefix="ref2")
+        form4 = ReferenceLetterRequestForm(request.POST, prefix="ref3")
 
         application_is_valid = form.is_valid()
         ref_letter_1_is_valid = form2.is_valid()
@@ -49,10 +49,10 @@ def get_application(request):
 
     # if a GET (or any other method) we'll create a blank form
     else:
-        form = ApplicantForm()
-        form2 = ReferenceLetterRequestForm()
-        form3 = ReferenceLetterRequestForm()
-        form4 = ReferenceLetterRequestForm()
+        form = ApplicantForm(prefix="app")
+        form2 = ReferenceLetterRequestForm(prefix="ref1")
+        form3 = ReferenceLetterRequestForm(prefix="ref2")
+        form4 = ReferenceLetterRequestForm(prefix="ref3")
 
     return render(request, 'application.html', {'input_form': form, 'ref_letter_1': form2, 'ref_letter_2': form3,
                                                 'ref_letter_3': form4})

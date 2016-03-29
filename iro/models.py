@@ -68,7 +68,7 @@ class Applicant(models.Model):
     last_name = models.CharField("Applicant Last Name", help_text="Enter your last name", max_length=40)
     applicant_name = models.CharField("Applicant Full Name", help_text="Enter your full name", max_length=200)
     date_of_birth = models.DateField("Applicant Date of Birth", help_text="Please choose date of birth")
-    sex = models.CharField("Applicant Sex", help_text="Please choose your sex", max_length=6, choices=SEX_CHOICES,
+    sex = models.CharField("Applicant Sex", help_text="Please choose your sex", max_length=50, choices=SEX_CHOICES,
                            default=DECLINE)
     ethnic_background = models.CharField("Ethnic Background", help_text="Please choose your ethnic background",
                                          max_length=30, choices=ETHNIC_CHOICES, default=OTHER)

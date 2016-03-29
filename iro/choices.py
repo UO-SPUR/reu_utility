@@ -12,11 +12,13 @@ MULTIPLE = "Multiple"
 ## Sex Choices ###
 MALE = "Male"
 FEMALE = "Female"
+OTHER = "Other"
 
 SEX_CHOICES = (
     (MALE, MALE),
     (FEMALE, FEMALE),
-    (DECLINE, DECLINE)
+    (DECLINE, DECLINE),
+    (OTHER, OTHER)
 )
 
 ### Ethnic Background/ Race  ####

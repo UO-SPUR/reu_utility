@@ -53,15 +53,6 @@ class Mentor(models.Model):
         return self.mentor_name
 
 
-class Abstract(models.Model):
-    title = models.TextField("Abstract Title", help_text="Title of Abstract")
-    last_updated = models.DateField("Last Updated", help_text="Timestamp of last modification", auto_now=True)
-    content = models.TextField("Abstract", help_text="Enter the abstract here")
-
-    def __str__(self):
-        return self.title
-
-
 class Applicant(models.Model):
     ############## Basic Info ###############################
     first_name = models.CharField("Applicant First Name", help_text="Enter your first name", max_length=20)
@@ -243,6 +234,16 @@ class ProgressReport(models.Model):
     content = models.TextField("Progress Report", help_text="Enter your progress report")
     week = models.PositiveSmallIntegerField("Week", help_text="Which week is this progress report for?")
     intern = models.ForeignKey(Intern, verbose_name="Intern")  # Deleted if Intern is deleted
+
+
+class Abstract(models.Model):
+    title = models.TextField("Abstract Title", help_text="Title of Abstract")
+    last_updated = models.DateField("Last Updated", help_text="Timestamp of last modification", auto_now=True)
+    content = models.TextField("Abstract", help_text="Enter the abstract here")
+    intern = models.ForeignKey(Intern, verbose_name="Intern")  # Deleted if Intern is deleted
+
+    def __str__(self):
+        return self.title
 
 
 class PISurvey(models.Model):

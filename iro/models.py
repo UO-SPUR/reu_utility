@@ -220,8 +220,7 @@ class Intern(models.Model):
     institute = models.ForeignKey(Institute, verbose_name="Institute", on_delete=models.SET_NULL, null=True)
     symposium_session = models.CharField("Sympo. Session", help_text="Symposium Session", max_length=100, null=True)
     picture = models.ImageField(upload_to='interns', null=True)
-    student_id = models.CharField("Student ID", help_text="Student ID number", max_length=11)
-    abstract = models.OneToOneField(Abstract, verbose_name="Abstract", null=True, on_delete=models.SET_NULL)
+    student_id = models.CharField("Student ID", help_text="Student ID number", max_length=13)
     presentation_oral = models.URLField("Oral Presentation URL", help_text="URL to oral presentation", null=True)
     presentation_poster = models.URLField("Poster Presentation URL", help_text="URL to poster presentation", null=True)
 
@@ -234,6 +233,9 @@ class ProgressReport(models.Model):
     content = models.TextField("Progress Report", help_text="Enter your progress report")
     week = models.PositiveSmallIntegerField("Week", help_text="Which week is this progress report for?")
     intern = models.ForeignKey(Intern, verbose_name="Intern")  # Deleted if Intern is deleted
+
+    def __str__(self):
+        return self.week + " " + self.intern.name
 
 
 class Abstract(models.Model):

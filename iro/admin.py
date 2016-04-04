@@ -110,9 +110,9 @@ class UserAdmin(UserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
-admin.site.register(Faculty)
+# admin.site.register(Faculty)
 admin.site.register(Mentor)
-admin.site.register(Intern)
+# admin.site.register(Intern)
 admin.site.register(Abstract)
 admin.site.register(ReferenceLetter)
 admin.site.register(ProgressReport)

@@ -208,6 +208,15 @@ class Applicant(models.Model):
         return [(field.name, field.value_to_string(self)) for field in Applicant._meta.fields]
 
 
+class Abstract(models.Model):
+    title = models.TextField("Abstract Title", help_text="Title of Abstract")
+    last_updated = models.DateField("Last Updated", help_text="Timestamp of last modification", auto_now=True)
+    content = models.TextField("Abstract", help_text="Enter the abstract here")
+
+    def __str__(self):
+        return self.title
+
+
 class Intern(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     name = models.CharField("Applicant Full Name", help_text="Enter your full name", max_length=200, null=True)
@@ -220,7 +229,8 @@ class Intern(models.Model):
     institute = models.ForeignKey(Institute, verbose_name="Institute", on_delete=models.SET_NULL, null=True)
     symposium_session = models.CharField("Sympo. Session", help_text="Symposium Session", max_length=100, null=True)
     picture = models.ImageField(upload_to='interns', null=True)
-    student_id = models.CharField("Student ID", help_text="Student ID number", max_length=13)
+    student_id = models.CharField("Student ID", help_text="Student ID number", max_length=11)
+    abstract = models.OneToOneField(Abstract, verbose_name="Abstract", null=True, on_delete=models.SET_NULL)
     presentation_oral = models.URLField("Oral Presentation URL", help_text="URL to oral presentation", null=True)
     presentation_poster = models.URLField("Poster Presentation URL", help_text="URL to poster presentation", null=True)
 
@@ -235,17 +245,7 @@ class ProgressReport(models.Model):
     intern = models.ForeignKey(Intern, verbose_name="Intern")  # Deleted if Intern is deleted
 
     def __str__(self):
-        return self.week + " " + self.intern.name
-
-
-class Abstract(models.Model):
-    title = models.TextField("Abstract Title", help_text="Title of Abstract")
-    last_updated = models.DateField("Last Updated", help_text="Timestamp of last modification", auto_now=True)
-    content = models.TextField("Abstract", help_text="Enter the abstract here")
-    intern = models.ForeignKey(Intern, verbose_name="Intern")  # Deleted if Intern is deleted
-
-    def __str__(self):
-        return self.title
+        return "Week " + str(self.week)
 
 
 class PISurvey(models.Model):

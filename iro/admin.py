@@ -6,6 +6,7 @@ from tabbed_admin import TabbedModelAdmin
 # Register your models here.
 from .models import *
 
+
 # Inline models here
 
 class FacultyInline(admin.StackedInline):
@@ -13,25 +14,32 @@ class FacultyInline(admin.StackedInline):
     can_delete = False
     verbose_name_plural = "Faculty"
 
+
 class MentorInline(admin.StackedInline):
     model = Mentor
     can_delete = False
     verbose_name_plural = "Mentors"
+
 
 class LetterInline(admin.StackedInline):
     model = ReferenceLetter
     extra = 3
     max_num = 3
 
+
 class InternInline(admin.StackedInline):
     model = Intern
     can_delete = False
     extra = 1
 
+
 # Defining ModelAdmin here.
 
 @admin.register(Applicant)
 class ApplicantAdmin(TabbedModelAdmin):
+    list_display = ('applicant_name', 'gpa', 'stem_gpa', 'decision_action', 'disadvantaged', 'first_choice',
+                    'second_choice', 'third_choice', 'short_list', 'ranking',
+                    'available_start', 'available_end',)
     tab_admin = (
         ('Course Work', {
             'fields': (('gpa', 'stem_gpa'), 'grades')
@@ -50,26 +58,32 @@ class ApplicantAdmin(TabbedModelAdmin):
     )
     tab_application = (
         ('Basic Information', {
-            'fields': (('first_name', 'last_name'), ('applicant_email', 'applicant_name'), ('cell_phone_number', 'phone_number'))
+            'fields': (
+            ('first_name', 'last_name'), ('applicant_email', 'applicant_name'), ('cell_phone_number', 'phone_number'))
         }),
         ('College', {
-            'fields': (('college', 'college_class'), ('expected_graduation', 'major'), 'transfer', ('gpa', 'stem_gpa'), ('program', 'available_start', 'available_end'))
+            'fields': (('college', 'college_class'), ('expected_graduation', 'major'), 'transfer', ('gpa', 'stem_gpa'),
+                       ('program', 'available_start', 'available_end'))
         }),
         ('Demographic Information', {
-            'fields': (('date_of_birth', 'citizenship'), 'sex', ('ethnic_background', 'ethnic_background_other'), ('disadvantaged', 'disadvantaged_other'))
+            'fields': (('date_of_birth', 'citizenship'), 'sex', ('ethnic_background', 'ethnic_background_other'),
+                       ('disadvantaged', 'disadvantaged_other'))
         }),
         ('Survey Questions', {
-            'fields': (('learned_of', 'previous_program'), ('marc_current', 'marc_past'), ('advanced_degree', 'advanced_degree_other'), ('research_career', 'gre_mcat'), 'date_of_test')
+            'fields': (('learned_of', 'previous_program'), ('marc_current', 'marc_past'),
+                       ('advanced_degree', 'advanced_degree_other'), ('research_career', 'gre_mcat'), 'date_of_test')
         }),
         ('Application Questions', {
-            'fields': ('background', 'goals', ('first_choice', 'first_choice_importance'), ('second_choice', 'second_choice_importance'), ('third_choice', 'third_choice_importance'), 'other_choice', 'details', 'lab_preferences', 'outside_interests', 'transcript')
+            'fields': ('background', 'goals', ('first_choice', 'first_choice_importance'),
+                       ('second_choice', 'second_choice_importance'), ('third_choice', 'third_choice_importance'),
+                       'other_choice', 'details', 'lab_preferences', 'outside_interests', 'transcript')
         }),
     )
     tab_intern = (
         InternInline,
     )
     tab_possible_pis = (
-        
+
     )
 
     tabs = [
@@ -78,8 +92,20 @@ class ApplicantAdmin(TabbedModelAdmin):
         ('Intern Profile', tab_intern)
     ]
 
+
+@admin.register(Faculty)
+class FacultyAdmin(admin.ModelAdmin):
+    list_display = ('faculty_name', 'institute')
+
+
+@admin.register(Intern)
+class InternAdmin(admin.ModelAdmin):
+    list_display = ('name', 'institute', 'professor', 'program')
+
+
 class UserAdmin(UserAdmin):
     inlines = (FacultyInline, MentorInline, InternInline)
+
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)

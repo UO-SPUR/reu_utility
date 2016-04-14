@@ -43,6 +43,12 @@ class ApplicantInline(admin.StackedInline):
     model = Applicant
     can_delete = False
     extra = 1
+
+
+class ProgressReportInline(admin.TabularInline):
+    model = ProgressReport
+    can_delete = False
+    extra = 10
 # Defining ModelAdmin here.
 
 @admin.register(Applicant)
@@ -120,6 +126,7 @@ class InternAdmin(TabbedModelAdmin):
             'fields': ('symposium_session', ('presentation_oral', 'presentation_poster'))
         }),
         AbstractInline,
+        ProgressReportInline,
         ('Admin', {
             'fields': ('student_id', ('arrival_date', 'departure_date'))
         }),

@@ -92,7 +92,7 @@ class ApplicantForm(ModelForm):
         exclude = ['mentors', 'possible_pis', 'triage', 'ranking',
                    'likely_institute', 'decision_action', 'comments',
                    'application_completeness', 'correspondence', 'year_created',
-                   'short_list', 'uuid']
+                   'short_list', 'uuid', 'show_preferences']
 
     def __init__(self, *args, **kwargs):
         super(ApplicantForm, self).__init__(*args, **kwargs)

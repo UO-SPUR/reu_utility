@@ -199,6 +199,8 @@ class Applicant(models.Model):
     short_list = models.CharField("Short List?", choices=SHORT_LIST_CHOICES, default=UNSURE, max_length=10)
     transcript = models.FileField('Transcript', upload_to='transcripts', null=True)
     uuid = models.TextField("UUID", default=uuid.uuid4(), null=False)
+
+    show_preferences = models.BooleanField("Show Lab Preferences?", default=False, null=True)
     #########End Administrative fields ###########################################################
 
     def __str__(self):

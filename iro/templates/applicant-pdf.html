@@ -18,8 +18,14 @@
     <br />
     {% for name, value in application.get_fields %}
         {% if value %}
-            <strong>{{ name }}</strong> : {{ value }}
-            <br />
+            {% if name == "show_preferences" and value == True %}
+                <strong>{{ name }}</strong> : {{ value }}
+                <br />
+            {% elif name == "show_preferences" and value == False %}
+            {% else %}
+                <strong>{{ name }}</strong> : {{ value }}
+                <br />
+            {% endif %}
         {% endif %}
     {% endfor %}
 

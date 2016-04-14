@@ -33,6 +33,16 @@ class InternInline(admin.StackedInline):
     extra = 1
 
 
+class AbstractInline(admin.StackedInline):
+    model = Abstract
+    can_delete = False
+    extra = 1
+
+
+class ApplicantInline(admin.StackedInline):
+    model = Applicant
+    can_delete = False
+    extra = 1
 # Defining ModelAdmin here.
 
 @admin.register(Applicant)
@@ -99,8 +109,29 @@ class FacultyAdmin(admin.ModelAdmin):
 
 
 @admin.register(Intern)
-class InternAdmin(admin.ModelAdmin):
+class InternAdmin(TabbedModelAdmin):
     list_display = ('name', 'institute', 'professor', 'program')
+    tab_admin = (
+        ('Overview', {
+            'fields': ('program', 'institute')
+        }),
+        FacultyInline,
+        ('Presentation', {
+            'fields': ('symposium_session', ('presentation_oral', 'presentation_poster'))
+        }),
+        AbstractInline,
+        ('Admin', {
+            'fields': ('student_id', ('arrival_date', 'departure_date'))
+        }),
+    )
+    tab_application = (
+        ApplicantInline,
+    )
+
+    tabs = [
+        ('Overview', tab_admin),
+        ('Application', tab_application)
+    ]
 
 
 class UserAdmin(UserAdmin):

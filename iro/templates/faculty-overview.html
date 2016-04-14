@@ -11,6 +11,6 @@
     </form>
     <h2>Applicants</h2>
     {% for application in application_list %}
-        <a href="{% url 'application-PDFs' %}?uuid={{ application.uuid }}">{{ application.applicant_name }}</a>
+        <a href="{% url 'application-PDFs' %}?uuid={{ application.uuid }}">{{ application.applicant_name }}</a> <strong>Ranking: {{ application.ranking }}</strong>
     {% endfor %}
 {% endblock %}

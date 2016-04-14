@@ -200,7 +200,7 @@ class Applicant(models.Model):
     transcript = models.FileField('Transcript', upload_to='transcripts', null=True)
     uuid = models.TextField("UUID", default=uuid.uuid4(), null=False)
 
-    show_preferences = models.BooleanField("Show Lab Preferences?", default=False, null=True)
+    show_preferences = models.BooleanField("Show Lab Preferences?", default=False)
     #########End Administrative fields ###########################################################
 
     def __str__(self):

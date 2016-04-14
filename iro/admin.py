@@ -39,7 +39,7 @@ class InternInline(admin.StackedInline):
 class ApplicantAdmin(TabbedModelAdmin):
     list_display = ('applicant_name', 'gpa', 'stem_gpa', 'decision_action', 'disadvantaged', 'first_choice',
                     'second_choice', 'third_choice', 'short_list', 'ranking',
-                    'available_start', 'available_end',)
+                    'available_start', 'available_end', 'show_preferences')
     tab_admin = (
         ('Course Work', {
             'fields': (('gpa', 'stem_gpa'), 'grades')

@@ -340,7 +340,7 @@ class ReferenceLetter(models.Model):
                 html_content = htmly.render(context)
                 msg = EmailMessage('Reference Letter Request', html_content, [self.email])
                 msg.content_subtype = "html"  # Main content is now text/html
-                msg.send()
+                #msg.send()
             if self.letter:
                 # If letter file exists, then it is uploaded
                 self.status = LETTER_UPLOADED
@@ -350,7 +350,7 @@ class ReferenceLetter(models.Model):
                 html_content = htmly.render(context)
                 msg = EmailMessage('Reference Letter Request', html_content, [self.email])
                 msg.content_subtype = "html"  # Main content is now text/html
-                msg.send()
+                #msg.send()
         else:
             if self.status != REQUESTED_LETTER and self.status != LETTER_UPLOADED:
                 htmly = get_template("reference-request-email.html")
@@ -358,7 +358,7 @@ class ReferenceLetter(models.Model):
                 html_content = htmly.render(context)
                 msg = EmailMessage('Reference Letter Request', html_content, [self.email])
                 msg.content_subtype = "html"  # Main content is now text/html
-                msg.send()
+                #msg.send()
                 self.status = REQUESTED_LETTER
         super(ReferenceLetter, self).save()
 

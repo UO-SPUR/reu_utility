@@ -121,18 +121,18 @@ class InternAdmin(TabbedModelAdmin):
         ('Overview', {
             'fields': ('program', 'institute')
         }),
-        FacultyInline,
+        #FacultyInline,
         ('Presentation', {
             'fields': ('symposium_session', ('presentation_oral', 'presentation_poster'))
         }),
-        AbstractInline,
-        ProgressReportInline,
+        #AbstractInline,
+        #ProgressReportInline
         ('Admin', {
             'fields': ('student_id', ('arrival_date', 'departure_date'))
         }),
     )
     tab_application = (
-        ApplicantInline,
+        #ApplicantInline,
     )
 
     tabs = [

@@ -10,25 +10,24 @@ as well as using ``pip`` to install it.
 
 1. Easiest Method: ``pip``
 ++++++++++++++++++++++++++
-    * Open up a terminal (on Linux or OSX), or Command Prompt (On Windows)
-    * Run ``pip install django-iro`` to install the utility and associated dependencies
+    1. Open up a terminal (on Linux or OSX), or Command Prompt (On Windows)
+    2. Run ``pip install django-iro`` to install the utility and associated dependencies
 2. Cloning the Repository
 +++++++++++++++++++++++++
-    * Open up a terminal (on Linux or OSX), or Command Prompt (On Windows)
-    * Run ``git clone git://github.com/UO-SPUR/iro`` to clone the repository to the current machine
-    * Type ``cd iro`` to change directory to the IRO utility
-    * Run ``pip install -r requirements.txt`` to install the dependencies
+    1. Open up a terminal (on Linux or OSX), or Command Prompt (On Windows)
+    2. Run ``git clone git://github.com/UO-SPUR/iro`` to clone the repository to the current machine
+    3. Type ``cd iro`` to change directory to the IRO utility
+    4. Run ``pip install -r requirements.txt`` to install the dependencies
 3. Using Docker
 +++++++++++++++
     If you have Docker installed, you can use the included Dockerfile to build the utility
-    * Download fromm GitHub the Dockerfile
-    *
+    1. Download fromm GitHub the Dockerfile
 4. Using Vagrant
 ++++++++++++++++
     If Vagrant is more your thing, the included Vagrant files can be used to run the utility in a virtual machine
-    * Download the Vagrant file from GitHub
-    * Open up a terminal (on Linux or OSX), or Command Prompt (On Windows) in the directory where the vagrant file was downloaded
-    * Run ``vagrant up`` to build the virtual machine
+    1. Download the Vagrant file from GitHub
+    2. Open up a terminal (on Linux or OSX), or Command Prompt (On Windows) in the directory where the vagrant file was downloaded
+    3. Run ``vagrant up`` to build the virtual machine
 
 .. _initial-setup:
 Initial Setup

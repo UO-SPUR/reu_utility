@@ -1,6 +1,8 @@
 Templates
 =========
 
+Located in the iro/templates subdirectory, the templates are fully editable.
+
 .. _template-email:
 Emails
 ------

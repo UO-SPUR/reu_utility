@@ -364,3 +364,11 @@ class ReferenceLetter(models.Model):
 
     def __str__(self):
         return self.applicant.applicant_name + " Letter"
+
+
+class FacultyFeedback(models.Model):
+    feedback = models.TextField(null=True)
+    faculty = models.OneToOneField(Faculty)
+    applicant = models.OneToOneField(Applicant)
+    applicant_rating = models.TextField(null=True)
+    show_rating = models.BooleanField(default=False)

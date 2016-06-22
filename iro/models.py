@@ -52,16 +52,6 @@ class Mentor(models.Model):
     def __str__(self):
         return self.mentor_name
 
-class FacultyFeedback(models.Model):
-    feedback = models.TextField(null=True)
-    faculty = models.OneToOneField(Faculty, related_name="feedback_faculty")
-    applicant = models.OneToOneField(Applicant, related_name="feedback_applicant")
-    applicant_rating = models.TextField(null=True)
-    show_rating = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.faculty.faculty_name + " Feedback On " + self.applicant.applicant_name
-
 class Applicant(models.Model):
     ############## Basic Info ###############################
     first_name = models.CharField("Applicant First Name", help_text="Enter your first name", max_length=20)
@@ -225,6 +215,17 @@ class Applicant(models.Model):
                                                              applicant_rating=self.lab_preferences)
             feedback.save()
         super(Applicant, self).save()
+
+
+class FacultyFeedback(models.Model):
+    feedback = models.TextField(null=True)
+    faculty = models.OneToOneField(Faculty, related_name="feedback_faculty")
+    applicant = models.OneToOneField(Applicant, related_name="feedback_applicant")
+    applicant_rating = models.TextField(null=True)
+    show_rating = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.faculty.faculty_name + " Feedback On " + self.applicant.applicant_name
 
 
 class Abstract(models.Model):

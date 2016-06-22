@@ -3,7 +3,7 @@ __author__ = 'Jacob Bieker'
 from registration.forms import RegistrationForm
 from django import forms
 from iro.models import Institute, Faculty, Applicant, Mentor, Intern, ReferenceLetter, ProgressReport, PISurvey, \
-    MentorSurvey, InternSurvey, Abstract
+    MentorSurvey, InternSurvey, Abstract, FacultyFeedback
 from django.forms import ModelForm
 
 
@@ -83,6 +83,12 @@ class MentorSurveyForm(ModelForm):
 class InternSurveyForm(ModelForm):
     model = InternSurvey
     fields = ["evaluator", "comments"]
+
+
+class FacultyFeedbackForm(ModelForm):
+    class Meta:
+        model = FacultyFeedback
+        fields = ["applicant_rating", "feedback"]
 
 
 class ApplicantForm(ModelForm):

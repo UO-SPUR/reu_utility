@@ -3,4 +3,4 @@ django-tabbed-admin
 django-grappelli
 django-registration-redux
 django-betterforms
-weasyprint
+Pillow

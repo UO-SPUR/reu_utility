@@ -12,5 +12,13 @@
     <h2>Applicants</h2>
     {% for application in application_list %}
         <a href="{% url 'application-PDFs' %}?uuid={{ application.uuid }}">{{ application.applicant_name }}</a> <strong>Ranking: {{ application.ranking }}</strong>
+        {% for feedback in feedback_list %}
+            {% if application in feedback.applicant %}
+                {% if feedback.show_rating %}
+                    <strong> Applicant Preference </strong> : {{ feedback.applicant_rating }}
+                {% endif %}
+                <strong> Feedback </strong> : {{ feedback.feedback }}
+            {% endif %}
+        {% endfor %}
     {% endfor %}
 {% endblock %}

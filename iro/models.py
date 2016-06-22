@@ -368,7 +368,7 @@ class ReferenceLetter(models.Model):
 
 class FacultyFeedback(models.Model):
     feedback = models.TextField(null=True)
-    faculty = models.OneToOneField(Faculty)
-    applicant = models.OneToOneField(Applicant)
+    faculty = models.OneToOneField(Faculty, related_name="feedback_faculty")
+    applicant = models.OneToOneField(Applicant, related_name="feedback_applicant")
     applicant_rating = models.TextField(null=True)
     show_rating = models.BooleanField(default=False)

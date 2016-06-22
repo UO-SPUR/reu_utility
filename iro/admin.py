@@ -49,6 +49,12 @@ class ProgressReportInline(admin.TabularInline):
     model = ProgressReport
     can_delete = False
     extra = 10
+
+
+class FacultyFeedbackInline(admin.StackedInline):
+    model = FacultyFeedback
+    can_delete = False
+
 # Defining ModelAdmin here.
 
 @admin.register(Applicant)
@@ -99,13 +105,14 @@ class ApplicantAdmin(TabbedModelAdmin):
         InternInline,
     )
     tab_possible_pis = (
-
+        FacultyFeedbackInline,
     )
 
     tabs = [
         ('Admin', tab_admin),
         ('Application', tab_application),
-        ('Intern Profile', tab_intern)
+        ('Intern Profile', tab_intern),
+        ('Faculty Feedback', tab_possible_pis),
     ]
 
 
@@ -151,6 +158,7 @@ admin.site.register(User, UserAdmin)
 # admin.site.register(Faculty)
 admin.site.register(Mentor)
 # admin.site.register(Intern)
+# admin.site.register(FacultyFeedback)
 admin.site.register(Abstract)
 admin.site.register(ReferenceLetter)
 admin.site.register(ProgressReport)

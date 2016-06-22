@@ -52,6 +52,15 @@ class Mentor(models.Model):
     def __str__(self):
         return self.mentor_name
 
+class FacultyFeedback(models.Model):
+    feedback = models.TextField(null=True)
+    faculty = models.OneToOneField(Faculty, related_name="feedback_faculty")
+    applicant = models.OneToOneField(Applicant, related_name="feedback_applicant")
+    applicant_rating = models.TextField(null=True)
+    show_rating = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.faculty.faculty_name + " Feedback On " + self.applicant.applicant_name
 
 class Applicant(models.Model):
     ############## Basic Info ###############################
@@ -209,6 +218,14 @@ class Applicant(models.Model):
     def get_fields(self):
         return [(field.name, field.value_to_string(self)) for field in Applicant._meta.fields]
 
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        for pi in self.possible_pis_set:
+            feedback = FacultyFeedback.objects.get_or_create(faculty=pi, applicant=self,
+                                                             applicant_rating=self.lab_preferences)
+            feedback.save()
+        super(Applicant, self).save()
+
 
 class Abstract(models.Model):
     title = models.TextField("Abstract Title", help_text="Title of Abstract")
@@ -364,11 +381,3 @@ class ReferenceLetter(models.Model):
 
     def __str__(self):
         return self.applicant.applicant_name + " Letter"
-
-
-class FacultyFeedback(models.Model):
-    feedback = models.TextField(null=True)
-    faculty = models.OneToOneField(Faculty, related_name="feedback_faculty")
-    applicant = models.OneToOneField(Applicant, related_name="feedback_applicant")
-    applicant_rating = models.TextField(null=True)
-    show_rating = models.BooleanField(default=False)

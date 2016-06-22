@@ -338,7 +338,6 @@ def faculty_application_overview(request):
     current_faculty = request.user.faculty
     assigned_applications = current_faculty.applicant_set.all()
     feedback = current_faculty.feedback_faculty_set.all()
-    # TODO: List applications, with the links being to another view that generates the PDFs of application/ Reference Letters
     return render(request, 'faculty_overview.html', {
         'application_list': assigned_applications,
         'feedback_list': feedback

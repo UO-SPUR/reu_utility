@@ -1,11 +1,11 @@
-.header {
+#header {
     background-color: green;
 }
 
-.content {
+#content {
     background-color: yellow;
 }
 
-.footer {
+#footer {
     background-color: green;
 }

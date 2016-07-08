@@ -116,6 +116,10 @@ MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
 STATIC_ROOT = '/static_files/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static", "iro"),
+]
+
 #Email settings
 #EMAIL_USE_SSL = True
 #EMAIL_HOST = 'smtp.uoregon.edu'

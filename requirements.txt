@@ -2,5 +2,5 @@ django==1.11.6
 django-tabbed-admin==1.0.2
 django-grappelli==2.10.1
 django-registration-redux==1.8
-django-betterforms
+django-betterforms==1.1.4
 Pillow

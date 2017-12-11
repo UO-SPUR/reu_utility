@@ -1,5 +1,5 @@
 django==1.8.8
-django-tabbed-admin==1.0.2
+django-tabbed-admin==1.0.3
 django-grappelli
 django-registration-redux
 django-betterforms

@@ -3,4 +3,4 @@ django-tabbed-admin==1.0.2
 django-grappelli
 django-registration-redux
 django-betterforms
-Pillow
+Pillow==5.0.0
